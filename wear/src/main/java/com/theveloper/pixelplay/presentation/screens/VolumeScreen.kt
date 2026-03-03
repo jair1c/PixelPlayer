@@ -32,10 +32,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -51,6 +47,7 @@ import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
 import com.google.android.horologist.audio.ui.VolumeUiState
 import com.google.android.horologist.audio.ui.volumeRotaryBehavior
+import com.theveloper.pixelplay.presentation.components.CurvedVolumeIndicator
 import com.theveloper.pixelplay.presentation.components.WearTopTimeText
 import com.theveloper.pixelplay.presentation.theme.LocalWearPalette
 import com.theveloper.pixelplay.presentation.theme.screenBackgroundColor
@@ -144,54 +141,6 @@ fun VolumeScreen(
                 .align(Alignment.TopCenter)
                 .zIndex(5f),
             color = palette.textPrimary,
-        )
-    }
-}
-
-@Composable
-private fun CurvedVolumeIndicator(
-    progress: Float,
-    modifier: Modifier = Modifier,
-) {
-    val palette = LocalWearPalette.current
-    val animatedProgress by animateFloatAsState(
-        targetValue = progress.coerceIn(0f, 1f),
-        animationSpec = spring(),
-        label = "curvedVolumeIndicator",
-    )
-    val trackColor = palette.surfaceContainerColor().copy(alpha = 0.58f)
-    val progressColor = palette.controlContainer
-
-    Canvas(modifier = modifier) {
-        val strokeWidth = 6.dp.toPx()
-        val inset = strokeWidth / 2f + 9.dp.toPx()
-        val diameter = size.minDimension - (inset * 2f)
-        val arcSize = Size(diameter, diameter)
-        val topLeft = Offset(
-            x = (size.width - diameter) / 2f,
-            y = (size.height - diameter) / 2f,
-        )
-        val bottomAngle = 132f
-        val topAngle = 228f
-        val totalSweep = topAngle - bottomAngle
-
-        drawArc(
-            color = trackColor,
-            startAngle = bottomAngle,
-            sweepAngle = totalSweep,
-            useCenter = false,
-            topLeft = topLeft,
-            size = arcSize,
-            style = Stroke(width = strokeWidth, cap = StrokeCap.Round),
-        )
-        drawArc(
-            color = progressColor,
-            startAngle = bottomAngle,
-            sweepAngle = totalSweep * animatedProgress,
-            useCenter = false,
-            topLeft = topLeft,
-            size = arcSize,
-            style = Stroke(width = strokeWidth, cap = StrokeCap.Round),
         )
     }
 }
