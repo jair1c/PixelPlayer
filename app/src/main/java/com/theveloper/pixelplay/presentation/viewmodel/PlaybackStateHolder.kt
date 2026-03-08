@@ -70,6 +70,41 @@ class PlaybackStateHolder @Inject constructor(
     private var coldStartSnapshotToken: Long? = null
     private var coldStartSnapshotPositionMs: Long? = null
 
+    private fun clearColdStartSnapshot() {
+        coldStartSnapshotMediaId = null
+        coldStartSnapshotToken = null
+        coldStartSnapshotPositionMs = null
+    }
+
+    /**
+     * Binds a restored snapshot to the active playback occurrence when possible.
+     *
+     * If the first occurrence was already activated before the snapshot finished loading, we
+     * attach the snapshot to that token so resume still works. If playback has already advanced
+     * past the first occurrence, the snapshot is stale and must be discarded.
+     */
+    private fun rememberColdStartSnapshot(mediaId: String, positionMs: Long): Boolean {
+        coldStartSnapshotMediaId = mediaId
+        coldStartSnapshotToken = null
+        coldStartSnapshotPositionMs = positionMs
+
+        if (nextPositionOccurrenceToken == 1L) {
+            return true
+        }
+
+        if (
+            activePositionOccurrenceToken == 1L &&
+            nextPositionOccurrenceToken == 2L &&
+            activePositionOccurrenceMediaId == mediaId
+        ) {
+            coldStartSnapshotToken = activePositionOccurrenceToken
+            return true
+        }
+
+        clearColdStartSnapshot()
+        return false
+    }
+
     fun initialize(coroutineScope: CoroutineScope) {
         this.scope = coroutineScope
         scope?.launch {
@@ -82,9 +117,9 @@ class PlaybackStateHolder @Inject constructor(
                 ?: return@launch
             val snapshotPositionMs = snapshot.currentPositionMs.coerceAtLeast(0L)
             if (snapshotPositionMs <= 0L) return@launch
-
-            coldStartSnapshotMediaId = snapshotMediaId
-            coldStartSnapshotPositionMs = snapshotPositionMs
+            if (!rememberColdStartSnapshot(snapshotMediaId, snapshotPositionMs)) {
+                return@launch
+            }
 
             val controller = mediaController
             if (
@@ -139,9 +174,7 @@ class PlaybackStateHolder @Inject constructor(
             pausedPositionOverrideMs = null
         }
         if (mediaId == null || coldStartSnapshotMediaId == mediaId) {
-            coldStartSnapshotMediaId = null
-            coldStartSnapshotToken = null
-            coldStartSnapshotPositionMs = null
+            clearColdStartSnapshot()
         }
     }
 
@@ -183,9 +216,7 @@ class PlaybackStateHolder @Inject constructor(
                 pausedPositionOverrideMs = null
             }
             if (coldStartSnapshotMediaId == safeMediaId && coldStartSnapshotToken == activeToken) {
-                coldStartSnapshotMediaId = null
-                coldStartSnapshotToken = null
-                coldStartSnapshotPositionMs = null
+                clearColdStartSnapshot()
             }
             return safeReportedPosition
         }
@@ -225,15 +256,11 @@ class PlaybackStateHolder @Inject constructor(
         pausedPositionOverrideMs = null
 
         if (coldStartSnapshotToken != null) {
-            coldStartSnapshotMediaId = null
-            coldStartSnapshotToken = null
-            coldStartSnapshotPositionMs = null
+            clearColdStartSnapshot()
         } else if (coldStartSnapshotMediaId == safeMediaId && coldStartSnapshotPositionMs != null) {
             coldStartSnapshotToken = activePositionOccurrenceToken
         } else if (coldStartSnapshotMediaId != null) {
-            coldStartSnapshotMediaId = null
-            coldStartSnapshotToken = null
-            coldStartSnapshotPositionMs = null
+            clearColdStartSnapshot()
         }
 
         return activePositionOccurrenceToken

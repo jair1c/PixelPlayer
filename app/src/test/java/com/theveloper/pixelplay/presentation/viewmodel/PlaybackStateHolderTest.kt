@@ -32,6 +32,21 @@ class PlaybackStateHolderTest {
         listeningStatsTracker = listeningStatsTracker
     )
 
+    private fun snapshot(
+        mediaId: String = "duplicate-song",
+        positionMs: Long = 48_000L
+    ) = PlaybackQueueSnapshot(
+        items = listOf(
+            PlaybackQueueItemSnapshot(
+                mediaId = mediaId,
+                uri = "file:///music/$mediaId.mp3"
+            )
+        ),
+        currentMediaId = mediaId,
+        currentIndex = 0,
+        currentPositionMs = positionMs
+    )
+
     @Test
     fun `paused override does not bleed into later occurrence with same media id`() {
         val holder = createHolder()
@@ -48,17 +63,7 @@ class PlaybackStateHolderTest {
 
     @Test
     fun `cold start snapshot only applies to the first matching occurrence`() = runTest {
-        coEvery { userPreferencesRepository.getPlaybackQueueSnapshotOnce() } returns PlaybackQueueSnapshot(
-            items = listOf(
-                PlaybackQueueItemSnapshot(
-                    mediaId = "duplicate-song",
-                    uri = "file:///music/duplicate-song.mp3"
-                )
-            ),
-            currentMediaId = "duplicate-song",
-            currentIndex = 0,
-            currentPositionMs = 48_000L
-        )
+        coEvery { userPreferencesRepository.getPlaybackQueueSnapshotOnce() } returns snapshot()
 
         val holder = createHolder()
         holder.initialize(this)
@@ -70,6 +75,57 @@ class PlaybackStateHolderTest {
 
         holder.onPlaybackOccurrenceTransition("another-song")
         holder.onPlaybackOccurrenceTransition("duplicate-song")
+        holder.syncCurrentPositionFromPlayer("duplicate-song", 0L)
+
+        assertEquals(0L, holder.currentPosition.value)
+    }
+
+    @Test
+    fun `late cold start snapshot binds to the already active first occurrence`() = runTest {
+        coEvery { userPreferencesRepository.getPlaybackQueueSnapshotOnce() } returns snapshot()
+
+        val holder = createHolder()
+        holder.initialize(this)
+        holder.ensureCurrentPlaybackOccurrence("duplicate-song")
+        holder.syncCurrentPositionFromPlayer("duplicate-song", 0L)
+        assertEquals(0L, holder.currentPosition.value)
+
+        advanceUntilIdle()
+
+        holder.syncCurrentPositionFromPlayer("duplicate-song", 0L)
+
+        assertEquals(48_000L, holder.currentPosition.value)
+    }
+
+    @Test
+    fun `late cold start snapshot is discarded after playback occurrence advances`() = runTest {
+        coEvery { userPreferencesRepository.getPlaybackQueueSnapshotOnce() } returns snapshot()
+
+        val holder = createHolder()
+        holder.initialize(this)
+        holder.ensureCurrentPlaybackOccurrence("duplicate-song")
+        holder.onPlaybackOccurrenceTransition("another-song")
+        holder.onPlaybackOccurrenceTransition("duplicate-song")
+
+        advanceUntilIdle()
+
+        holder.syncCurrentPositionFromPlayer("duplicate-song", 0L)
+
+        assertEquals(0L, holder.currentPosition.value)
+    }
+
+    @Test
+    fun `late cold start snapshot is discarded after first occurrence already ended`() = runTest {
+        coEvery { userPreferencesRepository.getPlaybackQueueSnapshotOnce() } returns snapshot()
+
+        val holder = createHolder()
+        holder.initialize(this)
+        holder.ensureCurrentPlaybackOccurrence("duplicate-song")
+        holder.onPlaybackOccurrenceTransition(null)
+
+        advanceUntilIdle()
+
+        holder.ensureCurrentPlaybackOccurrence("duplicate-song")
         holder.syncCurrentPositionFromPlayer("duplicate-song", 0L)
 
         assertEquals(0L, holder.currentPosition.value)
