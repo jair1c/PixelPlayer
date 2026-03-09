@@ -137,6 +137,7 @@ import com.theveloper.pixelplay.data.backup.model.BackupTransferProgressUpdate
 import com.theveloper.pixelplay.data.backup.model.RestorePlan
 import com.theveloper.pixelplay.data.preferences.AppThemeMode
 import com.theveloper.pixelplay.presentation.components.PermissionIconCollage
+import com.theveloper.pixelplay.presentation.components.BackupModuleSelectionDialog
 import com.theveloper.pixelplay.presentation.components.subcomps.MaterialYouVectorDrawable
 import com.theveloper.pixelplay.presentation.components.subcomps.SineWaveLine
 import com.theveloper.pixelplay.presentation.components.FileExplorerDialog
@@ -389,18 +390,23 @@ fun SetupScreen(
 
     val restorePlan = uiState.restorePlan
     if (restorePlan != null && selectedBackupUri != null) {
-        SetupRestoreDialog(
+        BackupModuleSelectionDialog(
             plan = restorePlan,
             inProgress = uiState.isRestoringBackup,
-            progress = uiState.backupTransferProgress,
             onDismiss = {
-                if (!uiState.isRestoringBackup) {
-                    setupViewModel.clearRestorePlan()
-                    selectedBackupUri = null
-                }
+                setupViewModel.clearRestorePlan()
+                selectedBackupUri = null
+            },
+            onBack = {
+                setupViewModel.clearRestorePlan()
+                selectedBackupUri = null
             },
             onSelectionChanged = setupViewModel::updateRestorePlanSelection,
-            onConfirm = { setupViewModel.restoreFromPlan(selectedBackupUri!!) }
+            onConfirm = {
+                val uri = selectedBackupUri ?: return@BackupModuleSelectionDialog
+                selectedBackupUri = null
+                setupViewModel.restoreFromPlan(uri)
+            }
         )
     }
 
