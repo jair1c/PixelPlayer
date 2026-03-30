@@ -12,6 +12,7 @@ import android.util.Log
 
 import com.theveloper.pixelplay.data.model.Song
 import com.theveloper.pixelplay.data.repository.ArtistImageRepository
+import dagger.Lazy
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -87,8 +88,8 @@ class MusicRepositoryImpl @Inject constructor(
     private val musicDao: MusicDao,
     private val lyricsRepository: LyricsRepository,
     private val telegramDao: TelegramDao,
-    private val telegramCacheManager: com.theveloper.pixelplay.data.telegram.TelegramCacheManager,
-    override val telegramRepository: com.theveloper.pixelplay.data.telegram.TelegramRepository,
+    private val telegramCacheManagerProvider: Lazy<com.theveloper.pixelplay.data.telegram.TelegramCacheManager>,
+    private val telegramRepositoryProvider: Lazy<com.theveloper.pixelplay.data.telegram.TelegramRepository>,
     private val songRepository: SongRepository,
     private val favoritesDao: FavoritesDao,
     private val artistImageRepository: ArtistImageRepository,
@@ -106,6 +107,10 @@ class MusicRepositoryImpl @Inject constructor(
     private val repositoryScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
     // Tracks the active prefetch job so a new flow emission cancels the previous one.
     @Volatile private var prefetchJob: Job? = null
+    private val telegramCacheManager: com.theveloper.pixelplay.data.telegram.TelegramCacheManager
+        get() = telegramCacheManagerProvider.get()
+    override val telegramRepository: com.theveloper.pixelplay.data.telegram.TelegramRepository
+        get() = telegramRepositoryProvider.get()
 
     private fun normalizePath(path: String): String =
         runCatching { File(path).canonicalPath }.getOrElse { File(path).absolutePath }
