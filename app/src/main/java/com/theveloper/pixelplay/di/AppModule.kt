@@ -141,7 +141,8 @@ object AppModule {
             PixelPlayDatabase.MIGRATION_32_33,
             PixelPlayDatabase.MIGRATION_33_34,
             PixelPlayDatabase.MIGRATION_34_35,
-            PixelPlayDatabase.MIGRATION_35_36
+            PixelPlayDatabase.MIGRATION_35_36,
+            PixelPlayDatabase.MIGRATION_36_37
         )
             .addCallback(PixelPlayDatabase.createRuntimeArtifactsCallback())
             .setJournalMode(RoomDatabase.JournalMode.WRITE_AHEAD_LOGGING)
@@ -220,6 +221,12 @@ object AppModule {
     @Provides
     fun provideNavidromeDao(database: PixelPlayDatabase): com.theveloper.pixelplay.data.database.NavidromeDao {
         return database.navidromeDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideJellyfinDao(database: PixelPlayDatabase): com.theveloper.pixelplay.data.database.JellyfinDao {
+        return database.jellyfinDao()
     }
 
     @Provides

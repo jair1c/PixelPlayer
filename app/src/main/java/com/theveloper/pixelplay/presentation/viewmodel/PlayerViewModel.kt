@@ -1748,6 +1748,11 @@ class PlayerViewModel @Inject constructor(
                 _playerUiState.update { it.copy(currentStorageFilter = filter) }
             }
         }
+        viewModelScope.launch {
+            userPreferencesRepository.hideLocalMediaFlow.collect { hide ->
+                _playerUiState.update { it.copy(hideLocalMedia = hide) }
+            }
+        }
 
 
         castTransferStateHolder.initialize(
@@ -1866,6 +1871,12 @@ class PlayerViewModel @Inject constructor(
 
     fun setStorageFilter(filter: com.theveloper.pixelplay.data.model.StorageFilter) {
         libraryStateHolder.setStorageFilter(filter)
+    }
+
+    fun setHideLocalMedia(hide: Boolean) {
+        viewModelScope.launch {
+            userPreferencesRepository.setHideLocalMedia(hide)
+        }
     }
 
     fun toggleStorageFilter() {
@@ -2953,7 +2964,8 @@ class PlayerViewModel @Inject constructor(
                 startingUri.scheme == "telegram" ||
                 startingUri.scheme == "netease" ||
                 startingUri.scheme == "qqmusic" ||
-                startingUri.scheme == "navidrome"
+                startingUri.scheme == "navidrome" ||
+                startingUri.scheme == "jellyfin"
             ) {
                 if (startingUri.scheme == "telegram") {
                     ensureTelegramPlaybackObserversStarted()
@@ -3005,7 +3017,8 @@ class PlayerViewModel @Inject constructor(
             scheme != "telegram" &&
             scheme != "netease" &&
             scheme != "qqmusic" &&
-            scheme != "navidrome"
+            scheme != "navidrome" &&
+            scheme != "jellyfin"
         ) {
             return mediaItem
         }

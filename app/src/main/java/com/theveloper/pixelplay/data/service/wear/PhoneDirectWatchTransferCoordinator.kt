@@ -64,6 +64,7 @@ class PhoneDirectWatchTransferCoordinator @Inject constructor(
     private val neteaseStreamProxy: NeteaseStreamProxy,
     private val qqMusicStreamProxy: QqMusicStreamProxy,
     private val navidromeStreamProxy: NavidromeStreamProxy,
+    private val jellyfinStreamProxy: com.theveloper.pixelplay.data.jellyfin.JellyfinStreamProxy,
     private val gDriveStreamProxy: GDriveStreamProxy,
     private val okHttpClient: OkHttpClient,
 ) {
@@ -406,6 +407,11 @@ class PhoneDirectWatchTransferCoordinator @Inject constructor(
                 navidromeStreamProxy.warmUpStreamUrl(rawUri)
                 navidromeStreamProxy.resolveNavidromeUri(rawUri)
             }
+            "jellyfin" -> {
+                ensureCloudProxyReady(jellyfinStreamProxy) || return null
+                jellyfinStreamProxy.warmUpStreamUrl(rawUri)
+                jellyfinStreamProxy.resolveJellyfinUri(rawUri)
+            }
             "gdrive" -> {
                 ensureGDriveProxyReady() || return null
                 gDriveStreamProxy.resolveGDriveUri(rawUri)
@@ -445,6 +451,7 @@ class PhoneDirectWatchTransferCoordinator @Inject constructor(
             is NeteaseStreamProxy -> proxy.ensureReady(5_000L)
             is QqMusicStreamProxy -> proxy.ensureReady(5_000L)
             is NavidromeStreamProxy -> proxy.ensureReady(5_000L)
+            is com.theveloper.pixelplay.data.jellyfin.JellyfinStreamProxy -> proxy.ensureReady(5_000L)
             else -> false
         }
     }

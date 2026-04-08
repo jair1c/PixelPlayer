@@ -43,6 +43,7 @@ object LocalArtworkUri {
             !normalized.startsWith("netease://") &&
             !normalized.startsWith("qqmusic://") &&
             !normalized.startsWith("navidrome://") &&
+            !normalized.startsWith("jellyfin://") &&
             !normalized.startsWith("gdrive://")
     }
 

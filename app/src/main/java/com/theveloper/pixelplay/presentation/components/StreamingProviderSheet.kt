@@ -25,6 +25,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.theveloper.pixelplay.R
+import com.theveloper.pixelplay.presentation.jellyfin.auth.JellyfinLoginActivity
 import com.theveloper.pixelplay.presentation.navidrome.auth.NavidromeLoginActivity
 import com.theveloper.pixelplay.presentation.netease.auth.NeteaseLoginActivity
 import com.theveloper.pixelplay.presentation.qqmusic.auth.QqMusicLoginActivity
@@ -49,6 +50,8 @@ fun StreamingProviderSheet(
     onNavigateToQqMusicDashboard: () -> Unit = {},
     isNavidromeLoggedIn: Boolean = false,
     onNavigateToNavidromeDashboard: () -> Unit = {},
+    isJellyfinLoggedIn: Boolean = false,
+    onNavigateToJellyfinDashboard: () -> Unit = {},
     sheetState: SheetState = rememberModalBottomSheetState(
         skipPartiallyExpanded = true
     )
@@ -71,6 +74,9 @@ fun StreamingProviderSheet(
 
     val qqMusicContainerColor = if (isDark) Color(0xFF1A3B2A) else Color(0xFFD0F5E0)
     val qqMusicContentColor = if (isDark) Color(0xFF4BCB7B) else Color(0xFF1A8A40)
+
+    val jellyfinContainerColor = if (isDark) Color(0xFF1A2A3B) else Color(0xFFD0E5F5)
+    val jellyfinContentColor = if (isDark) Color(0xFF00A4DC) else Color(0xFF0070A0)
 
     val cardShape = AbsoluteSmoothCornerShape(
         cornerRadiusTR = 20.dp, cornerRadiusTL = 20.dp,
@@ -179,6 +185,31 @@ fun StreamingProviderSheet(
                         onNavigateToNavidromeDashboard()
                     } else {
                         context.startActivity(Intent(context, NavidromeLoginActivity::class.java))
+                    }
+                    onDismissRequest()
+                }
+            )
+
+            Spacer(Modifier.height(12.dp))
+
+            // Jellyfin Provider
+            ProviderCard(
+                icon = null,
+                iconPainter = painterResource(R.drawable.ic_jellyfin),
+                title = "Jellyfin",
+                subtitle = if (isJellyfinLoggedIn)
+                    "✓ Connected"
+                else
+                    "Connect your Jellyfin server",
+                containerColor = jellyfinContainerColor,
+                contentColor = jellyfinContentColor,
+                iconColor = jellyfinContentColor,
+                shape = cardShape,
+                onClick = {
+                    if (isJellyfinLoggedIn) {
+                        onNavigateToJellyfinDashboard()
+                    } else {
+                        context.startActivity(Intent(context, JellyfinLoginActivity::class.java))
                     }
                     onDismissRequest()
                 }
