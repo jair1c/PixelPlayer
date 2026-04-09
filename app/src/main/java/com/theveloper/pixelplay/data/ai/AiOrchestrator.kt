@@ -57,7 +57,9 @@ class AiOrchestrator @Inject constructor(
 
     suspend fun generateContent(
         prompt: String,
-        type: AiSystemPromptType = AiSystemPromptType.GENERAL
+        type: AiSystemPromptType = AiSystemPromptType.GENERAL,
+        temperature: Float = 0.7f,
+        context: String = ""
     ): String {
         // Determine chain based on user preference
         val userProviderStr = preferencesRepo.aiProvider.first()
@@ -65,7 +67,7 @@ class AiOrchestrator @Inject constructor(
 
         // Generate combined prompt for hashing and execution
         val basePersona = getBasePersona(userProvider)
-        val combinedSystemPrompt = promptEngine.buildPrompt(basePersona, type)
+        val combinedSystemPrompt = promptEngine.buildPrompt(basePersona, type, context)
         
         // Cache entry is valid for a specific prompt + system instruction + provider
         val hash = (combinedSystemPrompt + prompt).sha256()
@@ -102,7 +104,8 @@ class AiOrchestrator @Inject constructor(
                 val response = client.generateContent(
                     model.ifBlank { client.getDefaultModel() }, 
                     finalSystemPrompt,
-                    prompt
+                    prompt,
+                    temperature
                 )
                 
                 cacheDao.insert(AiCacheEntity(promptHash = hash, responseJson = response, timestamp = System.currentTimeMillis()))

@@ -14,12 +14,12 @@ class GeminiAiClient(private val apiKey: String) : AiClient {
         private const val DEFAULT_GEMINI_MODEL = "gemini-2.5-flash"
     }
     
-    private fun createModel(modelName: String, systemPrompt: String): GenerativeModel {
+    private fun createModel(modelName: String, systemPrompt: String, temp: Float = 0.7f): GenerativeModel {
         return GenerativeModel(
             modelName = modelName.ifBlank { DEFAULT_GEMINI_MODEL },
             apiKey = apiKey,
             generationConfig = generationConfig {
-                temperature = 0.7f
+                temperature = temp
             },
             systemInstruction = if (systemPrompt.isNotBlank()) {
                 com.google.ai.client.generativeai.type.content { text(systemPrompt) }
@@ -29,11 +29,30 @@ class GeminiAiClient(private val apiKey: String) : AiClient {
         )
     }
     
-    override suspend fun generateContent(model: String, systemPrompt: String, prompt: String): String {
+    override suspend fun generateContent(
+        model: String, 
+        systemPrompt: String, 
+        prompt: String,
+        temperature: Float
+    ): String {
         return withContext(Dispatchers.IO) {
-            val generativeModel = createModel(model, systemPrompt)
+            val generativeModel = createModel(model, systemPrompt, temperature)
             val response = generativeModel.generateContent(prompt)
             response.text ?: throw Exception("Gemini returned an empty response")
+        }
+    }
+    
+    override suspend fun countTokens(model: String, systemPrompt: String, prompt: String): Int {
+        return withContext(Dispatchers.IO) {
+            try {
+                val generativeModel = createModel(model, systemPrompt)
+                // Combine system instruction if possible, or just estimate
+                val response = generativeModel.countTokens(prompt)
+                response.totalTokens
+            } catch (e: Exception) {
+                // Return estimation if SDK fails
+                (prompt.length / 4) + (systemPrompt.length / 4)
+            }
         }
     }
     

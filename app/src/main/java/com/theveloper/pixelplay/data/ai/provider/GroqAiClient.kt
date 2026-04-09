@@ -50,7 +50,12 @@ class GroqAiClient(private val apiKey: String) : AiClient {
         isLenient = true
     }
     
-    override suspend fun generateContent(model: String, systemPrompt: String, prompt: String): String {
+    override suspend fun generateContent(
+        model: String, 
+        systemPrompt: String, 
+        prompt: String,
+        temperature: Float
+    ): String {
         return withContext(Dispatchers.IO) {
             val messagesList = mutableListOf<ChatMessage>()
             if (systemPrompt.isNotBlank()) {
@@ -60,7 +65,8 @@ class GroqAiClient(private val apiKey: String) : AiClient {
 
             val requestBody = ChatRequest(
                 model = model.ifBlank { DEFAULT_MODEL },
-                messages = messagesList
+                messages = messagesList,
+                temperature = temperature.toDouble()
             )
             
             val jsonBody = json.encodeToString(ChatRequest.serializer(), requestBody)
@@ -86,6 +92,12 @@ class GroqAiClient(private val apiKey: String) : AiClient {
             chatResponse.choices.firstOrNull()?.message?.content 
                 ?: throw Exception("Groq response has no content")
         }
+    }
+    
+    override suspend fun countTokens(model: String, systemPrompt: String, prompt: String): Int {
+        // Groq doesn't provide a native token counting endpoint, so we estimate.
+        // Rule of thumb: 1 token ≈ 4 characters for English text.
+        return (systemPrompt.length + prompt.length) / 4
     }
     
     override suspend fun getAvailableModels(apiKey: String): List<String> {
