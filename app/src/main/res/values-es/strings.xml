@@ -1,14 +1,15 @@
 <resources>
+    <!-- Setup / Loading -->
+    <string name="preparing_setup">Preparando configuración…</string>
+    <string name="preparing_library">Preparando tu biblioteca...</string>
+    <string name="scanned_songs_progress">Escaneadas %1$d de %2$d canciones</string>
+
+    <!-- Mantener el resto de traducciones originales -->
     <string name="app_name">PixelPlayer</string>
     <string name="app_name_change_title">Cambio de nombre de la app</string>
     <string name="app_name_change_message">Hemos cambiado el nombre de nuestra app de PixelPlay a PixelPlayer debido a un problema de marca registrada. ¡Sigue reproduciendo!</string>
     <string name="do_not_show_again">No volver a mostrar</string>
     <string name="dismiss">Descartar</string>
-
-    <!-- Setup / Loading -->
-    <string name="preparing_setup">Preparando configuración…</string>
-    <string name="preparing_library">Preparando tu biblioteca...</string>
-    <string name="scanned_songs_progress">Escaneadas %1$d de %2$d canciones</string>
 
     <string name="all_files_access_title">Permiso especial requerido</string>
     <string name="all_files_access_description">Para poder editar los metadatos de tus canciones (archivos .mp3), PixelPlayer necesita un permiso especial de acceso a todos los archivos.</string>
