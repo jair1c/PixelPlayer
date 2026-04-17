@@ -1,1 +1,870 @@
-(truncated for brevity) PLACEHOLDER
+package com.theveloper.pixelplay
+
+import com.theveloper.pixelplay.presentation.navigation.navigateSafely
+import android.Manifest
+import android.content.ActivityNotFoundException
+import android.content.ComponentName
+import android.content.Intent
+import android.os.Build
+import android.os.Bundle
+import android.os.Trace
+import android.provider.Settings
+import android.util.Log
+import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
+import androidx.annotation.DrawableRes
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.CircularWavyProgressIndicator
+import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBarDefaults
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.rememberDrawerState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalWindowInfo
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.lerp
+import androidx.core.net.toUri
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.media3.common.util.UnstableApi
+import androidx.media3.session.MediaController
+import androidx.media3.session.SessionToken
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.PermissionStatus
+import com.google.accompanist.permissions.rememberMultiplePermissionsState
+import com.google.common.util.concurrent.ListenableFuture
+import com.google.common.util.concurrent.MoreExecutors
+import com.theveloper.pixelplay.data.github.GitHubAnnouncementPropertiesService
+import com.theveloper.pixelplay.data.github.PlayStoreAnnouncementRemoteConfig
+import com.theveloper.pixelplay.data.preferences.AppThemeMode
+import com.theveloper.pixelplay.data.preferences.NavBarStyle
+import com.theveloper.pixelplay.data.preferences.ThemePreferencesRepository
+import com.theveloper.pixelplay.data.preferences.UserPreferencesRepository
+import com.theveloper.pixelplay.data.service.MusicService
+import com.theveloper.pixelplay.data.worker.SyncProgress
+import com.theveloper.pixelplay.presentation.components.AppSidebarDrawer
+import com.theveloper.pixelplay.presentation.components.CrashReportDialog
+import com.theveloper.pixelplay.presentation.components.DismissUndoBar
+import com.theveloper.pixelplay.presentation.components.DrawerDestination
+import com.theveloper.pixelplay.presentation.components.MiniPlayerBottomSpacer
+import com.theveloper.pixelplay.presentation.components.MiniPlayerHeight
+import com.theveloper.pixelplay.presentation.components.PlayerInternalNavigationBar
+import com.theveloper.pixelplay.presentation.components.PlayStoreAnnouncementDefaults
+import com.theveloper.pixelplay.presentation.components.PlayStoreAnnouncementDialog
+import com.theveloper.pixelplay.presentation.components.PlayStoreAnnouncementUiModel
+import com.theveloper.pixelplay.presentation.components.UnifiedPlayerSheetV2
+import com.theveloper.pixelplay.presentation.components.resolveNavBarOccupiedHeight
+import com.theveloper.pixelplay.presentation.components.resolveNavBarSurfaceHeight
+import com.theveloper.pixelplay.presentation.navigation.AppNavigation
+import com.theveloper.pixelplay.presentation.navigation.Screen
+import com.theveloper.pixelplay.presentation.screens.SetupScreen
+import com.theveloper.pixelplay.presentation.viewmodel.MainViewModel
+import com.theveloper.pixelplay.presentation.viewmodel.PlayerViewModel
+import com.theveloper.pixelplay.ui.theme.PixelPlayTheme
+import com.theveloper.pixelplay.utils.CrashHandler
+import com.theveloper.pixelplay.utils.LogUtils
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+import racra.compose.smooth_corner_rect_library.AbsoluteSmoothCornerShape
+import com.theveloper.pixelplay.presentation.utils.AppHapticsConfig
+import com.theveloper.pixelplay.presentation.utils.LocalAppHapticsConfig
+import com.theveloper.pixelplay.presentation.utils.NoOpHapticFeedback
+import com.theveloper.pixelplay.utils.CrashLogData
+import javax.annotation.concurrent.Immutable
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
+
+@Immutable
+data class BottomNavItem(
+    val label: String,
+    @DrawableRes val iconResId: Int,
+    @DrawableRes val selectedIconResId: Int? = null,
+    val screen: Screen
+)
+
+private data class DismissUndoBarSlice(
+    val isVisible: Boolean = false,
+    val durationMillis: Long = 4000L
+)
+
+@UnstableApi
+@AndroidEntryPoint
+class MainActivity : ComponentActivity() {
+
+    private val playerViewModel: PlayerViewModel by viewModels()
+    private val mainViewModel: MainViewModel by viewModels()
+    private var mediaControllerFuture: ListenableFuture<MediaController>? = null
+
+    @Inject
+    lateinit var userPreferencesRepository: UserPreferencesRepository
+
+    @Inject
+    lateinit var themePreferencesRepository: ThemePreferencesRepository
+
+    private val _pendingPlaylistNavigation = kotlinx.coroutines.flow.MutableStateFlow<String?>(null)
+
+    private val requestAllFilesAccessLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { _ -> }
+
+    @OptIn(ExperimentalPermissionsApi::class)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        LogUtils.d(this, "onCreate")
+        val splashScreen = installSplashScreen()
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.auto(
+                android.graphics.Color.TRANSPARENT,
+                android.graphics.Color.TRANSPARENT
+            ),
+            navigationBarStyle = SystemBarStyle.auto(
+                android.graphics.Color.TRANSPARENT,
+                android.graphics.Color.TRANSPARENT
+            )
+        )
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            window.isNavigationBarContrastEnforced = false
+        }
+        super.onCreate(savedInstanceState)
+        splashScreen.setKeepOnScreenCondition { false }
+        val isBenchmarkMode = intent.getBooleanExtra("is_benchmark", false)
+
+        setContent {
+            val systemDarkTheme = isSystemInDarkTheme()
+            val appThemeMode by themePreferencesRepository.appThemeModeFlow.collectAsStateWithLifecycle(initialValue = AppThemeMode.FOLLOW_SYSTEM)
+            val useDarkTheme = when (appThemeMode) {
+                AppThemeMode.DARK -> true
+                AppThemeMode.LIGHT -> false
+                else -> systemDarkTheme
+            }
+            val isSetupComplete by mainViewModel.isSetupComplete.collectAsStateWithLifecycle()
+
+            var showCrashReportDialog by remember { mutableStateOf(false) }
+            var crashLogData by remember { mutableStateOf<CrashLogData?>(null) }
+
+            val requiredPermissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                listOf(Manifest.permission.READ_MEDIA_AUDIO)
+            } else {
+                listOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+            }
+            val optionalPermissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                listOf(Manifest.permission.POST_NOTIFICATIONS)
+            } else {
+                emptyList()
+            }
+            val permissionState = rememberMultiplePermissionsState(
+                permissions = requiredPermissions + optionalPermissions
+            )
+            val requiredPermissionsGranted = requiredPermissions.all { permission ->
+                permissionState.permissions.any { state ->
+                    state.permission == permission && state.status is PermissionStatus.Granted
+                }
+            }
+            val showSetupScreen = remember(isSetupComplete, requiredPermissionsGranted, isBenchmarkMode) {
+                when {
+                    isBenchmarkMode -> false
+                    isSetupComplete == null -> null
+                    else -> !isSetupComplete!! || !requiredPermissionsGranted
+                }
+            }
+
+            LaunchedEffect(showSetupScreen) {
+                if (showSetupScreen == false) {
+                    LogUtils.i(this, "Setup complete/skipped and required permissions valid. Starting sync.")
+                    mainViewModel.startSync()
+                }
+            }
+
+            LaunchedEffect(Unit) {
+                if (!isBenchmarkMode && CrashHandler.hasCrashLog()) {
+                    crashLogData = CrashHandler.getCrashLog()
+                    showCrashReportDialog = true
+                }
+            }
+
+            PixelPlayTheme(darkTheme = useDarkTheme) {
+                var contentVisible by remember { mutableStateOf(false) }
+                val contentAlpha by animateFloatAsState(
+                    targetValue = if (contentVisible) 1f else 0f,
+                    animationSpec = tween(600, easing = LinearOutSlowInEasing),
+                    label = "AppContentAlpha"
+                )
+
+                LaunchedEffect(Unit) {
+                    delay(100)
+                    contentVisible = true
+                }
+
+                Surface(
+                    modifier = Modifier.fillMaxSize().graphicsLayer { alpha = contentAlpha },
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    if (showSetupScreen == null) {
+                        SetupGateLoadingScreen()
+                    } else {
+                        AnimatedContent(
+                            targetState = showSetupScreen,
+                            transitionSpec = {
+                                if (targetState) {
+                                    fadeIn(animationSpec = tween(400)) togetherWith fadeOut(animationSpec = tween(400))
+                                } else {
+                                    scaleIn(initialScale = 0.95f, animationSpec = tween(450)) + fadeIn(animationSpec = tween(450)) togetherWith
+                                        slideOutHorizontally(targetOffsetX = { -it }, animationSpec = tween(450)) + fadeOut(animationSpec = tween(450))
+                                }
+                            },
+                            label = "SetupTransition"
+                        ) { shouldShowSetup ->
+                            if (shouldShowSetup) {
+                                SetupScreen(onSetupComplete = {})
+                            } else {
+                                MainAppContent(playerViewModel, mainViewModel)
+                            }
+                        }
+                    }
+
+                    if (showCrashReportDialog && crashLogData != null) {
+                        CrashReportDialog(
+                            crashLog = crashLogData!!,
+                            onDismiss = {
+                                CrashHandler.clearCrashLog()
+                                crashLogData = null
+                                showCrashReportDialog = false
+                            }
+                        )
+                    }
+                }
+            }
+        }
+        handleIntent(intent)
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        handleIntent(intent)
+    }
+
+    private fun handleIntent(intent: Intent?) {
+        if (intent == null) return
+        when {
+            intent.action == MainActivityIntentContract.ACTION_SHUFFLE_ALL -> {
+                Log.d("TileDebug", "handleIntent: ACTION_SHUFFLE_ALL received")
+                playerViewModel.triggerShuffleAllFromTile()
+                intent.action = null
+            }
+            intent.action == MainActivityIntentContract.ACTION_OPEN_PLAYLIST -> {
+                intent.getStringExtra(MainActivityIntentContract.EXTRA_PLAYLIST_ID)?.let { playlistId ->
+                    _pendingPlaylistNavigation.value = playlistId
+                }
+                intent.action = null
+            }
+            intent.getBooleanExtra("ACTION_SHOW_PLAYER", false) -> {
+                playerViewModel.showPlayer()
+            }
+            intent.action == Intent.ACTION_VIEW && intent.data != null -> {
+                intent.data?.let { uri ->
+                    persistUriPermissionIfNeeded(intent, uri)
+                    playerViewModel.playExternalUri(uri)
+                }
+                clearExternalIntentPayload(intent)
+            }
+            intent.action == Intent.ACTION_SEND && intent.type?.startsWith("audio/") == true -> {
+                resolveStreamUri(intent)?.let { uri ->
+                    persistUriPermissionIfNeeded(intent, uri)
+                    playerViewModel.playExternalUri(uri)
+                }
+                clearExternalIntentPayload(intent)
+            }
+            intent.action == "com.theveloper.pixelplay.ACTION_PLAY_SONG" -> {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    intent.getParcelableExtra("song", com.theveloper.pixelplay.data.model.Song::class.java)?.let { song ->
+                        playerViewModel.playSong(song)
+                    }
+                } else {
+                    @Suppress("DEPRECATION")
+                    intent.getParcelableExtra<com.theveloper.pixelplay.data.model.Song>("song")?.let { song ->
+                        playerViewModel.playSong(song)
+                    }
+                }
+                intent.action = null
+            }
+        }
+    }
+
+    private fun resolveStreamUri(intent: Intent): android.net.Uri? {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra(Intent.EXTRA_STREAM, android.net.Uri::class.java)?.let { return it }
+        } else {
+            @Suppress("DEPRECATION")
+            val legacyUri = intent.getParcelableExtra<android.net.Uri>(Intent.EXTRA_STREAM)
+            if (legacyUri != null) return legacyUri
+        }
+        intent.clipData?.let { clipData ->
+            if (clipData.itemCount > 0) {
+                return clipData.getItemAt(0).uri
+            }
+        }
+        return intent.data
+    }
+
+    private fun persistUriPermissionIfNeeded(intent: Intent, uri: android.net.Uri) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            val hasPersistablePermission = intent.flags and Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION != 0
+            if (hasPersistablePermission) {
+                val takeFlags = intent.flags and (Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+                if (takeFlags != 0) {
+                    try {
+                        contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    } catch (securityException: SecurityException) {
+                        Log.w("MainActivity", "Unable to persist URI permission for $uri", securityException)
+                    } catch (illegalArgumentException: IllegalArgumentException) {
+                        Log.w("MainActivity", "Persistable URI permission not granted for $uri", illegalArgumentException)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun clearExternalIntentPayload(intent: Intent) {
+        intent.data = null
+        intent.clipData = null
+        intent.removeExtra(Intent.EXTRA_STREAM)
+    }
+
+    private fun openExternalUrl(url: String) {
+        val browserIntent = Intent(Intent.ACTION_VIEW, url.toUri())
+        try {
+            startActivity(browserIntent)
+        } catch (_: ActivityNotFoundException) {
+            LogUtils.w(this, "No activity available to open URL: $url")
+        }
+    }
+
+    private fun PlayStoreAnnouncementRemoteConfig.toUiModel(): PlayStoreAnnouncementUiModel {
+        val fallback = PlayStoreAnnouncementDefaults.Template
+        return fallback.copy(
+            enabled = enabled,
+            playStoreUrl = playStoreUrl ?: fallback.playStoreUrl,
+            title = title ?: fallback.title,
+            body = body ?: fallback.body,
+            primaryActionLabel = primaryActionLabel ?: fallback.primaryActionLabel,
+            dismissActionLabel = dismissActionLabel ?: fallback.dismissActionLabel,
+            linkPendingMessage = linkPendingMessage ?: fallback.linkPendingMessage,
+        )
+    }
+
+    @OptIn(ExperimentalMaterial3ExpressiveApi::class)
+    @Composable
+    private fun SetupGateLoadingScreen() {
+        Box(
+            modifier = Modifier.fillMaxSize().padding(32.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                CircularWavyProgressIndicator()
+                Spacer(modifier = Modifier.height(20.dp))
+                Text(
+                    text = stringResource(R.string.preparing_setup),
+                    style = MaterialTheme.typography.titleMedium,
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
+    }
+
+    @androidx.annotation.OptIn(UnstableApi::class)
+    @Composable
+    private fun MainAppContent(playerViewModel: PlayerViewModel, mainViewModel: MainViewModel) {
+        Trace.beginSection("MainActivity.MainAppContent")
+        val navController = rememberNavController()
+        val isSyncing by mainViewModel.isSyncing.collectAsStateWithLifecycle()
+        val isLibraryEmpty by mainViewModel.isLibraryEmpty.collectAsStateWithLifecycle()
+        val hasCompletedInitialSync by mainViewModel.hasCompletedInitialSync.collectAsStateWithLifecycle()
+        val syncProgress by mainViewModel.syncProgress.collectAsStateWithLifecycle()
+        val isMediaControllerReady by playerViewModel.isMediaControllerReady.collectAsStateWithLifecycle()
+        val pendingPlaylistNav by _pendingPlaylistNavigation.collectAsStateWithLifecycle()
+        var processedPlaylistId by remember { mutableStateOf<String?>(null) }
+
+        LaunchedEffect(pendingPlaylistNav, isMediaControllerReady) {
+            val playlistId = pendingPlaylistNav
+            if (playlistId != null && playlistId != processedPlaylistId && isMediaControllerReady) {
+                processedPlaylistId = playlistId
+                var success = false
+                var attempts = 0
+                while (!success && attempts < 50) {
+                    try {
+                        success = navController.navigateSafely(Screen.PlaylistDetail.createRoute(playlistId))
+                        if (success) {
+                            _pendingPlaylistNavigation.value = null
+                        } else {
+                            delay(100)
+                            attempts++
+                        }
+                    } catch (_: IllegalArgumentException) {
+                        delay(100)
+                        attempts++
+                    }
+                }
+            } else if (playlistId == null) {
+                processedPlaylistId = null
+            }
+        }
+
+        var canShowLoadingIndicator by remember { mutableStateOf(false) }
+        var loadingShownTimestamp by remember { mutableStateOf(0L) }
+        val minimumDisplayDuration = 1500L
+        val shouldPotentiallyShowLoading = isSyncing && isLibraryEmpty && !hasCompletedInitialSync
+
+        LaunchedEffect(shouldPotentiallyShowLoading) {
+            if (shouldPotentiallyShowLoading) {
+                delay(300L)
+                if (mainViewModel.isSyncing.value && mainViewModel.isLibraryEmpty.value) {
+                    canShowLoadingIndicator = true
+                    loadingShownTimestamp = System.currentTimeMillis()
+                }
+            } else {
+                if (canShowLoadingIndicator && loadingShownTimestamp > 0) {
+                    val elapsed = System.currentTimeMillis() - loadingShownTimestamp
+                    val remaining = minimumDisplayDuration - elapsed
+                    if (remaining > 0) delay(remaining)
+                }
+                canShowLoadingIndicator = false
+                loadingShownTimestamp = 0L
+            }
+        }
+
+        Box(modifier = Modifier.fillMaxSize()) {
+            MainUI(playerViewModel, navController)
+            if (canShowLoadingIndicator) {
+                LoadingOverlay(syncProgress)
+            }
+        }
+        Trace.endSection()
+    }
+
+    @androidx.annotation.OptIn(UnstableApi::class)
+    @Composable
+    private fun MainUI(playerViewModel: PlayerViewModel, navController: NavHostController) {
+        Trace.beginSection("MainActivity.MainUI")
+        val commonNavItems = remember {
+            persistentListOf(
+                BottomNavItem(stringResource(R.string.nav_home), R.drawable.rounded_home_24, R.drawable.home_24_rounded_filled, Screen.Home),
+                BottomNavItem(stringResource(R.string.search), R.drawable.rounded_search_24, R.drawable.rounded_search_24, Screen.Search),
+                BottomNavItem(stringResource(R.string.nav_library), R.drawable.rounded_library_music_24, R.drawable.round_library_music_24, Screen.Library)
+            )
+        }
+        val navBackStackEntry by navController.currentBackStackEntryAsState()
+        val currentRoute = navBackStackEntry?.destination?.route
+        var isSearchBarActive by remember { mutableStateOf(false) }
+
+        val routesWithHiddenNavigationBar = remember {
+            setOf(
+                Screen.Settings.route,
+                Screen.Accounts.route,
+                Screen.PlaylistDetail.route,
+                Screen.DailyMixScreen.route,
+                Screen.RecentlyPlayed.route,
+                Screen.GenreDetail.route,
+                Screen.AlbumDetail.route,
+                Screen.ArtistDetail.route,
+                Screen.DJSpace.route,
+                Screen.NavBarCrRad.route,
+                Screen.About.route,
+                Screen.Stats.route,
+                Screen.EditTransition.route,
+                Screen.Experimental.route,
+                Screen.ArtistSettings.route,
+                Screen.Equalizer.route,
+                Screen.SettingsCategory.route,
+                Screen.DelimiterConfig.route,
+                Screen.PaletteStyle.route,
+                Screen.DeviceCapabilities.route,
+                Screen.EasterEgg.route,
+                Screen.WordDelimiterConfig.route
+            )
+        }
+        val shouldHideNavigationBar by remember(currentRoute, isSearchBarActive) {
+            derivedStateOf {
+                if (currentRoute == Screen.Search.route && isSearchBarActive) {
+                    true
+                } else {
+                    currentRoute?.let { route ->
+                        routesWithHiddenNavigationBar.any { hiddenRoute ->
+                            if (hiddenRoute.contains("{")) route.startsWith(hiddenRoute.substringBefore("{")) else route == hiddenRoute
+                        }
+                    } ?: false
+                }
+            }
+        }
+
+        val navBarStyle by playerViewModel.navBarStyle.collectAsStateWithLifecycle()
+        val navBarCompactMode by playerViewModel.navBarCompactMode.collectAsStateWithLifecycle()
+        val navBarCornerRadius by playerViewModel.navBarCornerRadius.collectAsStateWithLifecycle()
+        val hapticsEnabled by playerViewModel.hapticsEnabled.collectAsStateWithLifecycle()
+        val rootView = LocalView.current
+        val platformHapticFeedback = LocalHapticFeedback.current
+        val appHapticsConfig = remember(hapticsEnabled) { AppHapticsConfig(enabled = hapticsEnabled) }
+        val scopedHapticFeedback = remember(platformHapticFeedback, appHapticsConfig.enabled) {
+            if (appHapticsConfig.enabled) platformHapticFeedback else NoOpHapticFeedback
+        }
+
+        val systemNavBarInset = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
+        LaunchedEffect(hapticsEnabled, rootView) {
+            rootView.isHapticFeedbackEnabled = hapticsEnabled
+            rootView.rootView?.isHapticFeedbackEnabled = hapticsEnabled
+        }
+
+        val horizontalPadding = if (navBarStyle == NavBarStyle.DEFAULT) {
+            if (systemNavBarInset > 30.dp) 14.dp else systemNavBarInset
+        } else 0.dp
+
+        val animatedBottomBarPadding by animateDpAsState(
+            targetValue = if (navBarStyle == NavBarStyle.FULL_WIDTH) 0.dp else systemNavBarInset,
+            animationSpec = tween(400),
+            label = "BottomBarPadding"
+        )
+        val bottomBarPadding = animatedBottomBarPadding
+        val navBarHeight = resolveNavBarSurfaceHeight(navBarStyle, systemNavBarInset, navBarCompactMode)
+        val navBarOccupiedHeight by remember(systemNavBarInset, navBarCompactMode) {
+            derivedStateOf { resolveNavBarOccupiedHeight(systemNavBarInset, navBarCompactMode) }
+        }
+        val navBarVisibilityProgress by animateFloatAsState(
+            targetValue = if (shouldHideNavigationBar) 0f else 1f,
+            animationSpec = tween(durationMillis = 220, easing = LinearOutSlowInEasing),
+            label = "NavBarVisibilityProgress"
+        )
+        val visibleNavBarOccupiedHeight by remember(navBarOccupiedHeight, navBarVisibilityProgress) {
+            derivedStateOf { navBarOccupiedHeight * navBarVisibilityProgress }
+        }
+        val miniPlayerBottomMargin by remember(systemNavBarInset, visibleNavBarOccupiedHeight) {
+            derivedStateOf {
+                if (visibleNavBarOccupiedHeight > systemNavBarInset) visibleNavBarOccupiedHeight else systemNavBarInset
+            }
+        }
+        val shouldRenderNavigationBar by remember(shouldHideNavigationBar, navBarVisibilityProgress) {
+            derivedStateOf { !shouldHideNavigationBar || navBarVisibilityProgress > 0.01f }
+        }
+        val isNavBarEffectivelyHidden by remember(shouldHideNavigationBar, navBarVisibilityProgress) {
+            derivedStateOf { shouldHideNavigationBar && navBarVisibilityProgress <= 0.01f }
+        }
+
+        val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+        val scope = rememberCoroutineScope()
+        val announcementService = remember { GitHubAnnouncementPropertiesService() }
+        var playStoreAnnouncement by remember { mutableStateOf(PlayStoreAnnouncementDefaults.Template) }
+        var showPlayStoreAnnouncement by remember { mutableStateOf(false) }
+
+        LaunchedEffect(Unit) {
+            if (PlayStoreAnnouncementDefaults.LOCAL_PREVIEW_ENABLED) {
+                playStoreAnnouncement = PlayStoreAnnouncementDefaults.HardcodedPreview
+                showPlayStoreAnnouncement = true
+                return@LaunchedEffect
+            }
+            announcementService.fetchPlayStoreAnnouncement()
+                .onSuccess { remoteConfig ->
+                    val resolvedAnnouncement = remoteConfig.toUiModel()
+                    playStoreAnnouncement = resolvedAnnouncement
+                    showPlayStoreAnnouncement = resolvedAnnouncement.enabled
+                }
+                .onFailure { throwable ->
+                    LogUtils.w(this@MainActivity, "Remote announcement unavailable. Keeping popup disabled. ${throwable.message ?: ""}")
+                }
+        }
+
+        LaunchedEffect(userPreferencesRepository) {
+            userPreferencesRepository.clearDeprecatedPlayerSheetPreference()
+        }
+
+        CompositionLocalProvider(
+            LocalAppHapticsConfig provides appHapticsConfig,
+            LocalHapticFeedback provides scopedHapticFeedback
+        ) {
+            AppSidebarDrawer(
+                drawerState = drawerState,
+                selectedRoute = currentRoute ?: Screen.Home.route,
+                onDestinationSelected = { destination ->
+                    scope.launch { drawerState.close() }
+                    when (destination) {
+                        DrawerDestination.Home -> navController.navigateSafely(Screen.Home.route) { popUpTo(Screen.Home.route) { inclusive = true } }
+                        DrawerDestination.Equalizer -> navController.navigateSafely(Screen.Equalizer.route)
+                        DrawerDestination.Settings -> navController.navigateSafely(Screen.Settings.route)
+                        DrawerDestination.Telegram -> startActivity(Intent(this@MainActivity, com.theveloper.pixelplay.presentation.telegram.auth.TelegramLoginActivity::class.java))
+                        else -> {}
+                    }
+                }
+            ) {
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    bottomBar = {
+                        if (shouldRenderNavigationBar) {
+                            val playerContentExpansionFraction = playerViewModel.playerContentExpansionFraction.value
+                            val currentSongId by remember {
+                                playerViewModel.stablePlayerState.map { it.currentSong?.id }.distinctUntilChanged()
+                            }.collectAsStateWithLifecycle(initialValue = null)
+                            val showPlayerContentArea = currentSongId != null
+                            val navBarElevation = 3.dp
+                            val playerContentActualBottomRadiusTargetValue by remember(navBarStyle, showPlayerContentArea, playerContentExpansionFraction) {
+                                derivedStateOf {
+                                    if (navBarStyle == NavBarStyle.FULL_WIDTH) return@derivedStateOf lerp(navBarCornerRadius.dp, 26.dp, playerContentExpansionFraction)
+                                    if (showPlayerContentArea) {
+                                        if (playerContentExpansionFraction < 0.2f) lerp(12.dp, 26.dp, (playerContentExpansionFraction / 0.2f).coerceIn(0f, 1f)) else 26.dp
+                                    } else {
+                                        navBarCornerRadius.dp
+                                    }
+                                }
+                            }
+                            val playerContentActualBottomRadius by animateDpAsState(
+                                targetValue = playerContentActualBottomRadiusTargetValue,
+                                animationSpec = androidx.compose.animation.core.spring(
+                                    dampingRatio = androidx.compose.animation.core.Spring.DampingRatioNoBouncy,
+                                    stiffness = androidx.compose.animation.core.Spring.StiffnessMedium
+                                ),
+                                label = "PlayerContentBottomRadius"
+                            )
+                            val navBarHideFractionClamped = if (showPlayerContentArea) playerContentExpansionFraction.coerceIn(0f, 1f) else 0f
+                            val animatedNavBarCornerRadius by animateDpAsState(
+                                targetValue = navBarCornerRadius.dp,
+                                animationSpec = tween(400),
+                                label = "NavBarCornerRadius"
+                            )
+                            val actualShape = remember(playerContentActualBottomRadius, showPlayerContentArea, navBarStyle, animatedNavBarCornerRadius) {
+                                val bottomRadius = if (navBarStyle == NavBarStyle.FULL_WIDTH) 0.dp else animatedNavBarCornerRadius
+                                AbsoluteSmoothCornerShape(
+                                    cornerRadiusTL = playerContentActualBottomRadius,
+                                    smoothnessAsPercentBR = 60,
+                                    cornerRadiusTR = playerContentActualBottomRadius,
+                                    smoothnessAsPercentTL = 60,
+                                    cornerRadiusBL = bottomRadius,
+                                    smoothnessAsPercentTR = 60,
+                                    cornerRadiusBR = bottomRadius,
+                                    smoothnessAsPercentBL = 60
+                                )
+                            }
+                            var componentHeightPx by remember { mutableStateOf(0) }
+                            val density = LocalDensity.current
+                            val shadowOverflowPx = remember(navBarElevation, density) { with(density) { (navBarElevation * 8).toPx() } }
+                            val bottomBarPaddingPx = remember(bottomBarPadding, density) { with(density) { bottomBarPadding.toPx() } }
+                            val animatedTranslationY by remember(navBarHideFractionClamped, componentHeightPx, shadowOverflowPx, bottomBarPaddingPx) {
+                                derivedStateOf { (componentHeightPx + shadowOverflowPx + bottomBarPaddingPx) * navBarHideFractionClamped }
+                            }
+                            Box(
+                                modifier = Modifier.fillMaxWidth().height(visibleNavBarOccupiedHeight).clipToBounds()
+                            ) {
+                                val onSearchIconDoubleTap = remember(playerViewModel) { { playerViewModel.onSearchNavIconDoubleTapped() } }
+                                Surface(
+                                    modifier = Modifier.align(Alignment.BottomCenter).fillMaxWidth().padding(bottom = bottomBarPadding)
+                                        .onSizeChanged { componentHeightPx = it.height }
+                                        .graphicsLayer { translationY = animatedTranslationY; alpha = 1f }
+                                        .height(navBarHeight)
+                                        .padding(horizontal = horizontalPadding),
+                                    color = NavigationBarDefaults.containerColor,
+                                    shape = actualShape,
+                                    shadowElevation = navBarElevation
+                                ) {
+                                    PlayerInternalNavigationBar(
+                                        navController = navController,
+                                        navItems = commonNavItems,
+                                        currentRoute = currentRoute,
+                                        navBarStyle = navBarStyle,
+                                        compactMode = navBarCompactMode,
+                                        bottomBarPadding = bottomBarPadding,
+                                        onSearchIconDoubleTap = onSearchIconDoubleTap,
+                                        modifier = Modifier.fillMaxSize()
+                                    )
+                                }
+                            }
+                        }
+                    }
+                ) { innerPadding ->
+                    BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
+                        val density = LocalDensity.current
+                        val configuration = LocalWindowInfo.current
+                        val screenHeightPx = remember(configuration) { with(density) { configuration.containerSize.height } }
+                        val containerHeight = this.maxHeight
+                        val showPlayerContentInitially by remember {
+                            playerViewModel.stablePlayerState.map { it.currentSong?.id != null }.distinctUntilChanged()
+                        }.collectAsStateWithLifecycle(initialValue = false)
+                        val routesWithHiddenMiniPlayer = remember { setOf(Screen.NavBarCrRad.route) }
+                        val shouldHideMiniPlayer by remember(currentRoute) { derivedStateOf { currentRoute in routesWithHiddenMiniPlayer } }
+                        val miniPlayerH = with(density) { MiniPlayerHeight.toPx() }
+                        val totalSheetHeightWhenContentCollapsedPx = if (showPlayerContentInitially && !shouldHideMiniPlayer) miniPlayerH else 0f
+                        val spacerPx = with(density) { MiniPlayerBottomSpacer.toPx() }
+                        val sheetCollapsedTargetY = screenHeightPx - totalSheetHeightWhenContentCollapsedPx - with(density) { miniPlayerBottomMargin.toPx() } - spacerPx
+
+                        AppNavigation(
+                            playerViewModel = playerViewModel,
+                            navController = navController,
+                            paddingValues = innerPadding,
+                            userPreferencesRepository = userPreferencesRepository,
+                            onSearchBarActiveChange = { isSearchBarActive = it },
+                            onOpenSidebar = { scope.launch { drawerState.open() } }
+                        )
+
+                        UnifiedPlayerSheetV2(
+                            playerViewModel = playerViewModel,
+                            sheetCollapsedTargetY = sheetCollapsedTargetY,
+                            collapsedStateHorizontalPadding = horizontalPadding,
+                            hideMiniPlayer = shouldHideMiniPlayer,
+                            containerHeight = containerHeight,
+                            navController = navController,
+                            isNavBarHidden = isNavBarEffectivelyHidden
+                        )
+
+                        val dismissUndoBarSlice by remember {
+                            playerViewModel.playerUiState.map { state ->
+                                DismissUndoBarSlice(
+                                    isVisible = state.showDismissUndoBar,
+                                    durationMillis = state.undoBarVisibleDuration
+                                )
+                            }.distinctUntilChanged()
+                        }.collectAsStateWithLifecycle(initialValue = DismissUndoBarSlice())
+                        val onUndoDismissPlaylist = remember(playerViewModel) { { playerViewModel.undoDismissPlaylist() } }
+                        val onCloseDismissUndoBar = remember(playerViewModel) { { playerViewModel.hideDismissUndoBar() } }
+
+                        AnimatedVisibility(
+                            visible = dismissUndoBarSlice.isVisible,
+                            enter = slideInVertically(initialOffsetY = { it }) + fadeIn(),
+                            exit = slideOutVertically(targetOffsetY = { -it }) + fadeOut(),
+                            modifier = Modifier.align(Alignment.BottomCenter)
+                                .padding(bottom = innerPadding.calculateBottomPadding() + MiniPlayerBottomSpacer)
+                                .padding(horizontal = horizontalPadding)
+                        ) {
+                            DismissUndoBar(
+                                modifier = Modifier.fillMaxWidth().height(MiniPlayerHeight).padding(horizontal = 14.dp),
+                                onUndo = onUndoDismissPlaylist,
+                                onClose = onCloseDismissUndoBar,
+                                durationMillis = dismissUndoBarSlice.durationMillis
+                            )
+                        }
+
+                        if (showPlayStoreAnnouncement) {
+                            PlayStoreAnnouncementDialog(
+                                announcement = playStoreAnnouncement,
+                                onDismiss = { showPlayStoreAnnouncement = false },
+                                onOpenPlayStore = { url ->
+                                    showPlayStoreAnnouncement = false
+                                    openExternalUrl(url)
+                                }
+                            )
+                        }
+                    }
+                }
+            }
+        }
+        Trace.endSection()
+    }
+
+    @OptIn(ExperimentalMaterial3ExpressiveApi::class)
+    @Composable
+    private fun LoadingOverlay(syncProgress: SyncProgress) {
+        val animatedProgress by androidx.compose.animation.core.animateFloatAsState(
+            targetValue = syncProgress.progress,
+            animationSpec = androidx.compose.animation.core.spring(
+                dampingRatio = androidx.compose.animation.core.Spring.DampingRatioNoBouncy,
+                stiffness = androidx.compose.animation.core.Spring.StiffnessLow
+            ),
+            label = "SyncProgressAnimation"
+        )
+        Box(
+            modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background.copy(alpha = 0.9f)).clickable(enabled = false, onClick = {}),
+            contentAlignment = Alignment.Center
+        ) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(horizontal = 32.dp)) {
+                CircularWavyProgressIndicator()
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(
+                    text = stringResource(R.string.preparing_library),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+                if (syncProgress.hasProgress) {
+                    Spacer(modifier = Modifier.height(16.dp))
+                    androidx.compose.material3.LinearWavyProgressIndicator(progress = { animatedProgress }, modifier = Modifier.fillMaxWidth())
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = stringResource(
+                        R.string.scanned_songs_progress,
+                        syncProgress.currentCount,
+                        syncProgress.totalCount),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+        }
+    }
+
+    @androidx.annotation.OptIn(UnstableApi::class)
+    override fun onStart() {
+        super.onStart()
+        LogUtils.d(this, "onStart")
+        playerViewModel.onMainActivityStart()
+        val sessionToken = SessionToken(this, ComponentName(this, MusicService::class.java))
+        mediaControllerFuture = MediaController.Builder(this, sessionToken).buildAsync()
+        mediaControllerFuture?.addListener({}, MoreExecutors.directExecutor())
+    }
+
+    override fun onStop() {
+        super.onStop()
+        LogUtils.d(this, "onStop")
+        mediaControllerFuture?.let { MediaController.releaseFuture(it) }
+    }
+
+    override fun onResume() {
+        super.onResume()
+    }
+}

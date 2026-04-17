@@ -13,6 +13,8 @@
     <string name="cancel">Cancelar</string>
     <string name="import_file">Importar</string>
     <string name="search">Buscar</string>
+    <string name="nav_home">Inicio</string>
+    <string name="nav_library">Biblioteca</string>  
 
     <!-- Setup / Loading -->
     <string name="preparing_setup">Preparando configuración…</string>
