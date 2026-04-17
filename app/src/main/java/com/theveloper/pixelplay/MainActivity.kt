@@ -84,6 +84,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.PermissionStatus
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.google.common.util.concurrent.ListenableFuture
 import com.google.common.util.concurrent.MoreExecutors
@@ -209,7 +210,9 @@ class MainActivity : ComponentActivity() {
                 permissions = requiredPermissions + optionalPermissions
             )
             val requiredPermissionsGranted = requiredPermissions.all { permission ->
-                permissionState.permissions.any { state -> state.permission == permission && state.status.isGranted }
+                permissionState.permissions.any { state ->
+                    state.permission == permission && state.status is PermissionStatus.Granted
+                }
             }
             val showSetupScreen = remember(isSetupComplete, requiredPermissionsGranted, isBenchmarkMode) {
                 when {
