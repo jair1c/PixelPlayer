@@ -1,1 +1,293 @@
-<UPDATED_CONTENT_PLACEHOLDER>
+plugins {
+    alias(libs.plugins.android.application)
+    id("com.google.devtools.ksp") version "2.1.0-1.0.29"
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.dagger.hilt.android)
+    kotlin("plugin.serialization") version "2.1.0"
+    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.baselineprofile)
+    // id("com.google.protobuf") version "0.9.5" // Eliminado plugin de Protobuf
+    id("kotlin-parcelize")
+}
+
+val enableAbiSplits = providers.gradleProperty("pixelplay.enableAbiSplits")
+    .orElse("false")
+    .map(String::toBoolean)
+    .get()
+
+val enableComposeCompilerReports = providers.gradleProperty("pixelplay.enableComposeCompilerReports")
+    .orElse("false")
+    .map(String::toBoolean)
+    .get()
+
+android {
+    namespace = "com.theveloper.pixelplay"
+    compileSdk = 35
+
+    sourceSets {
+        getByName("androidTest") {
+            assets.srcDir("$projectDir/schemas")
+        }
+    }
+
+    androidResources {
+        noCompress.add("tflite")
+    }
+
+    packaging {
+        resources {
+            excludes += "META-INF/INDEX.LIST"
+            excludes += "META-INF/DEPENDENCIES"
+            excludes += "/META-INF/io.netty.versions.properties"
+            pickFirsts.add("META-INF/LICENSE.md")
+            pickFirsts.add("META-INF/LICENSE.txt")
+            excludes.add("META-INF/CONTRIBUTORS.md")
+            excludes.add("META-INF/NOTICE.txt")
+            excludes.add("META-INF/NOTICE.md")
+        }
+    }
+
+    defaultConfig {
+        applicationId = "com.theveloper.pixelplay"
+        minSdk = 29
+        targetSdk = 35
+        versionCode = (project.findProperty("APP_VERSION_CODE") as String).toInt()
+        versionName = project.findProperty("APP_VERSION_NAME") as String
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix = ".debug"
+        }
+
+        release {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            signingConfig = signingConfigs.getByName("debug")
+        }
+
+        create("benchmark") {
+            initWith(getByName("release"))
+            signingConfig = signingConfigs.getByName("debug")
+            matchingFallbacks += listOf("release")
+            isDebuggable = false
+        }
+    }
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "2.1.0"
+    }
+    buildFeatures {
+        compose = true
+        buildConfig = true
+    }
+    kotlinOptions {
+        jvmTarget = "11"
+        if (enableComposeCompilerReports) {
+            freeCompilerArgs += listOf(
+                "-P",
+                "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=${project.layout.buildDirectory.get().asFile.absolutePath}/compose_compiler_reports"
+            )
+            freeCompilerArgs += listOf(
+                "-P",
+                "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=${project.layout.buildDirectory.get().asFile.absolutePath}/compose_compiler_metrics"
+            )
+        }
+
+        freeCompilerArgs += listOf(
+            "-P",
+            "plugin:androidx.compose.compiler.plugins.kotlin:stabilityConfigurationPath=${project.rootDir.absolutePath}/app/compose_stability.conf"
+        )
+    }
+
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+        unitTests.all {
+            it.useJUnitPlatform()
+        }
+    }
+
+    splits {
+        abi {
+            isEnable = enableAbiSplits
+            reset()
+            if (enableAbiSplits) {
+                include("arm64-v8a", "armeabi-v7a", "x86_64", "x86")
+                isUniversalApk = true
+            }
+        }
+    }
+
+    bundle {
+        abi {
+            enableSplit = true
+        }
+        density {
+            enableSplit = true
+        }
+        language {
+            enableSplit = true
+        }
+    }
+}
+
+composeCompiler {
+    enableStrongSkippingMode = true
+
+    featureFlags = setOf(
+        org.jetbrains.kotlin.compose.compiler.gradle.ComposeFeatureFlag.OptimizeNonSkippingGroups
+    )
+}
+
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
+    arg("room.incremental", "true")
+    arg("room.generateKotlin", "true")
+}
+
+dependencies {
+    implementation(libs.androidx.profileinstaller)
+    implementation(libs.androidx.paging.common)
+    "baselineProfile"(project(":baselineprofile"))
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
+
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation("androidx.lifecycle:lifecycle-process:2.9.0")
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.generativeai)
+    implementation(libs.androidx.navigation.runtime.ktx)
+    testImplementation(libs.junit.jupiter.api)
+    testImplementation(libs.junit.jupiter.params)
+    testRuntimeOnly(libs.junit.jupiter.engine)
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockk)
+    testImplementation(libs.turbine)
+    testImplementation(libs.truth)
+    testImplementation(libs.androidx.test.core)
+    testImplementation(libs.androidx.junit)
+    testImplementation(libs.androidx.room.testing)
+    testImplementation(libs.kotlin.test.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.room.testing)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.androidx.test.core)
+    androidTestImplementation(libs.truth)
+    androidTestImplementation(libs.mockk)
+    androidTestImplementation("androidx.work:work-testing:2.10.1")
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    debugImplementation(platform(libs.androidx.compose.bom))
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
+
+    androidTestImplementation(libs.androidx.benchmark.macro.junit4)
+    androidTestImplementation(libs.androidx.uiautomator)
+
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.hilt.work)
+    ksp(libs.androidx.hilt.compiler)
+
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.paging)
+    implementation(libs.androidx.paging.runtime)
+    implementation(libs.androidx.paging.compose)
+
+    implementation(libs.androidx.glance)
+    implementation(libs.androidx.glance.appwidget)
+    implementation(libs.androidx.glance.material3)
+
+    implementation(libs.gson)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.androidx.work.runtime.ktx)
+
+    implementation(libs.smooth.corner.rect.android.compose)
+    implementation(libs.androidx.graphics.shapes)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.animation)
+    implementation(libs.coil.compose)
+
+    implementation(libs.capturable) {
+        exclude(group = "androidx.compose.animation")
+        exclude(group = "androidx.compose.foundation")
+        exclude(group = "androidx.compose.material")
+        exclude(group = "androidx.compose.runtime")
+        exclude(group = "androidx.compose.ui")
+    }
+
+    implementation(libs.reorderables)
+    implementation(libs.codeview)
+    implementation(libs.androidx.appcompat)
+
+    implementation(libs.androidx.media3.exoplayer)
+    implementation(libs.androidx.media3.ui)
+    implementation(libs.androidx.media3.session)
+    implementation(libs.androidx.mediarouter)
+    implementation(libs.google.play.services.cast.framework)
+    implementation(libs.androidx.media3.exoplayer.ffmpeg)
+
+    implementation(libs.androidx.palette.ktx)
+    implementation(libs.androidx.core.splashscreen)
+    implementation(libs.androidx.constraintlayout.compose)
+    implementation(libs.androidx.foundation)
+    implementation(libs.wavy.slider)
+    implementation(libs.androidx.material.icons.core)
+    implementation(libs.androidx.material.icons.extended)
+    implementation(libs.material)
+    implementation(libs.kotlinx.collections.immutable)
+    implementation(libs.accompanist.permissions)
+    implementation(libs.androidx.media3.transformer)
+    implementation(libs.checker.qual)
+    implementation(libs.timber)
+    implementation(libs.taglib)
+    implementation(libs.jaudiotagger)
+    implementation(libs.vorbisjava.core)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
+    implementation(libs.ktor.server.core)
+    implementation(libs.ktor.server.cio)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.androidx.ui.text.google.fonts)
+    implementation(libs.accompanist.drawablepainter)
+    implementation(kotlin("test"))
+    implementation(libs.androidx.media)
+    implementation(libs.androidx.app)
+    implementation(libs.androidx.app.projected)
+    implementation(project(":shared"))
+    implementation(libs.play.services.wearable)
+    implementation(libs.kotlinx.coroutines.play.services)
+    implementation(libs.tdlib)
+    implementation(libs.credentials)
+    implementation(libs.credentials.play.services.auth)
+    implementation(libs.googleid)
+    implementation(libs.kuromoji.ipadic)
+    implementation(libs.pinyin4j.core)
+    implementation(libs.androidx.security.crypto)
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
