@@ -19,23 +19,6 @@ val enableComposeCompilerReports = providers.gradleProperty("pixelplay.enableCom
     .map(String::toBoolean)
     .get()
 
-val releaseStoreFilePath = providers.gradleProperty("PIXELPLAY_RELEASE_STORE_FILE")
-    .orElse(providers.environmentVariable("PIXELPLAY_RELEASE_STORE_FILE"))
-    .orNull
-val releaseStorePassword = providers.gradleProperty("PIXELPLAY_RELEASE_STORE_PASSWORD")
-    .orElse(providers.environmentVariable("PIXELPLAY_RELEASE_STORE_PASSWORD"))
-    .orNull
-val releaseKeyAlias = providers.gradleProperty("PIXELPLAY_RELEASE_KEY_ALIAS")
-    .orElse(providers.environmentVariable("PIXELPLAY_RELEASE_KEY_ALIAS"))
-    .orNull
-val releaseKeyPassword = providers.gradleProperty("PIXELPLAY_RELEASE_KEY_PASSWORD")
-    .orElse(providers.environmentVariable("PIXELPLAY_RELEASE_KEY_PASSWORD"))
-    .orNull
-val hasReleaseSigning = !releaseStoreFilePath.isNullOrBlank() &&
-    !releaseStorePassword.isNullOrBlank() &&
-    !releaseKeyAlias.isNullOrBlank() &&
-    !releaseKeyPassword.isNullOrBlank()
-
 android {
     namespace = "com.theveloper.pixelplay"
     compileSdk = 35
@@ -69,23 +52,7 @@ android {
         targetSdk = 35
         versionCode = (project.findProperty("APP_VERSION_CODE") as String).toInt()
         versionName = project.findProperty("APP_VERSION_NAME") as String
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    signingConfigs {
-        if (hasReleaseSigning) {
-            create("release") {
-                storeFile = file(requireNotNull(releaseStoreFilePath))
-                storePassword = releaseStorePassword
-                keyAlias = releaseKeyAlias
-                keyPassword = releaseKeyPassword
-                enableV1Signing = true
-                enableV2Signing = true
-                enableV3Signing = true
-                enableV4Signing = true
-            }
-        }
     }
 
     buildTypes {
@@ -100,11 +67,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            signingConfig = if (hasReleaseSigning) {
-                signingConfigs.getByName("release")
-            } else {
-                signingConfigs.getByName("debug")
-            }
+            signingConfig = signingConfigs.getByName("debug")
         }
 
         create("benchmark") {
