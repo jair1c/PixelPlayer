@@ -6,7 +6,6 @@ plugins {
     kotlin("plugin.serialization") version "2.1.0"
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.baselineprofile)
-    // id("com.google.protobuf") version "0.9.5" // Eliminado plugin de Protobuf
     id("kotlin-parcelize")
 }
 
@@ -19,6 +18,23 @@ val enableComposeCompilerReports = providers.gradleProperty("pixelplay.enableCom
     .orElse("false")
     .map(String::toBoolean)
     .get()
+
+val releaseStoreFilePath = providers.gradleProperty("PIXELPLAY_RELEASE_STORE_FILE")
+    .orElse(providers.environmentVariable("PIXELPLAY_RELEASE_STORE_FILE"))
+    .orNull
+val releaseStorePassword = providers.gradleProperty("PIXELPLAY_RELEASE_STORE_PASSWORD")
+    .orElse(providers.environmentVariable("PIXELPLAY_RELEASE_STORE_PASSWORD"))
+    .orNull
+val releaseKeyAlias = providers.gradleProperty("PIXELPLAY_RELEASE_KEY_ALIAS")
+    .orElse(providers.environmentVariable("PIXELPLAY_RELEASE_KEY_ALIAS"))
+    .orNull
+val releaseKeyPassword = providers.gradleProperty("PIXELPLAY_RELEASE_KEY_PASSWORD")
+    .orElse(providers.environmentVariable("PIXELPLAY_RELEASE_KEY_PASSWORD"))
+    .orNull
+val hasReleaseSigning = !releaseStoreFilePath.isNullOrBlank() &&
+    !releaseStorePassword.isNullOrBlank() &&
+    !releaseKeyAlias.isNullOrBlank() &&
+    !releaseKeyPassword.isNullOrBlank()
 
 android {
     namespace = "com.theveloper.pixelplay"
@@ -57,6 +73,21 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        if (hasReleaseSigning) {
+            create("release") {
+                storeFile = file(requireNotNull(releaseStoreFilePath))
+                storePassword = releaseStorePassword
+                keyAlias = releaseKeyAlias
+                keyPassword = releaseKeyPassword
+                enableV1Signing = true
+                enableV2Signing = true
+                enableV3Signing = true
+                enableV4Signing = true
+            }
+        }
+    }
+
     buildTypes {
         debug {
             applicationIdSuffix = ".debug"
@@ -69,7 +100,11 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = if (hasReleaseSigning) {
+                signingConfigs.getByName("release")
+            } else {
+                signingConfigs.getByName("debug")
+            }
         }
 
         create("benchmark") {
@@ -79,18 +114,22 @@ android {
             isDebuggable = false
         }
     }
+
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
     composeOptions {
         kotlinCompilerExtensionVersion = "2.1.0"
     }
+
     buildFeatures {
         compose = true
         buildConfig = true
     }
+
     kotlinOptions {
         jvmTarget = "11"
         if (enableComposeCompilerReports) {
@@ -143,7 +182,6 @@ android {
 
 composeCompiler {
     enableStrongSkippingMode = true
-
     featureFlags = setOf(
         org.jetbrains.kotlin.compose.compiler.gradle.ComposeFeatureFlag.OptimizeNonSkippingGroups
     )
@@ -173,6 +211,7 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.generativeai)
     implementation(libs.androidx.navigation.runtime.ktx)
+
     testImplementation(libs.junit.jupiter.api)
     testImplementation(libs.junit.jupiter.params)
     testRuntimeOnly(libs.junit.jupiter.engine)
@@ -185,6 +224,7 @@ dependencies {
     testImplementation(libs.androidx.junit)
     testImplementation(libs.androidx.room.testing)
     testImplementation(libs.kotlin.test.junit)
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.room.testing)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -194,12 +234,12 @@ dependencies {
     androidTestImplementation("androidx.work:work-testing:2.10.1")
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+    androidTestImplementation(libs.androidx.benchmark.macro.junit4)
+    androidTestImplementation(libs.androidx.uiautomator)
+
     debugImplementation(platform(libs.androidx.compose.bom))
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-
-    androidTestImplementation(libs.androidx.benchmark.macro.junit4)
-    androidTestImplementation(libs.androidx.uiautomator)
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
@@ -227,7 +267,6 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.animation)
     implementation(libs.coil.compose)
-
     implementation(libs.capturable) {
         exclude(group = "androidx.compose.animation")
         exclude(group = "androidx.compose.foundation")
@@ -246,6 +285,7 @@ dependencies {
     implementation(libs.androidx.mediarouter)
     implementation(libs.google.play.services.cast.framework)
     implementation(libs.androidx.media3.exoplayer.ffmpeg)
+    implementation(libs.androidx.media3.transformer)
 
     implementation(libs.androidx.palette.ktx)
     implementation(libs.androidx.core.splashscreen)
@@ -257,7 +297,6 @@ dependencies {
     implementation(libs.material)
     implementation(libs.kotlinx.collections.immutable)
     implementation(libs.accompanist.permissions)
-    implementation(libs.androidx.media3.transformer)
     implementation(libs.checker.qual)
     implementation(libs.timber)
     implementation(libs.taglib)
@@ -273,6 +312,7 @@ dependencies {
     implementation(libs.androidx.ui.text.google.fonts)
     implementation(libs.accompanist.drawablepainter)
     implementation(kotlin("test"))
+
     implementation(libs.androidx.media)
     implementation(libs.androidx.app)
     implementation(libs.androidx.app.projected)
