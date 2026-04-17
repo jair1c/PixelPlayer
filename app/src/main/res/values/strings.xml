@@ -14,6 +14,11 @@
     <string name="import_file">Import</string>
     <string name="search">Search</string>
 
+    <!-- Setup / Loading -->
+    <string name="preparing_setup">Preparing setup…</string>
+    <string name="preparing_library">Preparing your library...</string>
+    <string name="scanned_songs_progress">Scanned %1$d of %2$d songs</string>
+
     <!-- Lyrics -->
     <string name="lyrics">Lyrics</string>
     <string name="close_lyrics_sheet">Close Lyrics Sheet</string>
