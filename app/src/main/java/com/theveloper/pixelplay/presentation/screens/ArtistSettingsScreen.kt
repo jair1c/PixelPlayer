@@ -94,6 +94,7 @@ import com.theveloper.pixelplay.presentation.components.ExpressiveTopBarContent
 import com.theveloper.pixelplay.presentation.viewmodel.ArtistSettingsViewModel
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
@@ -190,7 +191,7 @@ fun ArtistSettingsScreen(
             // Multi-Artist Parsing Section
             item {
                 SettingsSection(
-                    title = "Multi-Artist Parsing",
+                    title = stringResource(R.string.multi_artist_parsing),
                     icon = {
                         Icon(
                             imageVector = Icons.Outlined.Person,
@@ -205,7 +206,7 @@ fun ArtistSettingsScreen(
                     ) {
                         // Configure Character Delimiters
                         SettingsItem(
-                            title = "Character Delimiters",
+                            title = stringResource(R.string.character_delimiters),
                             subtitle = "Current: ${uiState.artistDelimiters.joinToString(", ")}",
                             leadingIcon = {
                                 Icon(
@@ -228,7 +229,7 @@ fun ArtistSettingsScreen(
 
                         // Configure Word Delimiters
                         SettingsItem(
-                            title = "Word Delimiters",
+                            title = stringResource(R.string.word_delimiters),
                             subtitle = if (uiState.wordDelimiters.isEmpty()) "None"
                                        else "Current: ${uiState.wordDelimiters.take(5).joinToString(", ")}${if (uiState.wordDelimiters.size > 5) "..." else ""}",
                             leadingIcon = {
@@ -252,8 +253,8 @@ fun ArtistSettingsScreen(
 
                         // Extract from title toggle
                         SwitchSettingItem(
-                            title = "Extract Artists from Title",
-                            subtitle = "Detect feat., ft., with in song titles",
+                            title = stringResource(R.string.extract_artists_from_title),
+                            subtitle = stringResource(R.string.extract_artists_desc),
                             checked = uiState.extractArtistsFromTitle,
                             onCheckedChange = { viewModel.setExtractArtistsFromTitle(it) },
                             leadingIcon = {
@@ -271,7 +272,7 @@ fun ArtistSettingsScreen(
             // Library Organization Section
             item {
                 SettingsSection(
-                    title = "Library Organization",
+                    title = stringResource(R.string.library_organization),
                     icon = {
                         Icon(
                             imageVector = Icons.Rounded.LibraryMusic,
@@ -282,8 +283,8 @@ fun ArtistSettingsScreen(
                 ) {
                     Column(modifier = Modifier.clip(shape = RoundedCornerShape(24.dp))) {
                         SwitchSettingItem(
-                            title = "Group by Album Artist",
-                            subtitle = "Show collaboration albums under main artist",
+                            title = stringResource(R.string.group_by_album_artist),
+                            subtitle = stringResource(R.string.group_by_album_artist_desc),
                             checked = uiState.groupByAlbumArtist,
                             onCheckedChange = { viewModel.setGroupByAlbumArtist(it) },
                             leadingIcon = {
@@ -301,7 +302,7 @@ fun ArtistSettingsScreen(
             // Info Card
             item {
                 InfoCard(
-                    title = "About Multi-Artist Parsing",
+                    title = stringResource(R.string.about_multi_artist),
                     content = "PixelPlay splits artist tags using character delimiters (/, ;, &) and word delimiters (feat., ft., vs., x). Word delimiters are matched case-insensitively.\n\n\"Extract Artists from Title\" detects patterns like (feat. Artist) in song titles.\n\nBackslash (\\) can be used to escape character delimiters."
                 )
             }
@@ -320,7 +321,7 @@ fun ArtistSettingsScreen(
             }
         }
         CollapsibleCommonTopBar(
-            title = "Artists",
+            title = stringResource(R.string.artists_screen),
             collapseFraction = collapseFraction,
             headerHeight = currentTopBarHeightDp,
             onBackClick = { navController.popBackStack() },

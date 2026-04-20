@@ -38,6 +38,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.theveloper.pixelplay.utils.CrashLogData
+import androidx.compose.ui.res.stringResource
+import com.theveloper.pixelplay.R
 
 /**
  * Material3 Expressive styled dialog that displays crash information
@@ -147,7 +149,7 @@ fun CrashReportDialog(
                     FilledTonalButton(
                         onClick = {
                             val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                            val clip = ClipData.newPlainText("Crash Log", crashLog.getFullLog())
+                            val clip = ClipData.newPlainText(context.getString(R.string.copy_crash_log), crashLog.getFullLog())
                             clipboard.setPrimaryClip(clip)
                             Toast.makeText(context, "Crash log copied to clipboard", Toast.LENGTH_SHORT).show()
                         },
@@ -159,7 +161,7 @@ fun CrashReportDialog(
                             modifier = Modifier.size(18.dp)
                         )
                         Spacer(modifier = Modifier.width(6.dp))
-                        Text("Copy")
+                        Text(stringResource(R.string.copy_action))
                     }
 
                     FilledTonalButton(
@@ -179,7 +181,7 @@ fun CrashReportDialog(
                             modifier = Modifier.size(18.dp)
                         )
                         Spacer(modifier = Modifier.width(6.dp))
-                        Text("Share")
+                        Text(stringResource(R.string.share))
                     }
                 }
             }
@@ -187,7 +189,7 @@ fun CrashReportDialog(
         confirmButton = {},
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("Dismiss")
+                Text(stringResource(R.string.dismiss))
             }
         }
     )

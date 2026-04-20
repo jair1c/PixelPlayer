@@ -83,6 +83,7 @@ import androidx.compose.ui.graphics.TransformOrigin
 import com.theveloper.pixelplay.presentation.screens.TabAnimation
 import com.theveloper.pixelplay.ui.theme.GoogleSansRounded
 import com.theveloper.pixelplay.utils.AudioMetaUtils
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -482,7 +483,7 @@ fun SongInfoBottomSheet(
                                                         contentDescription = "Add to Queue"
                                                     )
                                                     Spacer(Modifier.width(14.dp))
-                                                    Text("Add to Queue")
+                                                    Text(stringResource(R.string.add_to_queue))
                                                 }
                                                 FilledTonalButton(
                                                     modifier = Modifier
@@ -501,7 +502,7 @@ fun SongInfoBottomSheet(
                                                         contentDescription = "Play Next"
                                                     )
                                                     Spacer(Modifier.width(8.dp))
-                                                    Text("Next")
+                                                    Text(stringResource(R.string.next))
                                                 }
                                             }
                                         }
@@ -530,7 +531,7 @@ fun SongInfoBottomSheet(
                                                         contentDescription = "Add to Playlist"
                                                     )
                                                     Spacer(Modifier.width(8.dp))
-                                                    Text("Playlist")
+                                                    Text(stringResource(R.string.playlist))
                                                 }
 
                                                 FilledTonalButton(
@@ -558,7 +559,7 @@ fun SongInfoBottomSheet(
                                                         contentDescription = "Delete"
                                                     )
                                                     Spacer(Modifier.width(8.dp))
-                                                    Text("Delete")
+                                                    Text(stringResource(R.string.delete))
                                                 }
                                             }
                                         }
@@ -598,7 +599,7 @@ fun SongInfoBottomSheet(
                                                     if (shouldShowWatchTransferLoading) {
                                                         LoadingIndicator(modifier = Modifier.size(18.dp))
                                                         Spacer(Modifier.width(10.dp))
-                                                        Text("Checking Watch")
+                                                        Text(stringResource(R.string.checking_watch))
                                                     } else if (isSendingToWatch) {
                                                         LoadingIndicator(modifier = Modifier.size(18.dp))
                                                         Spacer(Modifier.width(10.dp))

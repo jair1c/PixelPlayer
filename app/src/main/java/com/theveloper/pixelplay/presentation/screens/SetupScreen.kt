@@ -159,6 +159,7 @@ import java.util.Date
 import java.util.Locale
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalPermissionsApi::class, androidx.compose.foundation.ExperimentalFoundationApi::class)
 @Composable
@@ -480,7 +481,7 @@ fun DirectorySelectionPage(
     }
 
     PermissionPageLayout(
-        title = "Excluded folders",
+        title = stringResource(R.string.setup_excluded_folders),
         description = "All folders are scanned by default. Pick any locations you want to ignore when building your library.",
         buttonText = "Choose folders to ignore",
         buttonEnabled = canOpenDirectoryPicker,
@@ -783,7 +784,7 @@ fun MediaPermissionPage(
     }
 
     PermissionPageLayout(
-        title = "Media Permission",
+        title = stringResource(R.string.setup_media_permission),
         granted = isGranted,
         description = "PixelPlayer needs access to your audio files to build your music library.",
         buttonText = if (isGranted) "Permission Granted" else "Grant Media Permission",
@@ -822,7 +823,7 @@ fun NotificationsPermissionPage(
     }
 
     PermissionPageLayout(
-        title = "Notifications",
+        title = stringResource(R.string.setup_notifications),
         granted = isGranted,
         description = "Enable notifications to control your music from the lock screen and notification shade.",
         buttonText = if (isGranted) "Permission Granted" else "Enable Notifications",
@@ -855,7 +856,7 @@ fun AlarmsPermissionPage(
     val isGranted = uiState.alarmsPermissionGranted
 
     PermissionPageLayout(
-        title = "Alarms & Reminders",
+        title = stringResource(R.string.setup_alarms),
         granted = isGranted,
         description = "Optional, but recommended if you use Sleep Timer and want PixelPlayer to stop playback exactly on time.",
         buttonText = if (isGranted) "Permission Granted" else "Grant Permission",
@@ -889,7 +890,7 @@ fun BackupRestorePage(
     val progress = uiState.backupTransferProgress
 
     PermissionPageLayout(
-        title = "Do you have a backup?",
+        title = stringResource(R.string.setup_backup_question),
         description = "If you already have a PixelPlayer backup, restore it now and skip most of the remaining setup on this device.",
         buttonText = when {
             uiState.isInspectingBackup -> "Inspecting backup"
@@ -981,20 +982,20 @@ fun ThemeSelectionPage(
         listOf(
             ThemeOptionItem(
                 mode = AppThemeMode.DARK,
-                title = "Dark",
+                title = stringResource(R.string.setup_dark),
                 description = "The default Material 3 dark look for PixelPlay.",
                 icon = Icons.Rounded.DarkMode,
                 recommended = true
             ),
             ThemeOptionItem(
                 mode = AppThemeMode.LIGHT,
-                title = "Light",
+                title = stringResource(R.string.setup_light),
                 description = "A brighter Material 3 look across the app.",
                 icon = Icons.Outlined.LightMode
             ),
             ThemeOptionItem(
                 mode = AppThemeMode.FOLLOW_SYSTEM,
-                title = "Follow system",
+                title = stringResource(R.string.setup_follow_system),
                 description = "Match your phone's current appearance setting.",
                 icon = Icons.Rounded.PhoneAndroid
             )
@@ -1323,7 +1324,7 @@ fun LibraryHeaderPreview(isCompact: Boolean) {
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             LibraryNavigationPillSetupShow(
-                                title = "Songs",
+                                title = stringResource(R.string.setup_songs),
                                 isExpanded = false,
                                 iconRes = R.drawable.rounded_music_note_24,
                                 pageIndex = 0,
@@ -1480,7 +1481,7 @@ fun BatteryOptimizationPage(
     )
 
     PermissionPageLayout(
-        title = "Battery Optimization",
+        title = stringResource(R.string.battery_optimization),
         granted = isIgnoringBatteryOptimizations,
         description = "Some Android devices aggressively kill background apps. Disable battery optimization for PixelPlayer to prevent unexpected playback interruptions.",
         buttonText = if (isIgnoringBatteryOptimizations) "Permission Granted" else "Disable Optimization",

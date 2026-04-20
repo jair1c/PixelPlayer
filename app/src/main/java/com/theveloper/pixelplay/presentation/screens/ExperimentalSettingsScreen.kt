@@ -77,6 +77,8 @@ import com.theveloper.pixelplay.presentation.viewmodel.PlayerViewModel
 import com.theveloper.pixelplay.presentation.viewmodel.SettingsViewModel
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
+import androidx.compose.ui.res.stringResource
+import com.theveloper.pixelplay.R
 
 @OptIn(UnstableApi::class)
 @Composable
@@ -179,7 +181,7 @@ fun ExperimentalSettingsScreen(
         ) {
             item(key = "player_ui_tweaks_section") {
                 SettingsSection(
-                    title = "PlayerUI loading tweaks",
+                    title = stringResource(R.string.experimental_settings_desc),
                     icon = {
                         Icon(
                             imageVector = Icons.Outlined.Style,
@@ -210,8 +212,8 @@ fun ExperimentalSettingsScreen(
                             val canUseTriggerMode = isAnyDelayEnabled && placeholdersEnabled
 
                             SwitchSettingItem(
-                                title = "Animated Lyrics (High-end devices)",
-                                subtitle = "Uses spring animations and visual effects for lyrics. May cause frame drops on low-end devices.",
+                                title = stringResource(R.string.immersive_lyrics),
+                                subtitle = stringResource(R.string.immersive_lyrics_desc),
                                 checked = uiState.useAnimatedLyrics,
                                 onCheckedChange = settingsViewModel::setUseAnimatedLyrics,
                                 leadingIcon = {
@@ -230,8 +232,8 @@ fun ExperimentalSettingsScreen(
                             ) {
                                 Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                                     SwitchSettingItem(
-                                        title = "Lyric Blur Effect",
-                                        subtitle = "Applies a depth-of-field blur to inactive lyrics.",
+                                        title = stringResource(R.string.lyrics_screen),
+                                        subtitle = stringResource(R.string.system_prompt_desc),
                                         checked = uiState.animatedLyricsBlurEnabled,
                                         onCheckedChange = settingsViewModel::setAnimatedLyricsBlurEnabled,
                                         leadingIcon = {
@@ -327,7 +329,7 @@ fun ExperimentalSettingsScreen(
                             }
 
                             SwitchSettingItem(
-                                title = "Delay everything",
+                                title = stringResource(R.string.experimental_settings),
                                 subtitle = "Hold the full player content until the sheet background is fully expanded.",
                                 checked = delayAllEnabled,
                                 onCheckedChange = settingsViewModel::setDelayAllFullPlayerContent,
@@ -347,7 +349,7 @@ fun ExperimentalSettingsScreen(
                             ) {
                                 Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                                     SwitchSettingItem(
-                                        title = "Album carousel",
+                                        title = stringResource(R.string.album_art_palette_style),
                                         subtitle = "Delay album art and carousel until the sheet is expanded.",
                                         checked = loadingTweaks.delayAlbumCarousel,
                                         onCheckedChange = settingsViewModel::setDelayAlbumCarousel,
@@ -361,7 +363,7 @@ fun ExperimentalSettingsScreen(
                                     )
 
                                     SwitchSettingItem(
-                                        title = "Song metadata",
+                                        title = stringResource(R.string.field_title),
                                         subtitle = "Delay title, artist, and lyrics/queue actions.",
                                         checked = loadingTweaks.delaySongMetadata,
                                         onCheckedChange = settingsViewModel::setDelaySongMetadata,
@@ -375,7 +377,7 @@ fun ExperimentalSettingsScreen(
                                     )
 
                                     SwitchSettingItem(
-                                        title = "Progress bar",
+                                        title = stringResource(R.string.peak_segment),
                                         subtitle = "Delay the timeline and time labels until expansion completes.",
                                         checked = loadingTweaks.delayProgressBar,
                                         onCheckedChange = settingsViewModel::setDelayProgressBar,
@@ -389,7 +391,7 @@ fun ExperimentalSettingsScreen(
                                     )
 
                                     SwitchSettingItem(
-                                        title = "Playback controls",
+                                        title = stringResource(R.string.playback),
                                         subtitle = "Delay play/pause, seek, and favorite controls.",
                                         checked = loadingTweaks.delayControls,
                                         onCheckedChange = settingsViewModel::setDelayControls,
@@ -439,7 +441,7 @@ fun ExperimentalSettingsScreen(
                             }
 
                             SwitchSettingItem(
-                                title = "Use placeholders for delayed items",
+                                title = stringResource(R.string.use_smooth_corners),
                                 subtitle = "Keep layout stable by rendering lightweight placeholders while components wait for expansion.",
                                 checked = placeholdersEnabled,
                                 onCheckedChange = settingsViewModel::setFullPlayerPlaceholders,
@@ -490,7 +492,7 @@ fun ExperimentalSettingsScreen(
                                                 horizontalArrangement = Arrangement.spacedBy(8.dp)
                                             ) {
                                                 TriggerModeOptionCard(
-                                                    title = "Threshold",
+                                                    title = stringResource(R.string.cd_volume_level),
                                                     subtitle = "Uses expansion percentage.",
                                                     selected = !switchOnDragRelease,
                                                     enabled = canUseTriggerMode,
@@ -498,7 +500,7 @@ fun ExperimentalSettingsScreen(
                                                     modifier = Modifier.weight(1f)
                                                 )
                                                 TriggerModeOptionCard(
-                                                    title = "Drag release",
+                                                    title = stringResource(R.string.cd_drag_handle),
                                                     subtitle = "Switches only after gesture release.",
                                                     selected = switchOnDragRelease,
                                                     enabled = canUseTriggerMode,
@@ -568,7 +570,7 @@ fun ExperimentalSettingsScreen(
                                             }
 
                                             SwitchSettingItem(
-                                                title = "Also apply on player close",
+                                                title = stringResource(R.string.tap_background_closes_player),
                                                 subtitle = "Use close threshold to switch back to placeholders while collapsing.",
                                                 checked = loadingTweaks.applyPlaceholdersOnClose,
                                                 onCheckedChange = settingsViewModel::setFullPlayerPlaceholdersOnClose,
@@ -663,7 +665,7 @@ fun ExperimentalSettingsScreen(
                                     }
 
                                     SwitchSettingItem(
-                                        title = "Make placeholders transparent",
+                                        title = stringResource(R.string.compact_mode),
                                         subtitle = "Placeholders keep their layout space but become invisible.",
                                         checked = loadingTweaks.transparentPlaceholders,
                                         onCheckedChange = settingsViewModel::setTransparentPlaceholders,
@@ -708,7 +710,7 @@ fun ExperimentalSettingsScreen(
                 val albumArtQuality = uiState.albumArtQuality
                 
                  SettingsSection(
-                    title = "Album Art Resolution",
+                    title = stringResource(R.string.album_art_palette_style),
                     icon = {
                         Icon(
                             imageVector = Icons.Rounded.MusicNote, // Or Image/Photo icon
@@ -784,7 +786,7 @@ fun ExperimentalSettingsScreen(
         }
 
         CollapsibleCommonTopBar(
-            title = "Experimental",
+            title = stringResource(R.string.experimental_settings),
             collapseFraction = collapseFraction,
             headerHeight = currentTopBarHeightDp,
             onBackClick = onNavigationIconClick

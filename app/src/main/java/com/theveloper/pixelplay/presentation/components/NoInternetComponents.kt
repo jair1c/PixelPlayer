@@ -55,7 +55,7 @@ fun NoInternetDialog(
         },
         confirmButton = {
             TextButton(onClick = onDismiss) {
-                Text("OK")
+                Text(stringResource(R.string.ok))
             }
         }
     )
@@ -108,7 +108,7 @@ fun NoInternetScreen(
                 onClick = onRetry,
                 modifier = Modifier.fillMaxWidth(0.5f)
             ) {
-                Text("Retry")
+                Text(stringResource(R.string.retry))
             }
         }
     }

@@ -108,6 +108,7 @@ import kotlinx.coroutines.launch
 import racra.compose.smooth_corner_rect_library.AbsoluteSmoothCornerShape
 import timber.log.Timber
 import kotlin.math.roundToInt
+import androidx.compose.ui.res.stringResource
 
 private data class Contributor(
     val id: String,
@@ -376,8 +377,8 @@ fun AboutScreen(
 
             item(key = "maintainer_title") {
                 AboutSectionHeader(
-                    title = "Maintainer",
-                    subtitle = "The person behind PixelPlayer.",
+                    title = stringResource(R.string.maintainer),
+                    subtitle = stringResource(R.string.maintainer_desc),
                     modifier = Modifier.padding(top = 24.dp),
                 )
             }
@@ -396,8 +397,8 @@ fun AboutScreen(
 
             item(key = "spotlight_title") {
                 AboutSectionHeader(
-                    title = "Community Spotlight",
-                    subtitle = "Recognition for collaborators with major impact.",
+                    title = stringResource(R.string.community_spotlight),
+                    subtitle = stringResource(R.string.community_spotlight_desc),
                     modifier = Modifier.padding(top = 24.dp),
                 )
             }
@@ -420,8 +421,8 @@ fun AboutScreen(
 
             item(key = "contributors_title") {
                 AboutSectionHeader(
-                    title = "Open Source Contributors",
-                    subtitle = "Live contributor list from GitHub.",
+                    title = stringResource(R.string.open_source_contributors),
+                    subtitle = stringResource(R.string.open_source_contributors_desc),
                     modifier = Modifier.padding(top = 24.dp),
                 )
             }
@@ -479,7 +480,7 @@ fun AboutScreen(
         }
 
         CollapsibleCommonTopBar(
-            title = "About",
+            title = stringResource(R.string.about),
             collapseFraction = collapseFraction,
             headerHeight = currentTopBarHeightDp,
             onBackClick = onNavigationIconClick,
@@ -754,12 +755,12 @@ private fun ContributorCard(
             ) {
                 SocialIconButton(
                     painterRes = R.drawable.github,
-                    contentDescription = "Open GitHub profile",
+                    contentDescription = stringResource(R.string.cd_open_telegram),
                     url = contributor.githubUrl,
                 )
                 SocialIconButton(
                     painterRes = R.drawable.telegram,
-                    contentDescription = "Open Telegram",
+                    contentDescription = stringResource(R.string.cd_open_telegram),
                     url = contributor.telegramUrl,
                 )
             }

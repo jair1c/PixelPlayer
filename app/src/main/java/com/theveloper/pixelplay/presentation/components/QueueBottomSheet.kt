@@ -91,6 +91,7 @@ import androidx.compose.material.icons.filled.LibraryAdd
 import androidx.compose.material.icons.rounded.Pause
 import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material.icons.rounded.SkipNext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -696,7 +697,7 @@ fun QueueBottomSheet(
                             .padding(32.dp),
                         contentAlignment = Alignment.Center
                     ) {
-                        Text("Queue is empty.", color = colors.onSurface)
+                        Text(stringResource(R.string.queue_empty), color = colors.onSurface)
                     }
                 } else {
                     Box(
@@ -1075,8 +1076,8 @@ fun QueueBottomSheet(
         if (showClearQueueDialog) {
             AlertDialog(
                 onDismissRequest = { showClearQueueDialog = false },
-                title = { Text("Clear Queue") },
-                text = { Text("Are you sure you want to clear all songs from the queue except the current one?") },
+                title = { Text(stringResource(R.string.clear_queue)) },
+                text = { Text(stringResource(R.string.clear_queue_confirm)) },
                 confirmButton = {
                     TextButton(
                         onClick = {

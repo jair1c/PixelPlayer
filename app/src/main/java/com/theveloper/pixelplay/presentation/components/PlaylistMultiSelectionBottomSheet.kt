@@ -60,6 +60,8 @@ import com.theveloper.pixelplay.data.model.Playlist
 import com.theveloper.pixelplay.ui.theme.GoogleSansRounded
 import com.theveloper.pixelplay.utils.resolvePlaylistCoverContentColor
 import racra.compose.smooth_corner_rect_library.AbsoluteSmoothCornerShape
+import androidx.compose.ui.res.stringResource
+import com.theveloper.pixelplay.R
 
 /**
  * Bottom sheet for batch operations on multiple selected playlists.
@@ -186,7 +188,7 @@ fun PlaylistMultiSelectionBottomSheet(
                                     contentDescription = "Delete all"
                                 )
                                 Spacer(Modifier.width(8.dp))
-                                Text("Delete")
+                                Text(stringResource(R.string.delete))
                             }
 
                             FilledTonalButton(
@@ -208,7 +210,7 @@ fun PlaylistMultiSelectionBottomSheet(
                                     contentDescription = "Export all"
                                 )
                                 Spacer(Modifier.width(8.dp))
-                                Text("Export")
+                                Text(stringResource(R.string.export))
                             }
                         }
                     }
@@ -241,7 +243,7 @@ fun PlaylistMultiSelectionBottomSheet(
                                     contentDescription = "Merge all"
                                 )
                                 Spacer(Modifier.width(8.dp))
-                                Text("Merge")
+                                Text(stringResource(R.string.merge))
                             }
 
                             FilledTonalButton(
@@ -263,7 +265,7 @@ fun PlaylistMultiSelectionBottomSheet(
                                     contentDescription = "Share all"
                                 )
                                 Spacer(Modifier.width(8.dp))
-                                Text("Share")
+                                Text(stringResource(R.string.share))
                             }
                         }
                     }

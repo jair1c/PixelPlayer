@@ -18,6 +18,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import com.theveloper.pixelplay.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -49,9 +51,9 @@ fun DailyMixMenu(
             TextField(
                 value = prompt,
                 onValueChange = { prompt = it },
-                label = { Text("Dile a la IA qué quieres escuchar hoy") },
+                label = { Text(stringResource(R.string.daily_mix_ia_label)) },
                 modifier = Modifier.fillMaxWidth(),
-                supportingText = { Text("Usamos una muestra pequeña para mantener los costos bajos") }
+                supportingText = { Text(stringResource(R.string.daily_mix_cost_note)) }
             )
             Spacer(modifier = Modifier.height(16.dp))
             Button(

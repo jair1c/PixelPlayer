@@ -128,6 +128,7 @@ import com.theveloper.pixelplay.utils.shapes.RoundedStarShape
 import androidx.compose.material.icons.outlined.MusicNote
 import androidx.compose.material.icons.outlined.PlayCircleOutline
 import com.theveloper.pixelplay.ui.theme.ExpTitleTypography
+import androidx.compose.ui.res.stringResource
 
 private const val PULL_TO_REFRESH_MIN_DURATION_MS = 3500L
 
@@ -348,7 +349,7 @@ fun StatsScreen(
                         .padding(bottom = 8.dp) // Reduced padding below tabs
                 ) {
                     CollapsibleCommonTopBar(
-                        title = "Listening Stats",
+                        title = stringResource(R.string.listening_stats),
                         collapseFraction = collapseFraction,
                         headerHeight = currentTopBarHeightDp,
                         onBackClick = { navController.popBackStack() },
@@ -403,7 +404,7 @@ private fun StatsHeroSection(
     ) {
         // Time Card - Primary Container
         HeroCard(
-            title = "Listening",
+            title = stringResource(R.string.listening),
             value = if (hasData) formatListeningDurationCompact(summary?.totalDurationMs ?: 0L) else "--",
             containerColor = MaterialTheme.colorScheme.primaryContainer,
             contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
@@ -414,7 +415,7 @@ private fun StatsHeroSection(
 
         // Plays Card - Tertiary Container
         HeroCard(
-            title = "Plays",
+            title = stringResource(R.string.plays),
             value = if (hasData) "${summary?.totalPlayCount ?: 0}" else "--",
             containerColor = MaterialTheme.colorScheme.tertiaryContainer,
             contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
@@ -709,8 +710,8 @@ private fun ListeningHabitsCard(
             if (summary == null) {
                 StatsEmptyState(
                     icon = Icons.Outlined.History,
-                    title = "No habits yet",
-                    subtitle = "We will surface your listening habits once we know you better."
+                    title = stringResource(R.string.no_habits_yet),
+                    subtitle = stringResource(R.string.no_habits_desc)
                 )
             } else {
                 Column(
@@ -744,7 +745,7 @@ private fun ListeningHabitsCard(
                 }
                 HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.3f))
                 HighlightRow(
-                    title = "Most active day",
+                    title = stringResource(R.string.most_active_day),
                     value = summary.peakDayLabel ?: "—",
                     supporting = if (summary.peakDayDurationMs > 0L) {
                         formatListeningDurationCompact(summary.peakDayDurationMs)
@@ -755,7 +756,7 @@ private fun ListeningHabitsCard(
                 )
                 summary.peakTimeline?.let { peak ->
                     HighlightRow(
-                        title = "Peak timeline slot",
+                        title = stringResource(R.string.peak_timeline_slot),
                         value = peak.label,
                         supporting = formatListeningDurationCompact(peak.totalDurationMs),
                         icon = Icons.Outlined.AutoGraph
@@ -1091,8 +1092,8 @@ private fun ListeningTimelineSection(
         if (!hasTimeline) {
             StatsEmptyState(
                 icon = Icons.Outlined.PlayCircleOutline,
-                title = "No listening data yet",
-                subtitle = "Press play to start building your listening timeline"
+                title = stringResource(R.string.no_listening_data),
+                subtitle = stringResource(R.string.no_listening_data_desc)
             )
         } else {
             val cardColor = when (range) {
@@ -1157,7 +1158,7 @@ private fun ListeningTimelineSection(
 
             summary?.peakTimeline?.let { peak ->
                 HighlightRow(
-                    title = "Peak segment",
+                    title = stringResource(R.string.peak_segment),
                     value = formatTimelineLabelForRange(peak.label, range),
                     supporting = when (selectedMetric) {
                         TimelineMetric.ListeningTime -> formatListeningDurationCompact(peak.totalDurationMs)
@@ -1284,8 +1285,8 @@ private fun CategoryMetricsSection(
         if (entries.isEmpty()) {
             StatsEmptyState(
                 icon = Icons.Outlined.MusicNote,
-                title = "No category data yet",
-                subtitle = "Press play to surface your listening highlights"
+                title = stringResource(R.string.no_category_data),
+                subtitle = stringResource(R.string.no_category_data_desc)
             )
         } else {
             Card(
@@ -1823,8 +1824,8 @@ private fun TopArtistsCard(
             if (artists.isEmpty()) {
                 StatsEmptyState(
                     icon = Icons.Outlined.MusicNote,
-                    title = "No top artists",
-                    subtitle = "Keep listening and your favorite artists will show up here."
+                    title = stringResource(R.string.no_top_artists),
+                    subtitle = stringResource(R.string.no_top_artists_desc)
                 )
             } else {
                 val maxDuration = artists.maxOf { it.totalDurationMs }.coerceAtLeast(1L)
@@ -1931,8 +1932,8 @@ private fun TopAlbumsCard(
             if (albums.isEmpty()) {
                 StatsEmptyState(
                     icon = Icons.Outlined.Album,
-                    title = "No top albums",
-                    subtitle = "Albums you revisit often will appear here."
+                    title = stringResource(R.string.no_top_albums),
+                    subtitle = stringResource(R.string.no_top_albums_desc)
                 )
             } else {
                 val maxDuration = albums.maxOf { it.totalDurationMs }.coerceAtLeast(1L)
@@ -2031,8 +2032,8 @@ private fun SongStatsCard(
             if (songs.isEmpty()) {
                 StatsEmptyState(
                     icon = Icons.Outlined.MusicNote,
-                    title = "No top tracks",
-                    subtitle = "Listen to your favorites to see them highlighted here."
+                    title = stringResource(R.string.no_top_tracks),
+                    subtitle = stringResource(R.string.no_top_tracks_desc)
                 )
             } else {
                 Column(
@@ -2184,8 +2185,8 @@ private fun TrackConcentrationCard(
             if (songs.isEmpty()) {
                 StatsEmptyState(
                     icon = Icons.Outlined.AutoGraph,
-                    title = "No concentration data yet",
-                    subtitle = "Play more tracks to see how focused your listening is."
+                    title = stringResource(R.string.no_concentration_data),
+                    subtitle = stringResource(R.string.no_concentration_desc)
                 )
             } else {
                 val totalDuration = songs.sumOf { it.totalDurationMs }.coerceAtLeast(1L)

@@ -89,6 +89,7 @@ import com.theveloper.pixelplay.utils.formatSongCount
 import com.theveloper.pixelplay.ui.theme.GoogleSansRounded
 import androidx.compose.foundation.combinedClickable
 import kotlinx.coroutines.flow.map
+import androidx.compose.ui.res.stringResource
 
 @androidx.annotation.OptIn(UnstableApi::class)
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
@@ -577,8 +578,8 @@ fun CreatePlaylistDialogRedesigned(
                 OutlinedTextField(
                     value = playlistName,
                     onValueChange = { playlistName = it },
-                    label = { Text("Playlist Name") },
-                    placeholder = { Text("My playlist") },
+                    label = { Text(stringResource(R.string.playlist_name)) },
+                    placeholder = { Text(stringResource(R.string.my_playlist)) },
                     shape = RoundedCornerShape(16.dp),
                     modifier = Modifier
                         .fillMaxWidth()
@@ -599,7 +600,7 @@ fun CreatePlaylistDialogRedesigned(
                         onClick = onDismiss,
                         modifier = Modifier.weight(1f)
                     ) {
-                        Text("Cancel", fontWeight = FontWeight.SemiBold)
+                        Text(stringResource(R.string.cancel), fontWeight = FontWeight.SemiBold)
                     }
 
                     Button(
@@ -612,7 +613,7 @@ fun CreatePlaylistDialogRedesigned(
                             contentColor = MaterialTheme.colorScheme.onPrimary
                         )
                     ) {
-                        Text("Create", fontWeight = FontWeight.Bold)
+                        Text(stringResource(R.string.create), fontWeight = FontWeight.Bold)
                     }
                 }
             }

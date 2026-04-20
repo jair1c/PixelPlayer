@@ -17,6 +17,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.theveloper.pixelplay.ui.theme.GoogleSansRounded
+import androidx.compose.ui.res.stringResource
+import com.theveloper.pixelplay.R
 
 @Composable
 fun SavePresetDialog(
@@ -44,7 +46,7 @@ fun SavePresetDialog(
                         name = it
                         isError = false
                     },
-                    label = { Text("Preset Name") },
+                    label = { Text(stringResource(R.string.preset_name)) },
                     singleLine = true,
                     isError = isError,
                     modifier = Modifier.fillMaxWidth()
@@ -70,12 +72,12 @@ fun SavePresetDialog(
                     }
                 }
             ) {
-                Text("Save")
+                Text(stringResource(R.string.save))
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("Cancel")
+                Text(stringResource(R.string.cancel))
             }
         }
     )
@@ -103,7 +105,7 @@ fun RenamePresetDialog(
                         name = it
                         isError = false
                     },
-                    label = { Text("Preset Name") },
+                    label = { Text(stringResource(R.string.preset_name)) },
                     singleLine = true,
                     isError = isError,
                     modifier = Modifier.fillMaxWidth()
@@ -129,12 +131,12 @@ fun RenamePresetDialog(
                     }
                 }
             ) {
-                Text("Rename")
+                Text(stringResource(R.string.rename))
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("Cancel")
+                Text(stringResource(R.string.cancel))
             }
         }
     )

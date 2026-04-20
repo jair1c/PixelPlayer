@@ -181,8 +181,8 @@ fun LyricsMoreBottomSheet(
             if (showResetDialog) {
                 androidx.compose.material3.AlertDialog(
                     onDismissRequest = { showResetDialog = false },
-                    title = { Text("Reset Lyrics?") },
-                    text = { Text("Are you sure you want to reset the lyrics for this song?") },
+                    title = { Text(stringResource(R.string.reset_lyrics_title)) },
+                    text = { Text(stringResource(R.string.reset_lyrics_confirm)) },
                     confirmButton = {
                         androidx.compose.material3.TextButton(
                             onClick = {
@@ -191,14 +191,14 @@ fun LyricsMoreBottomSheet(
                                 onResetImportedLyrics()
                             }
                         ) {
-                            Text("Reset", color = MaterialTheme.colorScheme.error)
+                            Text(stringResource(R.string.reset), color = MaterialTheme.colorScheme.error)
                         }
                     },
                     dismissButton = {
                         androidx.compose.material3.TextButton(
                             onClick = { showResetDialog = false }
                         ) {
-                            Text("Cancel")
+                            Text(stringResource(R.string.cancel))
                         }
                     },
                     containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
@@ -347,7 +347,7 @@ fun LyricsMoreBottomSheet(
 
                     if (isRomanizationVisible) {
                         ListItem(
-                            headlineContent = { Text("Show Romanization") },
+                            headlineContent = { Text(stringResource(R.string.show_romanization)) },
                             leadingContent = {
                                 Icon(
                                     imageVector = Icons.Rounded.Abc,
@@ -388,7 +388,7 @@ fun LyricsMoreBottomSheet(
 
                     if (isTranslationVisible) {
                         ListItem(
-                            headlineContent = { Text("Show Translations") },
+                            headlineContent = { Text(stringResource(R.string.show_translations)) },
                             leadingContent = {
                                 Icon(
                                     imageVector = Icons.Rounded.Translate,
@@ -430,7 +430,7 @@ fun LyricsMoreBottomSheet(
                     // Immersive Mode Toggle
                     if (isImmersiveVisible) {
                         ListItem(
-                            headlineContent = { Text("Disable Immersive (Once)") },
+                            headlineContent = { Text(stringResource(R.string.disable_immersive_once)) },
                             leadingContent = {
                                 Icon(
                                     imageVector = Icons.Rounded.VisibilityOff,

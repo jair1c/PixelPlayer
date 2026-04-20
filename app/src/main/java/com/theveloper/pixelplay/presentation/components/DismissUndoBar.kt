@@ -31,6 +31,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.theveloper.pixelplay.ui.theme.GoogleSansRounded
 import racra.compose.smooth_corner_rect_library.AbsoluteSmoothCornerShape
+import androidx.compose.ui.res.stringResource
+import com.theveloper.pixelplay.R
 
 @Composable
 fun DismissUndoBar(
@@ -83,7 +85,7 @@ fun DismissUndoBar(
                         ),
                         onClick = onUndo
                     ) {
-                        Text("Undo", color = MaterialTheme.colorScheme.primary)
+                        Text(stringResource(R.string.undo), color = MaterialTheme.colorScheme.primary)
                     }
                     FilledIconButton(
                         colors = IconButtonDefaults.filledIconButtonColors(

@@ -72,6 +72,8 @@ import com.theveloper.pixelplay.presentation.viewmodel.PlayerViewModel
 import kotlinx.coroutines.launch
 import racra.compose.smooth_corner_rect_library.AbsoluteSmoothCornerShape
 import kotlin.math.roundToInt
+import androidx.compose.ui.res.stringResource
+import com.theveloper.pixelplay.R
 
 @OptIn(UnstableApi::class)
 @Composable
@@ -164,7 +166,7 @@ fun DeviceCapabilitiesScreen(
                  // Audio Capabilities
                  item {
                      state.audioCapabilities?.let { audio ->
-                         CapabilitySection(title = "Audio Output", icon = Icons.Rounded.Speaker) {
+                         CapabilitySection(title = stringResource(R.string.audio_output), icon = Icons.Rounded.Speaker) {
                              InfoRow("Sample Rate", "${audio.outputSampleRate} Hz")
                              InfoRow("Frames Per Buffer", "${audio.outputFramesPerBuffer}")
                              InfoRow("Low Latency Support", if (audio.isLowLatencySupported) "Yes" else "No")
@@ -176,7 +178,7 @@ fun DeviceCapabilitiesScreen(
                  // ExoPlayer Info
                  item {
                      state.exoPlayerInfo?.let { exo ->
-                         CapabilitySection(title = "ExoPlayer Engine", icon = Icons.Rounded.Memory) {
+                         CapabilitySection(title = stringResource(R.string.exoplayer_engine), icon = Icons.Rounded.Memory) {
                              InfoRow("Version", exo.version)
                              InfoRow("Active Renderers", exo.renderers)
                              InfoRow("Decoder Counters", exo.decoderCounters)
@@ -206,7 +208,7 @@ fun DeviceCapabilitiesScreen(
         
         // Top Bar
         CollapsibleCommonTopBar(
-            title = "Device Capabilities",
+            title = stringResource(R.string.device_capabilities),
             collapseFraction = collapseFraction,
             headerHeight = currentTopBarHeightDp,
             onBackClick = { navController.popBackStack() },

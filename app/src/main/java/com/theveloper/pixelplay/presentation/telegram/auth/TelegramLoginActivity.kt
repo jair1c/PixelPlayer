@@ -108,6 +108,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.drinkless.tdlib.TdApi
 import racra.compose.smooth_corner_rect_library.AbsoluteSmoothCornerShape
 import java.util.Locale
+import androidx.compose.ui.res.stringResource
 
 @AndroidEntryPoint
 class TelegramLoginActivity : ComponentActivity() {
@@ -810,8 +811,8 @@ fun ExpressiveCodeInput(
         OutlinedTextField(
             value = code,
             onValueChange = { onCodeChanged(it.filter(Char::isDigit).take(8)) },
-            label = { Text("Code", fontFamily = GoogleSansRounded) },
-            placeholder = { Text("12345", fontFamily = GoogleSansRounded) },
+            label = { Text(stringResource(R.string.code), fontFamily = GoogleSansRounded) },
+            placeholder = { Text(stringResource(R.string.code_placeholder), fontFamily = GoogleSansRounded) },
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Rounded.Sms,
@@ -898,7 +899,7 @@ fun ExpressivePasswordInput(
         OutlinedTextField(
             value = password,
             onValueChange = onPasswordChanged,
-            label = { Text("Password", fontFamily = GoogleSansRounded) },
+            label = { Text(stringResource(R.string.password), fontFamily = GoogleSansRounded) },
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Rounded.Lock,

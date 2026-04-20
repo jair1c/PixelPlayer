@@ -494,7 +494,7 @@ fun NotFoundContent(
         OutlinedTextField(
             value = title,
             onValueChange = { title = it },
-            placeholder = { Text("Title") },
+            placeholder = { Text(stringResource(R.string.field_title)) },
             modifier = Modifier.fillMaxWidth(),
             singleLine = true
         )
@@ -514,7 +514,7 @@ fun NotFoundContent(
         OutlinedTextField(
             value = artist,
             onValueChange = { artist = it },
-            placeholder = { Text("Artist (optional)") },
+            placeholder = { Text(stringResource(R.string.field_artist)) },
             modifier = Modifier.fillMaxWidth(),
             singleLine = true
         )

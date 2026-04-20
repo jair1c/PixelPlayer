@@ -156,6 +156,7 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlin.math.abs
 import kotlin.math.roundToInt
+import androidx.compose.ui.res.stringResource
 
 @androidx.annotation.OptIn(UnstableApi::class)
 @OptIn(ExperimentalMaterial3Api::class)
@@ -1409,7 +1410,7 @@ private fun ActiveDeviceHero(
                             Spacer(
                                 modifier = Modifier.width(6.dp)
                             )
-                            Text("Disconnect")
+                            Text(stringResource(R.string.disconnect))
                         }
                     }
                 }
@@ -1944,7 +1945,7 @@ private fun WifiOffIllustration(
                         contentColor = MaterialTheme.colorScheme.onPrimary
                     )
                 ) {
-                    Text("Turn on Wi‑Fi")
+                    Text(stringResource(R.string.turn_on_wifi))
                 }
 
                 Button(
@@ -1955,7 +1956,7 @@ private fun WifiOffIllustration(
                         contentColor = MaterialTheme.colorScheme.onSecondaryContainer
                     )
                 ) {
-                    Text("Open Bluetooth")
+                    Text(stringResource(R.string.open_bluetooth))
                 }
             }
         }

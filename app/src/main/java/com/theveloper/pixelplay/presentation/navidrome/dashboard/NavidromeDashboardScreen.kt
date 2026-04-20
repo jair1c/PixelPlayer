@@ -40,6 +40,7 @@ import com.theveloper.pixelplay.presentation.components.SmartImage
 import com.theveloper.pixelplay.ui.theme.GoogleSansRounded
 import racra.compose.smooth_corner_rect_library.AbsoluteSmoothCornerShape
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -251,7 +252,7 @@ private fun DashboardContent(
                         modifier = Modifier.size(18.dp)
                     )
                     Spacer(Modifier.width(4.dp))
-                    Text("Sync", fontFamily = GoogleSansRounded)
+                    Text(stringResource(R.string.sync), fontFamily = GoogleSansRounded)
                 }
             }
         }
@@ -365,7 +366,7 @@ private fun SubsonicMenuCard(
                             color = MaterialTheme.colorScheme.onPrimaryContainer
                         )
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text("Syncing", fontFamily = GoogleSansRounded)
+                        Text(stringResource(R.string.syncing), fontFamily = GoogleSansRounded)
                     } else {
                         Icon(
                             Icons.Rounded.CloudSync,
@@ -373,7 +374,7 @@ private fun SubsonicMenuCard(
                             modifier = Modifier.size(18.dp)
                         )
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text("Sync library", fontFamily = GoogleSansRounded)
+                        Text(stringResource(R.string.sync_library), fontFamily = GoogleSansRounded)
                     }
                 }
 
@@ -391,7 +392,7 @@ private fun SubsonicMenuCard(
                         modifier = Modifier.size(18.dp)
                     )
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text("Disconnect", fontFamily = GoogleSansRounded)
+                    Text(stringResource(R.string.disconnect), fontFamily = GoogleSansRounded)
                 }
             }
         }

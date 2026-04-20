@@ -95,6 +95,8 @@ import java.io.File
 import kotlin.math.roundToInt
 import kotlinx.coroutines.launch
 import racra.compose.smooth_corner_rect_library.AbsoluteSmoothCornerShape
+import androidx.compose.ui.res.stringResource
+import com.theveloper.pixelplay.R
 
 @OptIn(
     ExperimentalMaterial3Api::class,
@@ -484,7 +486,7 @@ private fun ExpressiveChannelItem(
                             color = MaterialTheme.colorScheme.onSecondaryContainer
                         )
                         Spacer(modifier = Modifier.size(8.dp))
-                        Text("Syncing")
+                        Text(stringResource(R.string.syncing))
                     } else {
                         Icon(
                             imageVector = Icons.Rounded.Sync,
@@ -492,7 +494,7 @@ private fun ExpressiveChannelItem(
                             modifier = Modifier.size(18.dp)
                         )
                         Spacer(modifier = Modifier.size(8.dp))
-                        Text("Sync now")
+                        Text(stringResource(R.string.sync_now))
                     }
                 }
 
@@ -897,7 +899,7 @@ private fun ExpressiveEmptyState(
                 modifier = Modifier.size(18.dp)
             )
             Spacer(modifier = Modifier.size(8.dp))
-            Text("Add channel")
+            Text(stringResource(R.string.add_channel))
         }
     }
 }

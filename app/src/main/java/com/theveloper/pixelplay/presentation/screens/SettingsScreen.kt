@@ -85,6 +85,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.media3.common.util.UnstableApi
 import androidx.navigation.NavController
 import com.theveloper.pixelplay.data.preferences.LaunchTab
+import androidx.compose.ui.res.stringResource
 
 // SettingsTopBar removed, replaced by CollapsibleCommonTopBar
 
@@ -261,8 +262,8 @@ fun SettingsScreen(
                     itemIndex++
 
                     ExpressiveNavigationItem(
-                        title = "Accounts",
-                        subtitle = "Manage Telegram, Google Drive, Netease, and more services",
+                        title = stringResource(R.string.accounts),
+                        subtitle = stringResource(R.string.accounts_subtitle),
                         icon = Icons.Rounded.AccountCircle,
                         colors = getAccountsColors(isDark),
                         onClick = { navController.navigateSafely(Screen.Accounts.route) },
@@ -286,7 +287,7 @@ fun SettingsScreen(
             }
         }
         CollapsibleCommonTopBar(
-                title = "Settings",
+                title = stringResource(R.string.settings),
                 collapseFraction = collapseFraction,
                 headerHeight = currentTopBarHeightDp,
                 onBackClick = onNavigationIconClick

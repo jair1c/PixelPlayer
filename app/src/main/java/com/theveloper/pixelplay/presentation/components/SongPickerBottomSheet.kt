@@ -61,6 +61,8 @@ import com.theveloper.pixelplay.presentation.viewmodel.PlayerViewModel
 import com.theveloper.pixelplay.ui.theme.GoogleSansRounded
 import kotlinx.coroutines.flow.map
 import racra.compose.smooth_corner_rect_library.AbsoluteSmoothCornerShape
+import androidx.compose.ui.res.stringResource
+import com.theveloper.pixelplay.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -122,7 +124,7 @@ fun SongPickerContent(
                     shape = CircleShape,
                     onClick = { onConfirm(selectedSongIds.filterValues { it }.keys) },
                     icon = { Icon(Icons.Rounded.Check, "Add songs") },
-                    text = { Text("Add") },
+                    text = { Text(stringResource(R.string.add)) },
                 )
             }
         ) { innerPadding ->
@@ -229,7 +231,7 @@ private fun SongPickerSearchField(
             focusedSupportingTextColor = Color.Transparent,
         ),
         onValueChange = onSearchQueryChange,
-        label = { Text("Search for songs...") },
+        label = { Text(stringResource(R.string.search_for_songs)) },
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 8.dp),
@@ -281,7 +283,7 @@ fun SongPickerPagingList(
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                     Button(onClick = { pagedSongs.retry() }) {
-                        Text("Retry")
+                        Text(stringResource(R.string.retry))
                     }
                 }
             }
@@ -343,7 +345,7 @@ fun SongPickerPagingList(
                                 contentAlignment = Alignment.Center
                             ) {
                                 Button(onClick = { pagedSongs.retry() }) {
-                                    Text("Load more")
+                                    Text(stringResource(R.string.load_more))
                                 }
                             }
                         }

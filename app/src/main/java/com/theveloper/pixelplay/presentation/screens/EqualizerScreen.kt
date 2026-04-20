@@ -149,6 +149,7 @@ import androidx.compose.material.icons.automirrored.rounded.ShowChart
 import androidx.compose.material.icons.automirrored.rounded.ViewQuilt
 import androidx.compose.material.icons.automirrored.rounded.VolumeUp
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.res.stringResource
 
 @androidx.annotation.OptIn(UnstableApi::class)
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
@@ -374,7 +375,7 @@ fun EqualizerScreen(
         }
         
         CollapsibleCommonTopBar(
-            title = "Equalizer",
+            title = stringResource(R.string.equalizer),
             collapseFraction = collapseFraction,
             headerHeight = currentTopBarHeightDp,
             onBackClick = { navController.popBackStack() },
@@ -509,7 +510,7 @@ private fun PresetTabsRow(
         // Edit Button as a specific Tab (unselectable)
         TabAnimation(
             index = -1,
-            title = "Edit",
+            title = stringResource(R.string.edit),
             unselectedColor = MaterialTheme.colorScheme.surfaceContainerLowest,
             selectedIndex = selectedIndex,
             onClick = onEditClick 
@@ -1161,7 +1162,7 @@ private fun EffectControlsSection(
         // Bass Boost
         if (isBassBoostSupported) {
             EffectCard(
-                title = "Bass Boost",
+                title = stringResource(R.string.bass_boost),
                 value = bassBoostStrength, // Already Float
                 valueRange = 0f..1000f, // Keeping range as is, assuming VM handles 0-100 normalization? 
                 // Wait, if VM stores 0-100 Float, but repo uses 0-1000 Int.
@@ -1174,7 +1175,7 @@ private fun EffectControlsSection(
             )
         } else if (!isBassBoostDismissed) {
              UnsupportedEffectCard(
-                title = "Bass Boost",
+                title = stringResource(R.string.bass_boost),
                 onDismiss = onDismissBassBoost
             )
         }
@@ -1182,7 +1183,7 @@ private fun EffectControlsSection(
         // Virtualizer
         if (isVirtualizerSupported) {
             EffectCard(
-                title = "Virtualizer",
+                title = stringResource(R.string.virtualizer),
                 value = virtualizerStrength,
                 valueRange = 0f..1000f,
                 isEnabled = virtualizerEnabled,
@@ -1191,7 +1192,7 @@ private fun EffectControlsSection(
             )
         } else if (!isVirtualizerDismissed) {
              UnsupportedEffectCard(
-                title = "Virtualizer",
+                title = stringResource(R.string.virtualizer),
                 onDismiss = onDismissVirtualizer
             )
         }
@@ -1199,7 +1200,7 @@ private fun EffectControlsSection(
         // Loudness Enhancer
         if (isLoudnessEnhancerSupported) {
             EffectCard(
-                title = "Loudness",
+                title = stringResource(R.string.loudness),
                 value = loudnessStrength,
                 valueRange = 0f..1000f,
                 isEnabled = loudnessEnabled,
@@ -1208,7 +1209,7 @@ private fun EffectControlsSection(
             )
         } else if (!isLoudnessDismissed) {
              UnsupportedEffectCard(
-                title = "Loudness",
+                title = stringResource(R.string.loudness),
                 onDismiss = onDismissLoudness
             )
         }
