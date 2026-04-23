@@ -978,24 +978,27 @@ fun ThemeSelectionPage(
     uiState: SetupUiState,
     onModeSelected: (String) -> Unit
 ) {
-    val themeOptions = remember {
+    val darkTitle = stringResource(R.string.setup_dark)
+    val lightTitle = stringResource(R.string.setup_light)
+    val followSystemTitle = stringResource(R.string.setup_follow_system)
+    val themeOptions = remember(darkTitle, lightTitle, followSystemTitle) {
         listOf(
             ThemeOptionItem(
                 mode = AppThemeMode.DARK,
-                title = stringResource(R.string.setup_dark),
+                title = darkTitle,
                 description = "The default Material 3 dark look for PixelPlay.",
                 icon = Icons.Rounded.DarkMode,
                 recommended = true
             ),
             ThemeOptionItem(
                 mode = AppThemeMode.LIGHT,
-                title = stringResource(R.string.setup_light),
+                title = lightTitle,
                 description = "A brighter Material 3 look across the app.",
                 icon = Icons.Outlined.LightMode
             ),
             ThemeOptionItem(
                 mode = AppThemeMode.FOLLOW_SYSTEM,
-                title = stringResource(R.string.setup_follow_system),
+                title = followSystemTitle,
                 description = "Match your phone's current appearance setting.",
                 icon = Icons.Rounded.PhoneAndroid
             )
