@@ -171,7 +171,7 @@
     <string name="enter_merged_playlist_name">Enter a name for the merged playlist:</string>
     <string name="create_playlist_first">Create your first playlist to organize your library.</string>
     <string name="editing_song_metadata_title">Editing Song Metadata</string>
-    <string name="editing_song_metadata_desc">Editing a song's metadata can affect how it's displayed and organized in your library. Changes are permanent and may not be reversible.</string>
+    <string name="editing_song_metadata_desc">Editing a song\'s metadata can affect how it\'s displayed and organized in your library. Changes are permanent and may not be reversible.</string>
     <string name="field_title">Title</string>
     <string name="field_artist">Artist</string>
     <string name="field_album">Album</string>
@@ -504,7 +504,7 @@
     <string name="highlights">Highlights</string>
     <string name="fixes">Fixes</string>
     <string name="improvements">Improvements</string>
-    <string name="whats_new">What's New</string>
+    <string name="whats_new">What\'s New</string>
     <string name="delimiters_screen">Delimiters</string>
     <string name="word_delimiters_screen">Word Delimiters</string>
     <string name="add_delimiter">Add delimiter</string>
