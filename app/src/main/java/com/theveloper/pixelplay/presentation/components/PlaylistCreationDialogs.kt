@@ -365,11 +365,23 @@ private fun CreateAiPlaylistContent(
     var localError by rememberSaveable { mutableStateOf<String?>(null) }
     val controlsEnabled = !isGenerating
 
-    val moodOptions = remember {
-        listOf(stringResource(R.string.mood_chill), stringResource(R.string.mood_energetic), stringResource(R.string.mood_happy), stringResource(R.string.mood_dark), stringResource(R.string.mood_romantic), stringResource(R.string.mood_melancholic))
+    val moodChill = stringResource(R.string.mood_chill)
+    val moodEnergetic = stringResource(R.string.mood_energetic)
+    val moodHappy = stringResource(R.string.mood_happy)
+    val moodDark = stringResource(R.string.mood_dark)
+    val moodRomantic = stringResource(R.string.mood_romantic)
+    val moodMelancholic = stringResource(R.string.mood_melancholic)
+    val actWorkout = stringResource(R.string.activity_workout)
+    val actFocus = stringResource(R.string.activity_focus)
+    val actRoadTrip = stringResource(R.string.activity_road_trip)
+    val actParty = stringResource(R.string.activity_party)
+    val actStudy = stringResource(R.string.activity_study)
+    val actLateNight = stringResource(R.string.activity_late_night)
+    val moodOptions = remember(moodChill, moodEnergetic, moodHappy, moodDark, moodRomantic, moodMelancholic) {
+        listOf(moodChill, moodEnergetic, moodHappy, moodDark, moodRomantic, moodMelancholic)
     }
-    val activityOptions = remember {
-        listOf(stringResource(R.string.activity_workout), stringResource(R.string.activity_focus), stringResource(R.string.activity_road_trip), stringResource(R.string.activity_party), stringResource(R.string.activity_study), stringResource(R.string.activity_late_night))
+    val activityOptions = remember(actWorkout, actFocus, actRoadTrip, actParty, actStudy, actLateNight) {
+        listOf(actWorkout, actFocus, actRoadTrip, actParty, actStudy, actLateNight)
     }
     val eraOptions = remember {
         listOf("Any era", "70s", "80s", "90s", "2000s", "2010s", "2020s")

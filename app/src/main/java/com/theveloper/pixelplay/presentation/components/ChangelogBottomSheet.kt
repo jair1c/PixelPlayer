@@ -66,7 +66,7 @@ val changelog = listOf(
         date = "2026-03-05",
         sections = listOf(
             ChangelogSection(
-                title = stringResource(R.string.changelog_whats_new),
+                title = "Novedades",
                 items = listOf(
                     "Android Auto support is now available for in-car playback.",
                     "Wear OS support is live, including better watch-to-phone playback controls.",
@@ -77,7 +77,7 @@ val changelog = listOf(
                 )
             ),
             ChangelogSection(
-                title = stringResource(R.string.changelog_improvements),
+                title = "Mejoras",
                 items = listOf(
                     "Big performance pass across startup, library, queue, and player interactions.",
                     "Player, Cast, Lyrics, Artist, and Genre surfaces were redesigned for smoother use.",
@@ -87,7 +87,7 @@ val changelog = listOf(
                 )
             ),
             ChangelogSection(
-                title = stringResource(R.string.changelog_fixes),
+                title = "Correcciones",
                 items = listOf(
                     "Queue and shuffle behavior is now more stable and predictable.",
                     "Several background playback and casting edge cases were fixed.",
@@ -103,7 +103,7 @@ val changelog = listOf(
         date = "2026-01-14",
         sections = listOf(
             ChangelogSection(
-                title = stringResource(R.string.changelog_highlights),
+                title = "Destacados",
                 items = listOf(
                     "Material 3 Expressive UI Update",
                     "10-band Equalizer & Effects",
@@ -115,7 +115,7 @@ val changelog = listOf(
                 )
             ),
             ChangelogSection(
-                title = stringResource(R.string.changelog_improvements),
+                title = "Mejoras",
                 items = listOf(
                     "Settings Architecture Refactor",
                     "Queue & Player Animations",
@@ -124,7 +124,7 @@ val changelog = listOf(
                 )
             ),
             ChangelogSection(
-                title = stringResource(R.string.changelog_fixes),
+                title = "Correcciones",
                 items = listOf(
                     "Casting Stability Improvements",
                     "Player Sheet Stability",
@@ -138,7 +138,7 @@ val changelog = listOf(
         date = "2025-12-15",
         sections = listOf(
             ChangelogSection(
-                title = stringResource(R.string.changelog_highlights),
+                title = "Destacados",
                 items = listOf(
                     "Major navigation redesign",
                     "New file explorer for choosing source directories",
@@ -163,7 +163,7 @@ val changelog = listOf(
         date = "2025-10-28",
         sections = listOf(
             ChangelogSection(
-                title = stringResource(R.string.changelog_whats_new),
+                title = "Novedades",
                 items = listOf(
                     "Introduced a richer listening stats hub with deeper insights into your sessions.",
                     "Launched a floating quick player to instantly open and preview local files.",
@@ -171,7 +171,7 @@ val changelog = listOf(
                 )
             ),
             ChangelogSection(
-                title = stringResource(R.string.changelog_improvements),
+                title = "Mejoras",
                 items = listOf(
                     "Refined the overall Material 3 UI for a cleaner and more cohesive experience.",
                     "Metadata editing now supports cover art change.",
@@ -184,7 +184,7 @@ val changelog = listOf(
                 )
             ),
             ChangelogSection(
-                title = stringResource(R.string.changelog_fixes),
+                title = "Correcciones",
                 items = listOf(
                     "Resolved metadata quirks so song details stay accurate everywhere.",
                     "Restored notification shortcuts so they reliably jump back into playback."
@@ -197,7 +197,7 @@ val changelog = listOf(
         date = "2024-09-15",
         sections = listOf(
             ChangelogSection(
-                title = stringResource(R.string.changelog_added),
+                title = "Agregado",
                 items = listOf(
                     "Chromecast support for casting audio from your device.",
                     "In-app changelog to keep you updated on the latest features.",
@@ -213,7 +213,7 @@ val changelog = listOf(
                 )
             ),
             ChangelogSection(
-                title = stringResource(R.string.changelog_changed),
+                title = "Cambiado",
                 items = listOf(
                     "Complete redesign of the user interface.",
                     "Complete redesign of the player.",
@@ -223,7 +223,7 @@ val changelog = listOf(
                 )
             ),
             ChangelogSection(
-                title = stringResource(R.string.changelog_fixed),
+                title = "Arreglado",
                 items = listOf(
                     "Fixed various bugs in the tag editor.",
                     "Fixed a bug where the playback notification was not clearing.",
