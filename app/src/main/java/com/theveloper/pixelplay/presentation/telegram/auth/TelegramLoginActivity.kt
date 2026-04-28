@@ -219,7 +219,7 @@ fun TelegramLoginScreen(
                     ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = stringResource(R.string.cd_back)
                         )
                     }
                 },
@@ -484,7 +484,7 @@ private fun InlineErrorCard(
                     contentColor = MaterialTheme.colorScheme.onErrorContainer
                 )
             ) {
-                Icon(imageVector = Icons.Rounded.Clear, contentDescription = "Dismiss")
+                Icon(imageVector = Icons.Rounded.Clear, contentDescription = stringResource(R.string.dismiss))
             }
         }
     }
@@ -586,8 +586,8 @@ fun ExpressivePhoneNumberInput(
     ) {
         AuthStepHeader(
             icon = Icons.Rounded.Phone,
-            title = "Phone Number",
-            subtitle = "Enter your Telegram number. You can come back and edit it later."
+            title = stringResource(R.string.phone_number),
+            subtitle = stringResource(R.string.telegram_login_phone)
         )
 
         Spacer(Modifier.height(24.dp))
@@ -802,8 +802,8 @@ fun ExpressiveCodeInput(
     ) {
         AuthStepHeader(
             icon = Icons.Rounded.Sms,
-            title = "Verification Code",
-            subtitle = "Enter the code from Telegram. If the number is wrong, go back and edit it."
+            title = stringResource(R.string.verification_code),
+            subtitle = stringResource(R.string.telegram_login_code)
         )
 
         Spacer(Modifier.height(24.dp))
@@ -890,8 +890,8 @@ fun ExpressivePasswordInput(
     ) {
         AuthStepHeader(
             icon = Icons.Rounded.Lock,
-            title = "Two-Step Password",
-            subtitle = "Enter your Telegram password. You can still go back to fix your number."
+            title = stringResource(R.string.two_step_password),
+            subtitle = stringResource(R.string.telegram_login_pass)
         )
 
         Spacer(Modifier.height(24.dp))

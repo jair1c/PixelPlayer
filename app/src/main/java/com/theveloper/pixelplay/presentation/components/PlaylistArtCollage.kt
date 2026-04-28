@@ -28,6 +28,7 @@ import com.theveloper.pixelplay.R
 import com.theveloper.pixelplay.data.model.Song
 import kotlin.math.floor
 import kotlin.math.sqrt
+import androidx.compose.ui.res.stringResource
 
 @Composable
 fun PlaylistArtCollage(
@@ -44,7 +45,7 @@ fun PlaylistArtCollage(
         ) {
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.QueueMusic,
-                contentDescription = "Playlist",
+                contentDescription = stringResource(R.string.playlist_fallback),
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(12.dp),

@@ -267,7 +267,7 @@ private fun EditSongContent(
     if (showInfoDialog) {
         AlertDialog(
             onDismissRequest = { showInfoDialog = false },
-            icon = { Icon(Icons.Rounded.Info, contentDescription = "Information Icon") },
+            icon = { Icon(Icons.Rounded.Info, contentDescription = stringResource(R.string.cd_information_icon)) },
             title = { Text(stringResource(R.string.editing_song_metadata_title)) },
             text = { Text(stringResource(R.string.editing_song_metadata_desc)) },
             confirmButton = {
@@ -299,7 +299,7 @@ private fun EditSongContent(
                         onClick = { showInfoDialog = true },
                         shape = CircleShape
                     ) {
-                        Icon(Icons.Rounded.Info, contentDescription = "Show info dialog")
+                        Icon(Icons.Rounded.Info, contentDescription = stringResource(R.string.cd_show_info_dialog))
                     }
                 }
             )
@@ -354,7 +354,7 @@ private fun EditSongContent(
                 ) {
                     Text(
                         modifier = Modifier.padding(start = 4.dp),
-                        text = "Title",
+                        text = stringResource(R.string.field_title),
                         color = MaterialTheme.colorScheme.tertiary,
                         style = MaterialTheme.typography.labelLarge
                     )
@@ -439,7 +439,7 @@ private fun EditSongContent(
                             Icon(
                                 Icons.Rounded.RepeatOne,
                                 tint = MaterialTheme.colorScheme.primary,
-                                contentDescription = "ReplayGain Track Icon"
+                                contentDescription = stringResource(R.string.cd_replaygain_track)
                             )
                         },
                         modifier = Modifier.fillMaxWidth(),
@@ -469,7 +469,7 @@ private fun EditSongContent(
                             Icon(
                                 Icons.Rounded.Repeat,
                                 tint = MaterialTheme.colorScheme.tertiary,
-                                contentDescription = "ReplayGain Album Icon"
+                                contentDescription = stringResource(R.string.cd_replaygain_album)
                             )
                         },
                         modifier = Modifier.fillMaxWidth(),
@@ -486,7 +486,7 @@ private fun EditSongContent(
                 ) {
                     Text(
                         modifier = Modifier.padding(start = 4.dp),
-                        text = "Artist",
+                        text = stringResource(R.string.field_artist),
                         color = MaterialTheme.colorScheme.primary,
                         style = MaterialTheme.typography.labelLarge
                     )
@@ -510,7 +510,7 @@ private fun EditSongContent(
                 ) {
                     Text(
                         modifier = Modifier.padding(start = 4.dp),
-                        text = "Album",
+                        text = stringResource(R.string.field_album),
                         color = MaterialTheme.colorScheme.tertiary,
                         style = MaterialTheme.typography.labelLarge
                     )
@@ -589,7 +589,7 @@ private fun EditSongContent(
                         ) {
                             Icon(
                                 painter = painterResource(id = R.drawable.rounded_search_24),
-                                contentDescription = "Search lyrics on lrclib.net"
+                                contentDescription = stringResource(R.string.cd_search_lyrics)
                             )
                         }
                     }
@@ -718,7 +718,7 @@ private fun CoverArtEditorCard(
                         preview != null -> {
                             Image(
                                 bitmap = preview,
-                                contentDescription = "Preview of the new cover art",
+                                contentDescription = stringResource(R.string.cd_preview_cover_art),
                                 modifier = Modifier.fillMaxSize(),
                                 contentScale = ContentScale.Crop
                             )
@@ -727,7 +727,7 @@ private fun CoverArtEditorCard(
                         albumArtUri != null -> {
                             SmartImage(
                                 model = albumArtUri,
-                                contentDescription = "Current song cover art",
+                                contentDescription = stringResource(R.string.cd_song_cover),
                                 modifier = Modifier.fillMaxSize(),
                                 contentScale = ContentScale.Crop,
                                 placeholderResId = R.drawable.rounded_music_note_24,

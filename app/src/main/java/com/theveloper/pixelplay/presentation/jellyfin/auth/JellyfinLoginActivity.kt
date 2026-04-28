@@ -76,6 +76,7 @@ import com.theveloper.pixelplay.ui.theme.GoogleSansRounded
 import com.theveloper.pixelplay.ui.theme.PixelPlayTheme
 import dagger.hilt.android.AndroidEntryPoint
 import racra.compose.smooth_corner_rect_library.AbsoluteSmoothCornerShape
+import androidx.compose.ui.res.stringResource
 
 @AndroidEntryPoint
 class JellyfinLoginActivity : ComponentActivity() {
@@ -147,7 +148,7 @@ fun JellyfinLoginScreen(
                     ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = stringResource(R.string.cd_back)
                         )
                     }
                 },
@@ -184,7 +185,7 @@ fun JellyfinLoginScreen(
                     Box(contentAlignment = Alignment.Center) {
                         Icon(
                             painter = painterResource(R.drawable.ic_jellyfin),
-                            contentDescription = "Jellyfin",
+                            contentDescription = stringResource(R.string.cd_jellyfin),
                             tint = Color.White,
                             modifier = Modifier.size(36.dp)
                         )
@@ -260,7 +261,7 @@ fun JellyfinLoginScreen(
                     JellyfinLoginField(
                         value = serverUrl,
                         onValueChange = { serverUrl = it },
-                        label = "Server URL",
+                        label = stringResource(R.string.label_server_url),
                         placeholder = "http://192.168.1.100:8096",
                         supportingText = "Full URL of your Jellyfin server, including port.",
                         leadingIcon = Icons.Rounded.Dns,
@@ -280,8 +281,8 @@ fun JellyfinLoginScreen(
                     JellyfinLoginField(
                         value = username,
                         onValueChange = { username = it },
-                        label = "Username",
-                        placeholder = "admin",
+                        label = stringResource(R.string.label_username),
+                        placeholder = stringResource(R.string.placeholder_admin),
                         supportingText = "Your Jellyfin account username.",
                         leadingIcon = Icons.Rounded.Person,
                         enabled = !isLoading,
@@ -300,8 +301,8 @@ fun JellyfinLoginScreen(
                     JellyfinLoginField(
                         value = password,
                         onValueChange = { password = it },
-                        label = "Password",
-                        placeholder = "Enter password",
+                        label = stringResource(R.string.label_password),
+                        placeholder = stringResource(R.string.placeholder_enter_password),
                         supportingText = "Your Jellyfin account password.",
                         leadingIcon = Icons.Rounded.Lock,
                         enabled = !isLoading,
@@ -378,9 +379,9 @@ fun JellyfinLoginScreen(
                         color = MaterialTheme.colorScheme.onPrimary
                     )
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text("Connecting...", fontFamily = GoogleSansRounded)
+                    Text(stringResource(R.string.connecting), fontFamily = GoogleSansRounded)
                 } else {
-                    Text("Connect", fontFamily = GoogleSansRounded, fontWeight = FontWeight.SemiBold)
+                    Text(stringResource(R.string.connect), fontFamily = GoogleSansRounded, fontWeight = FontWeight.SemiBold)
                 }
             }
 

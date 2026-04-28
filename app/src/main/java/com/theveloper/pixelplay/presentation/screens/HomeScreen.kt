@@ -1,6 +1,7 @@
 package com.theveloper.pixelplay.presentation.screens
 
 import com.theveloper.pixelplay.presentation.navigation.navigateSafely
+import androidx.compose.ui.res.stringResource
 
 import android.content.Intent
 import androidx.activity.compose.ReportDrawnWhen
@@ -279,11 +280,11 @@ fun HomeScreen(
                         onPlayShuffled = {
                             if (yourMixSongs.isNotEmpty()) {
                                 if (usesFallbackHomeMix) {
-                                    playerViewModel.shuffleAllSongs(queueName = "Your Mix")
+                                    playerViewModel.shuffleAllSongs(queueName = stringResource(R.string.your_mix))
                                 } else {
                                     playerViewModel.playSongsShuffled(
                                         songsToPlay = yourMixSongs,
-                                        queueName = "Your Mix",
+                                        queueName = stringResource(R.string.your_mix),
                                         startAtZero = true,
                                     )
                                 }
@@ -320,9 +321,9 @@ fun HomeScreen(
                             pattern = activePattern,
                             onSongClick = { song ->
                                 if (usesFallbackHomeMix) {
-                                    playerViewModel.showAndPlaySongFromLibrary(song, queueName = "Your Mix")
+                                    playerViewModel.showAndPlaySongFromLibrary(song, queueName = stringResource(R.string.your_mix))
                                 } else {
-                                    playerViewModel.showAndPlaySong(song, yourMixSongs, "Your Mix")
+                                    playerViewModel.showAndPlaySong(song, yourMixSongs, stringResource(R.string.your_mix))
                                 }
                             }
                         )
@@ -368,7 +369,7 @@ fun HomeScreen(
                                     playerViewModel.playSongs(
                                         songsToPlay = recentlyPlayedQueue,
                                         startSong = song,
-                                        queueName = "Recently Played"
+                                        queueName = "Reproducidas recientemente"
                                     )
                                 }
                             },
@@ -509,7 +510,7 @@ fun YourMixHeader(
         ) {
             // Your Mix Title
             Text(
-                text = "Your\nMix",
+                text = stringResource(R.string.your_mix),
                 style = titleStyle,
                 color = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier
@@ -544,7 +545,7 @@ fun YourMixHeader(
         ) {
             Icon(
                 painter = painterResource(R.drawable.rounded_shuffle_24),
-                contentDescription = "Shuffle Play",
+                contentDescription = stringResource(R.string.cd_shuffle_play),
                 modifier = Modifier.size(36.dp)
             )
         }

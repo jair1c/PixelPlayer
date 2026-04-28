@@ -419,7 +419,7 @@ private fun ConnectedAccountCard(
         }
     ) {
         Text(
-            text = if (isComingSoon) "Soon" else "Connected",
+            text = if (isComingSoon) stringResource(R.string.soon_label) else stringResource(R.string.connected_label),
             style = MaterialTheme.typography.labelMedium,
             color = if (isComingSoon) {
                 MaterialTheme.colorScheme.onSecondaryContainer

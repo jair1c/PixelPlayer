@@ -48,6 +48,7 @@ import com.theveloper.pixelplay.presentation.components.AutoScrollingText
 import com.theveloper.pixelplay.presentation.components.SmartImage
 import com.theveloper.pixelplay.ui.theme.GoogleSansRounded
 import racra.compose.smooth_corner_rect_library.AbsoluteSmoothCornerShape
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -203,7 +204,7 @@ fun TelegramSongItem(
                                 Icons.Rounded.PlayArrow 
                             else 
                                 Icons.Rounded.Download,
-                            contentDescription = if (isDownloaded) "Play" else "Download"
+                            contentDescription = if (isDownloaded) stringResource(R.string.cd_play) else stringResource(R.string.cd_download)
                         )
                     }
                 }

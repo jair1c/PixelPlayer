@@ -755,14 +755,14 @@ fun LyricsSheet(
                                 Icon(
                                     modifier = Modifier.size(32.dp),
                                     imageVector = Icons.Rounded.Pause,
-                                    contentDescription = "Pause",
+                                    contentDescription = stringResource(R.string.cd_pause),
                                     tint = onTertiaryColor
                                 )
                             } else {
                                 Icon(
                                     modifier = Modifier.size(32.dp),
                                     imageVector = Icons.Rounded.PlayArrow,
-                                    contentDescription = "Play",
+                                    contentDescription = stringResource(R.string.cd_play),
                                     tint = onTertiaryColor
                                 )
                             }
@@ -900,7 +900,7 @@ fun LyricsSheet(
             ) {
                 Icon(
                     imageVector = Icons.Rounded.KeyboardArrowUp,
-                    contentDescription = "Show Controls"
+                    contentDescription = stringResource(R.string.cd_show_controls)
                 )
             }
         }
@@ -1789,7 +1789,7 @@ private fun LyricsTrackInfo(
         SmartImage(
             model = song.albumArtUriString ?: R.drawable.rounded_album_24,
             shape = albumShape,
-            contentDescription = "Cover Art",
+            contentDescription = stringResource(R.string.cd_album_art),
             modifier = Modifier
                 .size(66.dp)
                 .padding(6.dp)

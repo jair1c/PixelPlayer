@@ -228,7 +228,7 @@ fun LyricsMoreBottomSheet(
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     Text(
-                        text = "Alignment",
+                        text = stringResource(R.string.lyrics_alignment),
                         color = contentColor,
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.Medium
@@ -308,7 +308,7 @@ fun LyricsMoreBottomSheet(
                     Text(
                         modifier = Modifier
                             .padding(start = 6.dp, bottom = 6.dp),
-                        text = "Controls",
+                        text = stringResource(R.string.lyrics_controls),
                         color = accentColor,
                         style = MaterialTheme.typography.bodyLargeEmphasized
                     )

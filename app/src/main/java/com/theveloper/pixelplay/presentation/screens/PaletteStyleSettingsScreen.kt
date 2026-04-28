@@ -69,6 +69,8 @@ import com.theveloper.pixelplay.presentation.viewmodel.SettingsViewModel
 import com.theveloper.pixelplay.ui.theme.LocalPixelPlayDarkTheme
 import com.theveloper.pixelplay.ui.theme.generateColorSchemeFromSeed
 import kotlin.math.roundToInt
+import androidx.compose.ui.res.stringResource
+import com.theveloper.pixelplay.R
 
 @androidx.annotation.OptIn(UnstableApi::class)
 @OptIn(ExperimentalMaterial3Api::class)
@@ -296,7 +298,7 @@ private fun PaletteStyleHeader(
             ) {
                 Icon(
                     imageVector = Icons.Rounded.Close,
-                    contentDescription = "Close"
+                    contentDescription = stringResource(R.string.cd_close)
                 )
             }
 

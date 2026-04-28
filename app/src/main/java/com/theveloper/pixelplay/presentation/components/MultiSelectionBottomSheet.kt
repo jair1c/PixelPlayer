@@ -64,9 +64,11 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import coil.size.Size
+import com.theveloper.pixelplay.R
 import com.theveloper.pixelplay.data.model.Song
 import com.theveloper.pixelplay.ui.theme.GoogleSansRounded
 import racra.compose.smooth_corner_rect_library.AbsoluteSmoothCornerShape
+import androidx.compose.ui.res.stringResource
 
 /**
  * Bottom sheet for batch operations on multiple selected songs.
@@ -194,7 +196,7 @@ fun MultiSelectionBottomSheet(
                                 //.fillMaxWidth()
                         )
                         Text(
-                            text = "selected",
+                            text = stringResource(R.string.selected_label),
                             style = MaterialTheme.typography.bodyLarge,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             fontFamily = GoogleSansRounded
@@ -230,13 +232,13 @@ fun MultiSelectionBottomSheet(
                                 elevation = FloatingActionButtonDefaults.elevation(0.dp),
                                 shape = buttonShape,
                                 icon = {
-                                    Icon(Icons.Rounded.PlayArrow, contentDescription = "Play all")
+                                    Icon(Icons.Rounded.PlayArrow, contentDescription = stringResource(R.string.cd_play_all))
                                 },
                                 text = {
                                     Text(
                                         modifier = Modifier.padding(end = 0.dp),
                                         style = MaterialTheme.typography.titleMediumEmphasized,
-                                        text = "Play All"
+                                        text = stringResource(R.string.play_all)
                                     )
                                 }
                             )
@@ -284,7 +286,7 @@ fun MultiSelectionBottomSheet(
                                 Icon(
                                     modifier = Modifier.size(FloatingActionButtonDefaults.LargeIconSize),
                                     imageVector = Icons.Rounded.Share,
-                                    contentDescription = "Share all as ZIP"
+                                    contentDescription = stringResource(R.string.cd_share_all_zip)
                                 )
                             }
                         }
@@ -316,10 +318,10 @@ fun MultiSelectionBottomSheet(
                             ) {
                                 Icon(
                                     Icons.AutoMirrored.Rounded.QueueMusic,
-                                    contentDescription = "Add all to Queue"
+                                    contentDescription = stringResource(R.string.cd_add_all_to_queue)
                                 )
                                 Spacer(Modifier.width(14.dp))
-                                Text("Add to Queue")
+                                Text(stringResource(R.string.add_to_queue))
                             }
                             
                             FilledTonalButton(
@@ -339,10 +341,10 @@ fun MultiSelectionBottomSheet(
                             ) {
                                 Icon(
                                     Icons.AutoMirrored.Filled.QueueMusic,
-                                    contentDescription = "Play Next"
+                                    contentDescription = stringResource(R.string.cd_play_next)
                                 )
                                 Spacer(Modifier.width(8.dp))
-                                Text("Next")
+                                Text(stringResource(R.string.next))
                             }
                         }
                     }
@@ -372,10 +374,10 @@ fun MultiSelectionBottomSheet(
                             ) {
                                 Icon(
                                     Icons.AutoMirrored.Rounded.PlaylistAdd,
-                                    contentDescription = "Add to Playlist"
+                                    contentDescription = stringResource(R.string.cd_add_to_playlist)
                                 )
                                 Spacer(Modifier.width(8.dp))
-                                Text("Playlist")
+                                Text(stringResource(R.string.playlist))
                             }
                             
                             FilledTonalButton(
@@ -398,10 +400,10 @@ fun MultiSelectionBottomSheet(
                             ) {
                                 Icon(
                                     Icons.Rounded.Delete,
-                                    contentDescription = "Delete all"
+                                    contentDescription = stringResource(R.string.cd_delete_all)
                                 )
                                 Spacer(Modifier.width(8.dp))
-                                Text("Delete All")
+                                Text(stringResource(R.string.delete_all))
                             }
                         }
                     }

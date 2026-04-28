@@ -102,10 +102,12 @@ import androidx.compose.ui.window.DialogProperties
 import coil.ImageLoader
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.theveloper.pixelplay.R
 import com.theveloper.pixelplay.data.model.Song
 import com.theveloper.pixelplay.presentation.components.ImageCropView
 import com.theveloper.pixelplay.data.model.PlaylistShapeType
 import com.theveloper.pixelplay.data.model.SmartPlaylistRule
+import androidx.compose.ui.res.stringResource
 // import com.theveloper.pixelplay.presentation.screens.ShapeType // Removed local enum
 import com.theveloper.pixelplay.presentation.components.SongPickerSelectionPane
 import com.theveloper.pixelplay.ui.theme.GoogleSansRounded
@@ -330,7 +332,7 @@ private fun CreatePlaylistContent(
                             if (step == 0) {
                                 if (creationMode == PlaylistCreationMode.SMART) "New smart playlist" else "New playlist"
                             } else {
-                                "Add Songs"
+                                stringResource(R.string.add_songs)
                             },
                             style = MaterialTheme.typography.titleMedium.copy(
                                 fontSize = 24.sp,
@@ -358,7 +360,7 @@ private fun CreatePlaylistContent(
                             } else {
                                 Icons.Rounded.Close
                             },
-                            contentDescription = "Back or Cancel"
+                            contentDescription = stringResource(R.string.cd_back_or_cancel)
                         )
                     }
                 },
@@ -654,7 +656,7 @@ fun EditPlaylistContent(
                         ),
                         onClick = onDismiss
                     ) {
-                        Icon(Icons.Rounded.Close, contentDescription = "Close")
+                        Icon(Icons.Rounded.Close, contentDescription = stringResource(R.string.close))
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -665,7 +667,7 @@ fun EditPlaylistContent(
         floatingActionButton = {
             if (!showCropUi) {
                 MediumExtendedFloatingActionButton(
-                    text = { Text("Save") },
+                    text = { Text(stringResource(R.string.save)) },
                     icon = { Icon(Icons.Rounded.Check, contentDescription = null) },
                     onClick = {
                         val imageUriString = if(selectedTab == 1) selectedImageUri?.toString() else null
@@ -813,7 +815,7 @@ private fun PlaylistFormContent(
                     .align(Alignment.BottomEnd)
                     .padding(16.dp)
             ) {
-                Icon(Icons.Rounded.Check, contentDescription = "Confirm Crop")
+                Icon(Icons.Rounded.Check, contentDescription = stringResource(R.string.cd_confirm_crop))
             }
          }
          return
@@ -904,12 +906,12 @@ private fun PlaylistFormContent(
                                  Column(horizontalAlignment = Alignment.CenterHorizontally) {
                                      Icon(
                                          Icons.Rounded.AddPhotoAlternate,
-                                         contentDescription = "Add Photo",
+                                         contentDescription = stringResource(R.string.cd_add_photo),
                                          modifier = Modifier.size(56.dp),
                                          tint = MaterialTheme.colorScheme.primary
                                      )
                                      Spacer(Modifier.height(12.dp))
-                                     Text("Pick Image", style = MaterialTheme.typography.titleSmall)
+                                     Text(stringResource(R.string.pick_image), style = MaterialTheme.typography.titleSmall)
                                  }
                              }
                          }
@@ -997,8 +999,8 @@ private fun PlaylistFormContent(
             OutlinedTextField(
                 value = playlistName,
                 onValueChange = onNameChange,
-                label = { Text("Playlist Name") },
-                placeholder = { Text("My awesome mix") },
+                label = { Text(stringResource(R.string.playlist_name)) },
+                placeholder = { Text(stringResource(R.string.playlist_name_hint)) },
                 shape = RoundedCornerShape(16.dp),
                 modifier = Modifier
                     .fillMaxWidth()
@@ -1026,14 +1028,14 @@ private fun PlaylistFormContent(
                         onClick = { onCreationModeChange(PlaylistCreationMode.MANUAL) },
                         shape = SegmentedButtonDefaults.itemShape(index = 0, count = 2)
                     ) {
-                        Text("Manual")
+                        Text(stringResource(R.string.creation_manual))
                     }
                     SegmentedButton(
                         selected = creationMode == PlaylistCreationMode.SMART,
                         onClick = { onCreationModeChange(PlaylistCreationMode.SMART) },
                         shape = SegmentedButtonDefaults.itemShape(index = 1, count = 2)
                     ) {
-                        Text("Smart")
+                        Text(stringResource(R.string.smart))
                     }
                 }
             }
@@ -1057,7 +1059,7 @@ private fun PlaylistFormContent(
                         modifier = Modifier.size(18.dp)
                     )
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text("Generate with AI", fontWeight = FontWeight.SemiBold)
+                    Text(stringResource(R.string.generate_with_ai), fontWeight = FontWeight.SemiBold)
                 }
             }
 
@@ -1069,7 +1071,7 @@ private fun PlaylistFormContent(
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     Text(
-                        text = "Smart Rule",
+                        text = stringResource(R.string.creation_smart_rule),
                         style = MaterialTheme.typography.titleSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -1113,7 +1115,7 @@ private fun PlaylistFormContent(
                      // Colors
                      Text(
                          modifier = Modifier.padding(start = 22.dp),
-                         text = "Background Color",
+                         text = stringResource(R.string.background_color),
                          style = MaterialTheme.typography.titleSmall,
                          color = MaterialTheme.colorScheme.onSurfaceVariant
                      )
@@ -1170,7 +1172,7 @@ private fun PlaylistFormContent(
                      // Icons
                      Text(
                          modifier = Modifier.padding(start = 22.dp),
-                         text = "Icon Symbol",
+                         text = stringResource(R.string.icon_symbol),
                          style = MaterialTheme.typography.titleSmall,
                          color = MaterialTheme.colorScheme.onSurfaceVariant
                      )
@@ -1272,7 +1274,7 @@ private fun PlaylistFormContent(
                              modifier = Modifier.fillMaxWidth().padding(horizontal = 22.dp, vertical = 8.dp),
                              verticalArrangement = Arrangement.spacedBy(16.dp)
                          ) {
-                             Text("Shape parameters", style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                             Text(stringResource(R.string.shape_parameters), style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                              ShapeParameterCard("Corner Radius", smoothRectCornerRadius, 0f..50f, onSmoothRectCornerRadiusChange, { it.toInt().toString() })
                              ShapeParameterCard("Smoothness", smoothRectSmoothness, 0f..100f, onSmoothRectSmoothnessChange, { "${it.toInt()}%" })
                          }
@@ -1283,7 +1285,7 @@ private fun PlaylistFormContent(
                              modifier = Modifier.fillMaxWidth().padding(horizontal = 22.dp, vertical = 8.dp),
                              verticalArrangement = Arrangement.spacedBy(16.dp)
                          ) {
-                             Text("Shape parameters", style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                             Text(stringResource(R.string.shape_parameters), style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                              ShapeParameterCard("Sides", starSides.toFloat(), 3f..20f, { onStarSidesChange(it.toInt()) }, { it.toInt().toString() }, steps = 17)
                              ShapeParameterCard("Curve", starCurve.toFloat(), 0f..0.5f, { onStarCurveChange(it.toDouble()) }, { String.format("%.2f", it) })
                              ShapeParameterCard("Rotation", starRotation, 0f..360f, onStarRotationChange, { "${it.toInt()}°" })

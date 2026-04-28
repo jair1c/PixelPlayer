@@ -67,7 +67,7 @@ fun NeteaseDashboardScreen(
                 },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = stringResource(R.string.back))
                     }
                 },
                 actions = {
@@ -78,7 +78,7 @@ fun NeteaseDashboardScreen(
                     ) {
                         Icon(
                             Icons.Rounded.CloudSync,
-                            contentDescription = "Sync All Playlists",
+                            contentDescription = stringResource(R.string.cd_sync_all_playlists),
                             tint = MaterialTheme.colorScheme.tertiary
                         )
                     }
@@ -89,7 +89,7 @@ fun NeteaseDashboardScreen(
                     }) {
                         Icon(
                             Icons.AutoMirrored.Rounded.Logout,
-                            contentDescription = "Logout"
+                            contentDescription = stringResource(R.string.cd_logout)
                         )
                     }
                 }
@@ -213,7 +213,7 @@ fun NeteaseDashboardScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "Playlists",
+                    text = stringResource(R.string.tab_playlists),
                     style = MaterialTheme.typography.titleMedium,
                     fontFamily = GoogleSansRounded,
                     fontWeight = FontWeight.Bold
@@ -250,14 +250,14 @@ fun NeteaseDashboardScreen(
                         )
                         Spacer(Modifier.height(16.dp))
                         Text(
-                            text = "No playlists synced yet",
+                            text = stringResource(R.string.no_playlists_synced),
                             style = MaterialTheme.typography.bodyLarge,
                             fontFamily = GoogleSansRounded,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         Spacer(Modifier.height(8.dp))
                         Text(
-                            text = "Tap sync to fetch your playlists",
+                            text = stringResource(R.string.tap_sync_playlists),
                             style = MaterialTheme.typography.bodyMedium,
                             fontFamily = GoogleSansRounded,
                             color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
@@ -364,7 +364,7 @@ private fun PlaylistCard(
             ) {
                 Icon(
                     Icons.Rounded.Sync,
-                    contentDescription = "Sync",
+                    contentDescription = stringResource(R.string.cd_sync),
                     tint = MaterialTheme.colorScheme.tertiary,
                     modifier = Modifier.size(20.dp)
                 )
@@ -374,7 +374,7 @@ private fun PlaylistCard(
             IconButton(onClick = onDeleteClick) {
                 Icon(
                     Icons.Rounded.Delete,
-                    contentDescription = "Remove",
+                    contentDescription = stringResource(R.string.cd_remove_from_playlist),
                     tint = MaterialTheme.colorScheme.error.copy(alpha = 0.7f),
                     modifier = Modifier.size(20.dp)
                 )

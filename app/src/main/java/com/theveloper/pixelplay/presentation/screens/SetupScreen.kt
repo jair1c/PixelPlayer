@@ -502,7 +502,7 @@ fun DirectorySelectionPage(
         )
     ) {
         TextButton(onClick = onSkip) {
-            Text("Skip for now")
+            Text(stringResource(R.string.skip_for_now))
         }
     }
 
@@ -873,7 +873,7 @@ fun AlarmsPermissionPage(
     ) {
         if (!isGranted) {
             TextButton(onClick = onSkip) {
-                Text("Skip for now")
+                Text(stringResource(R.string.skip_for_now))
             }
         }
     }
@@ -959,7 +959,7 @@ fun BackupRestorePage(
             onClick = onSkip,
             enabled = !uiState.isRestoringBackup
         ) {
-            Text("Skip / Not now")
+            Text(stringResource(R.string.skip_not_now))
         }
     }
 }
@@ -1511,7 +1511,7 @@ fun BatteryOptimizationPage(
     ) {
         if (!isIgnoringBatteryOptimizations) {
             TextButton(onClick = onSkip) {
-                Text("Skip for now")
+                Text(stringResource(R.string.skip_for_now))
             }
         }
     }
@@ -1678,7 +1678,7 @@ private fun SetupRestoreDialog(
                                 enabled = !inProgress,
                                 modifier = Modifier.height(52.dp)
                             ) {
-                                Text("Cancel")
+                                Text(stringResource(R.string.cancel))
                             }
                             Button(
                                 onClick = onConfirm,
@@ -1690,11 +1690,11 @@ private fun SetupRestoreDialog(
                                 if (inProgress) {
                                     LoadingIndicator(modifier = Modifier.size(18.dp))
                                     Spacer(modifier = Modifier.width(8.dp))
-                                    Text("Restoring")
+                                    Text(stringResource(R.string.restoring))
                                 } else {
                                     Icon(Icons.Rounded.Restore, contentDescription = null)
                                     Spacer(modifier = Modifier.width(8.dp))
-                                    Text("Restore selected")
+                                    Text(stringResource(R.string.restore_selected))
                                 }
                             }
                         }
@@ -2303,7 +2303,7 @@ fun NavBarLayoutPage(
                              ) {
                                  Icon(Icons.Rounded.RoundedCorner, contentDescription = null, modifier = Modifier.size(18.dp))
                                  Spacer(modifier = Modifier.width(8.dp))
-                                 Text("Customize Corner Radius")
+                                 Text(stringResource(R.string.customize_corner_radius))
                              }
                          }
                     }

@@ -317,7 +317,7 @@ fun DelimiterConfigScreen(
                             ) {
                                 Icon(
                                     imageVector = Icons.Rounded.Add,
-                                    contentDescription = "Add delimiter"
+                                    contentDescription = stringResource(R.string.add_delimiter)
                                 )
                             }
                         }
@@ -379,7 +379,7 @@ fun DelimiterConfigScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Rounded.RestartAlt,
-                            contentDescription = "Reset Defaults",
+                            contentDescription = stringResource(R.string.reset),
                             modifier = Modifier.size(20.dp)
                         )
                     }
@@ -423,14 +423,14 @@ fun DelimiterConfigScreen(
                             contentColor = MaterialTheme.colorScheme.onError
                         )
                     ) {
-                        Text("Reset")
+                        Text(stringResource(R.string.reset_button))
                     }
                 },
                 dismissButton = {
                     TextButton(
                         onClick = { showResetDialog = false }
                     ) {
-                        Text("Cancel")
+                        Text(stringResource(R.string.cancel_button))
                     }
                 },
                 containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
@@ -461,7 +461,7 @@ private fun DelimiterChip(
             {
                 Icon(
                     imageVector = Icons.Rounded.Close,
-                    contentDescription = "Remove",
+                    contentDescription = stringResource(R.string.cd_delete),
                     modifier = Modifier.size(18.dp)
                 )
             }

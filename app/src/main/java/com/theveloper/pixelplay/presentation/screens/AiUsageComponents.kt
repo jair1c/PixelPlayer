@@ -13,12 +13,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.theveloper.pixelplay.R
 import com.theveloper.pixelplay.data.database.AiUsageEntity
 import com.theveloper.pixelplay.ui.theme.GoogleSansRounded
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Schedule
 import java.text.SimpleDateFormat
 import java.util.*
+import androidx.compose.ui.res.stringResource
 
 @Composable
 fun AiUsageDateHeader(date: String) {
@@ -175,12 +177,12 @@ private fun TokenChip(
 
 private fun formatPromptType(type: String): String {
     return when (type) {
-        "PLAYLIST" -> "Playlist"
+        "PLAYLIST" -> stringResource(R.string.stats_playlist)
         "METADATA" -> "Metadata"
         "TAGGING" -> "Tagging"
-        "MOOD_ANALYSIS" -> "Analysis"
+        "MOOD_ANALYSIS" -> stringResource(R.string.mood_analysis)
         "PERSONA" -> "Persona"
-        "DAILY_MIX" -> "Daily Mix"
+        "DAILY_MIX" -> stringResource(R.string.daily_mix)
         "GENERAL" -> "General"
         else -> type.lowercase().replaceFirstChar { it.uppercase() }
     }

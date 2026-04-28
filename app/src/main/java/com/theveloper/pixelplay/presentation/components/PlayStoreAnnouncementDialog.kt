@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import com.theveloper.pixelplay.R
 import com.theveloper.pixelplay.ui.theme.GoogleSansRounded
 import racra.compose.smooth_corner_rect_library.AbsoluteSmoothCornerShape
+import androidx.compose.ui.res.stringResource
 
 data class PlayStoreAnnouncementUiModel(
     val enabled: Boolean,
@@ -37,7 +38,7 @@ data class PlayStoreAnnouncementUiModel(
     val body: String,
     val playStoreUrl: String?,
     val primaryActionLabel: String = "Open Play Store",
-    val dismissActionLabel: String = "Continue beta",
+    val dismissActionLabel: String = "Continuar beta",
     val linkPendingMessage: String = "The Play Store link will be enabled from GitHub config.",
 )
 
@@ -46,7 +47,7 @@ object PlayStoreAnnouncementDefaults {
 
     val Template = PlayStoreAnnouncementUiModel(
         enabled = false,
-        title = "PixelPlay is now available on Google Play",
+        title = stringResource(R.string.play_store_announcement_title),
         body = "Use the stable channel on Google Play for release updates while we keep beta builds active.",
         playStoreUrl = null,
     )

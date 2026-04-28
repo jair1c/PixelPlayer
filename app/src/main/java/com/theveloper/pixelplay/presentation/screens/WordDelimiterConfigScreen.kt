@@ -211,7 +211,7 @@ fun WordDelimiterConfigScreen(
                                         trailingIcon = {
                                             Icon(
                                                 imageVector = Icons.Rounded.Close,
-                                                contentDescription = "Remove",
+                                                contentDescription = stringResource(R.string.cd_delete),
                                                 modifier = Modifier.size(18.dp)
                                             )
                                         },
@@ -308,7 +308,7 @@ fun WordDelimiterConfigScreen(
                             ) {
                                 Icon(
                                     imageVector = Icons.Rounded.Add,
-                                    contentDescription = "Add word delimiter"
+                                    contentDescription = stringResource(R.string.add_word_delimiter)
                                 )
                             }
                         }
@@ -375,7 +375,7 @@ fun WordDelimiterConfigScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Rounded.RestartAlt,
-                            contentDescription = "Reset Defaults",
+                            contentDescription = stringResource(R.string.reset),
                             modifier = Modifier.size(20.dp)
                         )
                     }
@@ -419,14 +419,14 @@ fun WordDelimiterConfigScreen(
                             contentColor = MaterialTheme.colorScheme.onError
                         )
                     ) {
-                        Text("Reset")
+                        Text(stringResource(R.string.reset_button))
                     }
                 },
                 dismissButton = {
                     androidx.compose.material3.TextButton(
                         onClick = { showResetDialog = false }
                     ) {
-                        Text("Cancel")
+                        Text(stringResource(R.string.cancel_button))
                     }
                 },
                 containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,

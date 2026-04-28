@@ -35,12 +35,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.theveloper.pixelplay.R
 import com.theveloper.pixelplay.data.model.Song
 import com.theveloper.pixelplay.presentation.components.SongPickerList
 import com.theveloper.pixelplay.presentation.components.SmartImage
 import com.theveloper.pixelplay.presentation.utils.GenreIconProvider
 import com.theveloper.pixelplay.ui.theme.GoogleSansRounded
 import racra.compose.smooth_corner_rect_library.AbsoluteSmoothCornerShape
+import androidx.compose.ui.res.stringResource
 
 @Composable
 fun QuickFillDialog(
@@ -112,7 +114,7 @@ fun QuickFillContent(
                     ) {
                         Icon(
                             if (step > 0) Icons.AutoMirrored.Rounded.ArrowBack else Icons.Rounded.Close,
-                            contentDescription = "Back"
+                            contentDescription = stringResource(R.string.back)
                         )
                     }
                 },
@@ -140,7 +142,7 @@ fun QuickFillContent(
                                modifier = Modifier
                                    .fillMaxWidth()
                                    .padding(16.dp),
-                               label = { Text("Search songs") },
+                               label = { Text(stringResource(R.string.search_songs)) },
                                leadingIcon = { Icon(Icons.Rounded.Search, contentDescription = null) },
                                trailingIcon = if (searchQuery.isNotEmpty()) {
                                    { IconButton(onClick = { searchQuery = "" }) { Icon(Icons.Rounded.Clear, null) } }
@@ -219,7 +221,7 @@ fun QuickFillContent(
                             contentPadding = PaddingValues(horizontal = 16.dp),
                             modifier = Modifier.fillMaxHeight()
                         ) {
-                            Text("Select All", style = MaterialTheme.typography.labelLarge)
+                            Text(stringResource(R.string.select_all), style = MaterialTheme.typography.labelLarge)
                         }
                         
                         // Divider/Spacer
@@ -235,7 +237,7 @@ fun QuickFillContent(
                             contentPadding = PaddingValues(horizontal = 16.dp),
                             modifier = Modifier.fillMaxHeight()
                         ) {
-                            Text("Clear", style = MaterialTheme.typography.labelLarge)
+                            Text(stringResource(R.string.clear), style = MaterialTheme.typography.labelLarge)
                         }
                     }
                     Spacer(modifier = Modifier.weight(1f))
@@ -331,7 +333,7 @@ fun GenreValidatorContent(
                  Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                      Column(horizontalAlignment = Alignment.CenterHorizontally) {
                          Icon(Icons.Rounded.Add, "Add Custom", tint = MaterialTheme.colorScheme.primary)
-                         Text("New Genre", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
+                         Text(stringResource(R.string.quick_fill_new_genre), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
                      }
                  }
             }
@@ -387,13 +389,13 @@ fun GenreValidatorContent(
         
         AlertDialog(
             onDismissRequest = { showCustomDialog = false },
-            title = { Text("Add Custom Genre") },
+            title = { Text(stringResource(R.string.quick_fill_add_custom_genre)) },
             text = {
                 Column {
                     OutlinedTextField(
                         value = newGenreName,
                         onValueChange = { newGenreName = it },
-                        label = { Text("Genre Name") },
+                        label = { Text(stringResource(R.string.quick_fill_genre_name)) },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth()
                     )
@@ -441,10 +443,10 @@ fun GenreValidatorContent(
                             showCustomDialog = false
                         }
                     }
-                ) { Text("Add") }
+                ) { Text(stringResource(R.string.add)) }
             },
             dismissButton = {
-                TextButton(onClick = { showCustomDialog = false }) { Text("Cancel") }
+                TextButton(onClick = { showCustomDialog = false }) { Text(stringResource(R.string.cancel)) }
             }
         )
     }

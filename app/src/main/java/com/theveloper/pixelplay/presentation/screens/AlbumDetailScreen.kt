@@ -3,6 +3,7 @@
 package com.theveloper.pixelplay.presentation.screens
 
 import com.theveloper.pixelplay.presentation.navigation.navigateSafely
+import androidx.compose.ui.res.stringResource
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.Spring
@@ -514,7 +515,7 @@ private fun SharedAlbumTopBarProbe(
         if (expandedContentAlpha > 0.01f) {
             SmartImage(
                 model = album.albumArtUriString,
-                contentDescription = "Cover of ${album.title}",
+                contentDescription = "${album.title}",
                 contentScale = ContentScale.Crop,
                 targetSize = headerImageRequestSize,
                 allowHardware = true,
@@ -579,7 +580,7 @@ private fun SharedAlbumTopBarProbe(
                     alpha = expandedContentAlpha
                 }
         ) {
-            Icon(Icons.Rounded.Shuffle, contentDescription = "Shuffle play album")
+            Icon(Icons.Rounded.Shuffle, contentDescription = stringResource(R.string.cd_shuffle_play_album))
         }
     }
 }
@@ -660,7 +661,7 @@ private fun CollapsingAlbumTopBar(
             if (showExpandedArtwork) {
                 SmartImage(
                     model = album.albumArtUriString,
-                    contentDescription = "Cover of ${album.title}",
+                    contentDescription = "${album.title}",
                     contentScale = ContentScale.Crop,
                     targetSize = headerImageRequestSize,
                     allowHardware = true,
@@ -696,7 +697,7 @@ private fun CollapsingAlbumTopBar(
                     onClick = onBackPressed,
                     colors = IconButtonDefaults.filledIconButtonColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow)
                 ) {
-                    Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                    Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.back))
                 }
 
                 Box(
@@ -749,7 +750,7 @@ private fun CollapsingAlbumTopBar(
                             alpha = fabScale
                         }
                 ) {
-                    Icon(Icons.Rounded.Shuffle, contentDescription = "Shuffle play album")
+                    Icon(Icons.Rounded.Shuffle, contentDescription = stringResource(R.string.cd_shuffle_play_album))
                 }
             }
         }

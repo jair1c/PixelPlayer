@@ -231,7 +231,7 @@ fun PlaylistDetailScreen(
                 title = {
                     Text(
                         modifier = Modifier.padding(start = 8.dp),
-                        text = currentPlaylist?.name ?: "Playlist",
+                        text = currentPlaylist?.name ?: stringResource(R.string.playlist_fallback),
                         fontFamily = GoogleSansRounded,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
@@ -273,7 +273,7 @@ fun PlaylistDetailScreen(
                     ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Rounded.Sort,
-                            contentDescription = "Sort Songs"
+                            contentDescription = stringResource(R.string.sort_songs)
                         )
                     }
                     if (!isFolderPlaylist) {
@@ -353,11 +353,11 @@ fun PlaylistDetailScreen(
                     ) {
                         Icon(
                             Icons.Rounded.PlayArrow,
-                            contentDescription = "Play",
+                            contentDescription = stringResource(R.string.play_label),
                             modifier = Modifier.size(20.dp)
                         )
                         Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-                        Text("Play it")
+                        Text(stringResource(R.string.play_it))
                     }
                     FilledTonalButton(
                         onClick = {
@@ -387,11 +387,11 @@ fun PlaylistDetailScreen(
                     ) {
                         Icon(
                             Icons.Rounded.Shuffle,
-                            contentDescription = "Shuffle",
+                            contentDescription = stringResource(R.string.cd_shuffle),
                             modifier = Modifier.size(ButtonDefaults.IconSize)
                         )
                         Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-                        Text("Shuffle")
+                        Text(stringResource(R.string.shuffle))
                     }
                 }
 
@@ -444,12 +444,12 @@ fun PlaylistDetailScreen(
                         ) {
                             Icon(
                                 imageVector = Icons.Rounded.Add,
-                                contentDescription = "Add songs",
+                                contentDescription = stringResource(R.string.cd_add_songs),
                                 modifier = Modifier.size(20.dp)
                             )
                             Spacer(Modifier.width(4.dp))
                             Text(
-                                text = "Add",
+                                text = stringResource(R.string.add),
                                 style = MaterialTheme.typography.labelLarge
                             )
                         }
@@ -471,13 +471,13 @@ fun PlaylistDetailScreen(
                             Icon(
                                 modifier = Modifier.size(18.dp),
                                 imageVector = Icons.Default.RemoveCircleOutline,
-                                contentDescription = "Remove songs",
+                                contentDescription = stringResource(R.string.cd_remove_songs),
                                 tint = removeIconColor
                             )
                             Spacer(Modifier.width(6.dp))
                             Text(
                                 modifier = Modifier.padding(end = 4.dp),
-                                text = "Remove",
+                                text = stringResource(R.string.remove),
                                 color = removeIconColor,
                                 style = MaterialTheme.typography.labelMedium
                             )
@@ -500,13 +500,13 @@ fun PlaylistDetailScreen(
                             Icon(
                                 modifier = Modifier.size(22.dp),
                                 painter = painterResource(R.drawable.drag_order_icon),
-                                contentDescription = "Reorder songs",
+                                contentDescription = stringResource(R.string.cd_reorder_songs),
                                 tint = reorderIconColor
                             )
                             Spacer(Modifier.width(6.dp))
                             Text(
                                 modifier = Modifier.padding(end = 4.dp),
-                                text = "Reorder",
+                                text = stringResource(R.string.cd_reorder),
                                 color = reorderIconColor,
                                 style = MaterialTheme.typography.labelMedium
                             )
@@ -521,7 +521,7 @@ fun PlaylistDetailScreen(
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Icon(Icons.Filled.MusicOff, null, Modifier.size(48.dp), tint = MaterialTheme.colorScheme.onSurfaceVariant)
                             Spacer(Modifier.height(8.dp))
-                            Text("This playlist is empty.", style = MaterialTheme.typography.titleMedium)
+                            Text(stringResource(R.string.playlist_empty_label), style = MaterialTheme.typography.titleMedium)
                             val emptyMessage = if (isFolderPlaylist) {
                                 "This folder doesn't contain songs."
                             } else {
@@ -633,7 +633,7 @@ fun PlaylistDetailScreen(
                                             ) {
                                                 Icon(
                                                     imageVector = Icons.Rounded.DragIndicator,
-                                                    contentDescription = "Reorder song",
+                                                    contentDescription = stringResource(R.string.cd_reorder_song),
                                                     tint = MaterialTheme.colorScheme.onSurfaceVariant
                                                 )
                                             }
@@ -785,9 +785,9 @@ fun PlaylistDetailScreen(
     if (showDeleteConfirmation && currentPlaylist != null) {
         AlertDialog(
             onDismissRequest = { showDeleteConfirmation = false },
-            title = { Text("Delete playlist?") },
+            title = { Text(stringResource(R.string.delete_playlist_title)) },
             text = {
-                Text("Are you sure you want to delete this playlist?")
+                Text(stringResource(R.string.delete_playlist_confirm))
             },
             confirmButton = {
                 TextButton(
@@ -797,12 +797,12 @@ fun PlaylistDetailScreen(
                         showDeleteConfirmation = false
                     }
                 ) {
-                    Text("Delete")
+                    Text(stringResource(R.string.delete))
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showDeleteConfirmation = false }) {
-                    Text("Cancel")
+                    Text(stringResource(R.string.cancel))
                 }
             }
         )
@@ -1002,12 +1002,12 @@ fun RenamePlaylistDialog(currentName: String, onDismiss: () -> Unit, onRename: (
     var newName by remember { mutableStateOf(TextFieldValue(currentName)) }
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Rename Playlist") },
+        title = { Text(stringResource(R.string.rename_playlist)) },
         text = {
             OutlinedTextField(
                 value = newName,
                 onValueChange = { newName = it },
-                label = { Text("New name") },
+                label = { Text(stringResource(R.string.new_name)) },
                 shape = CircleShape,
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth()
@@ -1017,8 +1017,8 @@ fun RenamePlaylistDialog(currentName: String, onDismiss: () -> Unit, onRename: (
             Button(
                 onClick = { if (newName.text.isNotBlank()) onRename(newName.text) },
                 enabled = newName.text.isNotBlank() && newName.text != currentName
-            ) { Text("Rename") }
+            ) { Text(stringResource(R.string.rename)) }
         },
-        dismissButton = { TextButton(onClick = onDismiss) { Text("Cancel") } }
+        dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.cancel)) } }
     )
 }

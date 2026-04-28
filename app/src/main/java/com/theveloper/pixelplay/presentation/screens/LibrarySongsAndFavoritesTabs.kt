@@ -65,6 +65,7 @@ import com.theveloper.pixelplay.presentation.viewmodel.StablePlayerState
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import androidx.compose.ui.res.stringResource
 
 @androidx.annotation.OptIn(UnstableApi::class)
 @Composable
@@ -327,7 +328,7 @@ fun LibrarySongsTabPaginated(
                 contentAlignment = Alignment.Center
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text("Error loading songs", style = MaterialTheme.typography.titleMedium)
+                    Text(stringResource(R.string.error_loading_songs), style = MaterialTheme.typography.titleMedium)
                     Text(
                         error.localizedMessage ?: "Unknown error",
                         style = MaterialTheme.typography.bodySmall,
@@ -335,7 +336,7 @@ fun LibrarySongsTabPaginated(
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Button(onClick = { paginatedSongs.retry() }) {
-                        Text("Retry")
+                        Text(stringResource(R.string.retry))
                     }
                 }
             }
@@ -351,12 +352,12 @@ fun LibrarySongsTabPaginated(
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Icon(
                         painter = painterResource(id = R.drawable.rounded_music_off_24),
-                        contentDescription = "No songs found",
+                        contentDescription = stringResource(R.string.cd_no_songs_found),
                         modifier = Modifier.size(48.dp),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                     Spacer(Modifier.height(8.dp))
-                    Text("No songs found in your library.", style = MaterialTheme.typography.titleMedium)
+                    Text(stringResource(R.string.no_songs_found_library), style = MaterialTheme.typography.titleMedium)
                     Text(
                         "Try rescanning your library in settings if you have music on your device.",
                         style = MaterialTheme.typography.bodySmall,

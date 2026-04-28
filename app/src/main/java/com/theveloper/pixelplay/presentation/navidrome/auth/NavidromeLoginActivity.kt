@@ -148,7 +148,7 @@ fun NavidromeLoginScreen(
                     ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = stringResource(R.string.cd_back)
                         )
                     }
                 },
@@ -186,7 +186,7 @@ fun NavidromeLoginScreen(
                     Box(contentAlignment = Alignment.Center) {
                         Icon(
                             imageVector = androidx.compose.ui.graphics.vector.ImageVector.vectorResource(id = R.drawable.ic_navidrome),
-                            contentDescription = "Navidrome",
+                            contentDescription = stringResource(R.string.cd_navidrome),
                             tint = androidx.compose.ui.graphics.Color.Unspecified,
                             modifier = Modifier.size(42.dp)
                         )
@@ -206,7 +206,7 @@ fun NavidromeLoginScreen(
                     Box(contentAlignment = Alignment.Center) {
                         Icon(
                             imageVector = androidx.compose.ui.graphics.vector.ImageVector.vectorResource(id = R.drawable.ic_subsonic),
-                            contentDescription = "Subsonic",
+                            contentDescription = stringResource(R.string.cd_subsonic),
                             tint = androidx.compose.ui.graphics.Color.Unspecified,
                             modifier = Modifier.size(42.dp)
                         )
@@ -282,7 +282,7 @@ fun NavidromeLoginScreen(
                     ExpressiveLoginField(
                         value = serverUrl,
                         onValueChange = { serverUrl = it },
-                        label = "Server URL",
+                        label = stringResource(R.string.label_server_url),
                         placeholder = "https://music.example.com",
                         supportingText = "Use the full https:// base address of your server.",
                         leadingIcon = Icons.Rounded.CloudQueue,
@@ -302,8 +302,8 @@ fun NavidromeLoginScreen(
                     ExpressiveLoginField(
                         value = username,
                         onValueChange = { username = it },
-                        label = "Username",
-                        placeholder = "admin",
+                        label = stringResource(R.string.label_username),
+                        placeholder = stringResource(R.string.placeholder_admin),
                         supportingText = "This is your Subsonic or Navidrome account name.",
                         leadingIcon = Icons.Rounded.Person,
                         enabled = !isLoading,
@@ -322,8 +322,8 @@ fun NavidromeLoginScreen(
                     ExpressiveLoginField(
                         value = password,
                         onValueChange = { password = it },
-                        label = "Password",
-                        placeholder = "Enter password",
+                        label = stringResource(R.string.label_password),
+                        placeholder = stringResource(R.string.placeholder_enter_password),
                         supportingText = "App password also works if your server supports it.",
                         leadingIcon = Icons.Rounded.Lock,
                         enabled = !isLoading,

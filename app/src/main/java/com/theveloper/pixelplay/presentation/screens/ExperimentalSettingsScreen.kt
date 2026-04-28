@@ -330,7 +330,7 @@ fun ExperimentalSettingsScreen(
 
                             SwitchSettingItem(
                                 title = stringResource(R.string.experimental_settings),
-                                subtitle = "Hold the full player content until the sheet background is fully expanded.",
+                                subtitle = stringResource(R.string.exp_delay_everything),
                                 checked = delayAllEnabled,
                                 onCheckedChange = settingsViewModel::setDelayAllFullPlayerContent,
                                 leadingIcon = {
@@ -350,7 +350,7 @@ fun ExperimentalSettingsScreen(
                                 Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                                     SwitchSettingItem(
                                         title = stringResource(R.string.album_art_palette_style),
-                                        subtitle = "Delay album art and carousel until the sheet is expanded.",
+                                        subtitle = stringResource(R.string.exp_delay_album),
                                         checked = loadingTweaks.delayAlbumCarousel,
                                         onCheckedChange = settingsViewModel::setDelayAlbumCarousel,
                                         leadingIcon = {
@@ -364,7 +364,7 @@ fun ExperimentalSettingsScreen(
 
                                     SwitchSettingItem(
                                         title = stringResource(R.string.field_title),
-                                        subtitle = "Delay title, artist, and lyrics/queue actions.",
+                                        subtitle = stringResource(R.string.exp_delay_metadata),
                                         checked = loadingTweaks.delaySongMetadata,
                                         onCheckedChange = settingsViewModel::setDelaySongMetadata,
                                         leadingIcon = {
@@ -378,7 +378,7 @@ fun ExperimentalSettingsScreen(
 
                                     SwitchSettingItem(
                                         title = stringResource(R.string.peak_segment),
-                                        subtitle = "Delay the timeline and time labels until expansion completes.",
+                                        subtitle = stringResource(R.string.exp_delay_progress),
                                         checked = loadingTweaks.delayProgressBar,
                                         onCheckedChange = settingsViewModel::setDelayProgressBar,
                                         leadingIcon = {
@@ -392,7 +392,7 @@ fun ExperimentalSettingsScreen(
 
                                     SwitchSettingItem(
                                         title = stringResource(R.string.playback),
-                                        subtitle = "Delay play/pause, seek, and favorite controls.",
+                                        subtitle = stringResource(R.string.exp_delay_controls),
                                         checked = loadingTweaks.delayControls,
                                         onCheckedChange = settingsViewModel::setDelayControls,
                                         leadingIcon = {
@@ -442,7 +442,7 @@ fun ExperimentalSettingsScreen(
 
                             SwitchSettingItem(
                                 title = stringResource(R.string.use_smooth_corners),
-                                subtitle = "Keep layout stable by rendering lightweight placeholders while components wait for expansion.",
+                                subtitle = stringResource(R.string.exp_use_placeholders),
                                 checked = placeholdersEnabled,
                                 onCheckedChange = settingsViewModel::setFullPlayerPlaceholders,
                                 leadingIcon = {
@@ -493,7 +493,7 @@ fun ExperimentalSettingsScreen(
                                             ) {
                                                 TriggerModeOptionCard(
                                                     title = stringResource(R.string.cd_volume_level),
-                                                    subtitle = "Uses expansion percentage.",
+                                                    subtitle = stringResource(R.string.exp_threshold),
                                                     selected = !switchOnDragRelease,
                                                     enabled = canUseTriggerMode,
                                                     onClick = { settingsViewModel.setFullPlayerSwitchOnDragRelease(false) },
@@ -501,7 +501,7 @@ fun ExperimentalSettingsScreen(
                                                 )
                                                 TriggerModeOptionCard(
                                                     title = stringResource(R.string.cd_drag_handle),
-                                                    subtitle = "Switches only after gesture release.",
+                                                    subtitle = stringResource(R.string.exp_drag_release),
                                                     selected = switchOnDragRelease,
                                                     enabled = canUseTriggerMode,
                                                     onClick = { settingsViewModel.setFullPlayerSwitchOnDragRelease(true) },
@@ -571,7 +571,7 @@ fun ExperimentalSettingsScreen(
 
                                             SwitchSettingItem(
                                                 title = stringResource(R.string.tap_background_closes_player),
-                                                subtitle = "Use close threshold to switch back to placeholders while collapsing.",
+                                                subtitle = stringResource(R.string.exp_close_threshold),
                                                 checked = loadingTweaks.applyPlaceholdersOnClose,
                                                 onCheckedChange = settingsViewModel::setFullPlayerPlaceholdersOnClose,
                                                 enabled = isAnyDelayEnabled,
@@ -666,7 +666,7 @@ fun ExperimentalSettingsScreen(
 
                                     SwitchSettingItem(
                                         title = stringResource(R.string.compact_mode),
-                                        subtitle = "Placeholders keep their layout space but become invisible.",
+                                        subtitle = stringResource(R.string.exp_transparent_ph),
                                         checked = loadingTweaks.transparentPlaceholders,
                                         onCheckedChange = settingsViewModel::setTransparentPlaceholders,
                                         leadingIcon = {
@@ -768,7 +768,7 @@ fun ExperimentalSettingsScreen(
                                        if (isSelected) {
                                             Icon(
                                                 imageVector = Icons.Rounded.LinearScale, // Check icon
-                                                contentDescription = "Selected",
+                                                contentDescription = stringResource(R.string.cd_selected),
                                                 tint = MaterialTheme.colorScheme.primary
                                             )
                                        }

@@ -58,6 +58,7 @@ import com.theveloper.pixelplay.presentation.components.SmartImage
 import com.theveloper.pixelplay.presentation.viewmodel.DeckState
 import com.theveloper.pixelplay.presentation.viewmodel.MashupViewModel
 import kotlinx.coroutines.launch
+import androidx.compose.ui.res.stringResource
 
 @androidx.annotation.OptIn(UnstableApi::class)
 @OptIn(ExperimentalMaterial3Api::class)
@@ -73,7 +74,7 @@ fun MashupScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("DJ Space") },
+                title = { Text(stringResource(R.string.dj_space)) },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.8f))
             )
         }
@@ -199,7 +200,7 @@ private fun DeckUi(
                         if (deckState.song != null) {
                             SmartImage(
                                 model = deckState.song.albumArtUriString,
-                                contentDescription = "Song Cover",
+                                contentDescription = stringResource(R.string.cd_song_cover),
                                 modifier = Modifier.fillMaxSize()
                             )
                         } else {
@@ -229,7 +230,7 @@ private fun DeckUi(
                             .padding(16.dp),
                         contentAlignment = Alignment.Center
                     ) {
-                        Text("Stem Separation not available yet.", style = MaterialTheme.typography.bodyMedium)
+                        Text(stringResource(R.string.stem_unavailable), style = MaterialTheme.typography.bodyMedium)
                     }
                 }
 
@@ -242,14 +243,14 @@ private fun DeckUi(
                 ) {
                     OutlinedButton(onClick = { onNudge(-100) }, enabled = deckState.song != null) { Text("<<") }
                     IconButton(onClick = onPlayPause, enabled = deckState.song != null, modifier = Modifier.size(56.dp)) {
-                        Icon(painter = painterResource(if (deckState.isPlaying) R.drawable.rounded_pause_24 else R.drawable.rounded_play_arrow_24), contentDescription = "Play/Pause", modifier = Modifier.fillMaxSize())
+                        Icon(painter = painterResource(if (deckState.isPlaying) R.drawable.rounded_pause_24 else R.drawable.rounded_play_arrow_24), contentDescription = stringResource(R.string.cd_play_pause), modifier = Modifier.fillMaxSize())
                     }
                     OutlinedButton(onClick = { onNudge(100) }, enabled = deckState.song != null) { Text(">>") }
                 }
 
                 Column(modifier = Modifier.padding(top = 8.dp)) {
-                    SliderControl(label = "Volume", value = deckState.volume, onValueChange = onVolumeChange, valueRange = 0f..1f, enabled = deckState.song != null)
-                    SliderControl(label = "Speed", value = deckState.speed, onValueChange = onSpeedChange, valueRange = 0.5f..2f, steps = 14, enabled = deckState.song != null) {
+                    SliderControl(label = stringResource(R.string.volume_label), value = deckState.volume, onValueChange = onVolumeChange, valueRange = 0f..1f, enabled = deckState.song != null)
+                    SliderControl(label = stringResource(R.string.speed_label), value = deckState.speed, onValueChange = onSpeedChange, valueRange = 0.5f..2f, steps = 14, enabled = deckState.song != null) {
                         Text(text = "x${"%.2f".format(deckState.speed)}", style = MaterialTheme.typography.labelSmall)
                     }
                 }
@@ -289,13 +290,13 @@ private fun SliderControl(
 @Composable
 private fun Crossfader(value: Float, onValueChange: (Float) -> Unit, modifier: Modifier = Modifier) {
     Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
-        Text("Crossfader", style = MaterialTheme.typography.titleMedium)
+        Text(stringResource(R.string.crossfader_label), style = MaterialTheme.typography.titleMedium)
         Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
-            Text("Deck 1", style = MaterialTheme.typography.bodyMedium)
+            Text(stringResource(R.string.deck_1), style = MaterialTheme.typography.bodyMedium)
             Slider(value = value, onValueChange = onValueChange, valueRange = -1f..1f, modifier = Modifier
                 .weight(1f)
                 .padding(horizontal = 8.dp))
-            Text("Deck 2", style = MaterialTheme.typography.bodyMedium)
+            Text(stringResource(R.string.deck_2), style = MaterialTheme.typography.bodyMedium)
         }
     }
 }
@@ -303,7 +304,7 @@ private fun Crossfader(value: Float, onValueChange: (Float) -> Unit, modifier: M
 @Composable
 private fun SongPickerSheet(songs: List<Song>, onSongSelected: (Song) -> Unit) {
     Column(modifier = Modifier.navigationBarsPadding()) {
-        Text("Select a Song", style = MaterialTheme.typography.titleLarge, modifier = Modifier
+        Text(stringResource(R.string.select_a_song), style = MaterialTheme.typography.titleLarge, modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp), textAlign = TextAlign.Center)
         LazyColumn(modifier = Modifier
@@ -329,7 +330,7 @@ private fun SongPickerItem(song: Song, onClick: () -> Unit) {
     ) {
         SmartImage(
             model = song.albumArtUriString,
-            contentDescription = "Song Cover",
+            contentDescription = stringResource(R.string.cd_song_cover),
             modifier = Modifier.size(40.dp)
         )
         Column(modifier = Modifier.weight(1f)) {

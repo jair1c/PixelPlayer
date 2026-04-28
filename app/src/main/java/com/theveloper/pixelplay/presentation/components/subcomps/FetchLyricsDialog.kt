@@ -487,7 +487,7 @@ fun NotFoundContent(
         verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         Text(
-            text = "Title",
+            text = stringResource(R.string.field_title),
             color = MaterialTheme.colorScheme.primary,
             style = MaterialTheme.typography.labelLarge
         )

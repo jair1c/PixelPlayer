@@ -138,7 +138,7 @@ fun EditTransitionScreen(
                         onClick = { navController.navigateUp() },
                         colors = IconButtonDefaults.filledIconButtonColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow)
                     ) {
-                        Icon(painterResource(R.drawable.rounded_arrow_back_24), contentDescription = "Back", tint = MaterialTheme.colorScheme.onSurface)
+                        Icon(painterResource(R.drawable.rounded_arrow_back_24), contentDescription = stringResource(R.string.back), tint = MaterialTheme.colorScheme.onSurface)
                     }
                 },
                 actions = {
@@ -148,7 +148,7 @@ fun EditTransitionScreen(
                         enabled = !uiState.isLoading,
                         colors = IconButtonDefaults.filledIconButtonColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer, contentColor = MaterialTheme.colorScheme.onTertiaryContainer)
                     ){
-                        Icon(Icons.Rounded.Save, contentDescription = "Save")
+                        Icon(Icons.Rounded.Save, contentDescription = stringResource(R.string.save))
                     }
                 },
                 scrollBehavior = scrollBehavior,
@@ -278,7 +278,7 @@ private fun TransitionSummaryCard(
 
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
-                        text = "Active Status",
+                        text = stringResource(R.string.active_status),
                         style = MaterialTheme.typography.labelLarge,
                         color = MaterialTheme.colorScheme.primary
                     )
@@ -310,9 +310,9 @@ private fun TransitionSummaryCard(
                         Column(modifier = Modifier
                             .weight(1f)
                             .padding(end = 16.dp)) {
-                            Text("Custom Override", style = MaterialTheme.typography.titleMedium)
+                            Text(stringResource(R.string.custom_override_label), style = MaterialTheme.typography.titleMedium)
                             Text(
-                                text = "Enable to set specific rules for this playlist.",
+                                text = stringResource(R.string.enable_specific_rules),
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -344,9 +344,9 @@ private fun TransitionModeSection(
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             Icon(Icons.Rounded.GraphicEq, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
             Column {
-                Text("Transition Style", style = MaterialTheme.typography.titleMedium)
+                Text(stringResource(R.string.transition_style_label), style = MaterialTheme.typography.titleMedium)
                 Text(
-                    text = "How tracks blend together",
+                    text = stringResource(R.string.how_tracks_blend),
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     style = MaterialTheme.typography.bodyMedium
                 )
@@ -403,7 +403,7 @@ private fun ExpressiveMorphingToggle(
         Row(modifier = Modifier.fillMaxSize()) {
             options.forEach { mode ->
                 val isSelected = selectedOption == mode
-                val title = if (mode == TransitionMode.OVERLAP) "Crossfade" else "None"
+                val title = if (mode == TransitionMode.OVERLAP) stringResource(R.string.crossfade_label) else stringResource(R.string.none_label)
 
                 Box(
                     modifier = Modifier
@@ -451,7 +451,7 @@ private fun TransitionDurationSection(
             modifier = Modifier.fillMaxWidth()
         ) {
             Column {
-                Text("Transition Duration", style = MaterialTheme.typography.titleMedium)
+                Text(stringResource(R.string.transition_duration_label), style = MaterialTheme.typography.titleMedium)
                 Text(
                     text = "${durationInSeconds}s total overlap",
                     style = MaterialTheme.typography.bodyMedium,
@@ -465,7 +465,7 @@ private fun TransitionDurationSection(
                     contentColor = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             ) {
-                Icon(Icons.Rounded.Tune, contentDescription = "Reset")
+                Icon(Icons.Rounded.Tune, contentDescription = stringResource(R.string.reset))
             }
         }
 
@@ -647,7 +647,7 @@ private fun TransitionCurvesSection(
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             Icon(Icons.Rounded.Tune, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
             Column {
-                Text("Volume Curves", style = MaterialTheme.typography.titleMedium)
+                Text(stringResource(R.string.volume_curves_label), style = MaterialTheme.typography.titleMedium)
                 Text(
                     "Fine tune the audio slope",
                     style = MaterialTheme.typography.bodySmall,

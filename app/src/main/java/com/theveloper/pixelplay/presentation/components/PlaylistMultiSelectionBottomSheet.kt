@@ -185,7 +185,7 @@ fun PlaylistMultiSelectionBottomSheet(
                             ) {
                                 Icon(
                                     Icons.Rounded.Delete,
-                                    contentDescription = "Delete all"
+                                    contentDescription = stringResource(R.string.cd_delete_all)
                                 )
                                 Spacer(Modifier.width(8.dp))
                                 Text(stringResource(R.string.delete))
@@ -207,7 +207,7 @@ fun PlaylistMultiSelectionBottomSheet(
                             ) {
                                 Icon(
                                     Icons.Rounded.FileDownload,
-                                    contentDescription = "Export all"
+                                    contentDescription = stringResource(R.string.cd_export_all)
                                 )
                                 Spacer(Modifier.width(8.dp))
                                 Text(stringResource(R.string.export))
@@ -240,7 +240,7 @@ fun PlaylistMultiSelectionBottomSheet(
                             ) {
                                 Icon(
                                     Icons.Rounded.Merge,
-                                    contentDescription = "Merge all"
+                                    contentDescription = stringResource(R.string.cd_merge_all)
                                 )
                                 Spacer(Modifier.width(8.dp))
                                 Text(stringResource(R.string.merge))
@@ -262,7 +262,7 @@ fun PlaylistMultiSelectionBottomSheet(
                             ) {
                                 Icon(
                                     Icons.Rounded.Share,
-                                    contentDescription = "Share all"
+                                    contentDescription = stringResource(R.string.cd_share_all)
                                 )
                                 Spacer(Modifier.width(8.dp))
                                 Text(stringResource(R.string.share))

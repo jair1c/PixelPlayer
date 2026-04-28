@@ -81,6 +81,7 @@ import com.theveloper.pixelplay.ui.theme.PixelPlayTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import org.json.JSONObject
+import androidx.compose.ui.res.stringResource
 
 @AndroidEntryPoint
 class NeteaseLoginActivity : ComponentActivity() {
@@ -251,7 +252,7 @@ fun NeteaseWebLoginScreen(
                     ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = stringResource(R.string.cd_back)
                         )
                     }
                 },
@@ -279,7 +280,7 @@ fun NeteaseWebLoginScreen(
                     ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
-                            contentDescription = "Web back"
+                            contentDescription = stringResource(R.string.cd_web_back)
                         )
                     }
 
@@ -296,7 +297,7 @@ fun NeteaseWebLoginScreen(
                     ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Rounded.ArrowForward,
-                            contentDescription = "Web forward"
+                            contentDescription = stringResource(R.string.cd_web_forward)
                         )
                     }
 
@@ -313,7 +314,7 @@ fun NeteaseWebLoginScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Rounded.Refresh,
-                            contentDescription = "Refresh"
+                            contentDescription = stringResource(R.string.cd_refresh)
                         )
                     }
 
@@ -331,7 +332,7 @@ fun NeteaseWebLoginScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Rounded.Home,
-                            contentDescription = "Open home"
+                            contentDescription = stringResource(R.string.cd_open_home)
                         )
                     }
                 },

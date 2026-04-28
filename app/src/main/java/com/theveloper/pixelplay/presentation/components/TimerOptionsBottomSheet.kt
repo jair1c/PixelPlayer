@@ -47,9 +47,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.theveloper.pixelplay.R
 import com.theveloper.pixelplay.ui.theme.GoogleSansRounded
 import racra.compose.smooth_corner_rect_library.AbsoluteSmoothCornerShape
 import kotlin.math.roundToInt
+import androidx.compose.ui.res.stringResource
 
 val predefinedTimes = listOf(0, 5, 10, 15, 20, 30, 45, 60) // 0 represents 'Off'
 
@@ -127,7 +129,7 @@ fun TimerOptionsBottomSheet(
             ) {
                 Text(
                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-                    text = "Sleep Timer",
+                    text = stringResource(R.string.sleep_timer),
                     fontFamily = GoogleSansRounded,
                     style = MaterialTheme.typography.headlineMedium,
                     color = MaterialTheme.colorScheme.primary
@@ -300,7 +302,7 @@ fun TimerOptionsBottomSheet(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "End of current track",
+                        text = stringResource(R.string.end_of_current_track),
                         modifier = Modifier
                             .weight(1f)
                             .padding(end = 8.dp),
@@ -322,7 +324,7 @@ fun TimerOptionsBottomSheet(
                             {
                                 Icon(
                                     imageVector = Icons.Rounded.Check,
-                                    contentDescription = "Switch is on",
+                                    contentDescription = stringResource(R.string.cd_switch_on),
                                     tint = MaterialTheme.colorScheme.tertiaryContainer,
                                     modifier = Modifier.size(SwitchDefaults.IconSize),
                                 )
@@ -357,7 +359,7 @@ fun TimerOptionsBottomSheet(
                         .weight(1f) // Give buttons equal space if desired
                         .height(buttonHeight)
                 ) {
-                    Text("Custom Time")
+                    Text(stringResource(R.string.custom_time))
                 }
                 Button(
                     onClick = {
@@ -380,7 +382,7 @@ fun TimerOptionsBottomSheet(
                         .weight(1f)
                         .height(buttonHeight)
                 ) {
-                    Text("Cancel Timer")
+                    Text(stringResource(R.string.cancel_timer))
                 }
             }
             Spacer(modifier = Modifier.height(16.dp))
@@ -403,7 +405,7 @@ fun TimerOptionsBottomSheet(
                 // No need to call onDismiss() for the bottom sheet here,
                 // as that's handled by the confirm button or if the user specifically dismisses the bottom sheet.
             },
-            title = { Text("Set Custom Duration") },
+            title = { Text(stringResource(R.string.set_custom_duration)) },
             text = {
                 TimePicker(state = timePickerState)
             },
@@ -421,7 +423,7 @@ fun TimerOptionsBottomSheet(
                         onDismiss() // Dismiss the bottom sheet after setting time, as per original logic
                     }
                 ) {
-                    Text("OK")
+                    Text(stringResource(R.string.ok))
                 }
             },
             dismissButton = {
@@ -430,7 +432,7 @@ fun TimerOptionsBottomSheet(
                         showCustomTimePicker = false // Dismiss the M3 dialog
                     }
                 ) {
-                    Text("Cancel")
+                    Text(stringResource(R.string.cancel))
                 }
             }
         )

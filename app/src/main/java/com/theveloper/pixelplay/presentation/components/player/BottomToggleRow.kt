@@ -14,6 +14,7 @@ import com.theveloper.pixelplay.R
 import com.theveloper.pixelplay.presentation.components.LocalMaterialTheme
 import com.theveloper.pixelplay.presentation.components.ToggleSegmentButton
 import racra.compose.smooth_corner_rect_library.AbsoluteSmoothCornerShape
+import androidx.compose.ui.res.stringResource
 
 @Composable
 fun BottomToggleRow(
@@ -84,7 +85,7 @@ fun BottomToggleRow(
                 inactiveContentColor = inactiveContentColor,
                 onClick = onShuffleToggle,
                 iconId = R.drawable.rounded_shuffle_24,
-                contentDesc = "Shuffle"
+                contentDesc = stringResource(R.string.cd_shuffle_toggle)
             )
             val repeatActive = repeatMode != Player.REPEAT_MODE_OFF
             val repeatIcon = when (repeatMode) {
@@ -102,7 +103,7 @@ fun BottomToggleRow(
                 inactiveContentColor = inactiveContentColor,
                 onClick = onRepeatToggle,
                 iconId = repeatIcon,
-                contentDesc = "Repeat"
+                contentDesc = stringResource(R.string.cd_repeat_toggle)
             )
             ToggleSegmentButton(
                 modifier = commonModifier,
@@ -114,7 +115,7 @@ fun BottomToggleRow(
                 inactiveContentColor = inactiveContentColor,
                 onClick = onFavoriteToggle,
                 iconId = if (isFavorite) R.drawable.round_favorite_24 else R.drawable.rounded_favorite_24,
-                contentDesc = "Favorite"
+                contentDesc = stringResource(R.string.cd_favorite_toggle)
             )
         }
     }

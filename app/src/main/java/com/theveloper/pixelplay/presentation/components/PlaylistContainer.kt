@@ -446,7 +446,7 @@ fun PlaylistItem(
                         Spacer(modifier = Modifier.width(8.dp))
                         Icon(
                             painter = painterResource(R.drawable.gemini_ai),
-                            contentDescription = "AI Generated",
+                            contentDescription = stringResource(R.string.cd_ai_generated),
                             tint = MaterialTheme.colorScheme.tertiary,
                             modifier = Modifier.size(20.dp)
                         )
@@ -455,7 +455,7 @@ fun PlaylistItem(
                         Spacer(modifier = Modifier.width(8.dp))
                         Icon(
                             painter = painterResource(R.drawable.netease_cloud_music_logo_icon_206716__1_),
-                            contentDescription = "Netease Cloud Music",
+                            contentDescription = stringResource(R.string.cd_netease),
                             tint = MaterialTheme.colorScheme.tertiary,
                             modifier = Modifier.size(18.dp)
                         )
@@ -464,7 +464,7 @@ fun PlaylistItem(
                         Spacer(modifier = Modifier.width(8.dp))
                         Icon(
                             painter = painterResource(R.drawable.telegram),
-                            contentDescription = "Telegram",
+                            contentDescription = stringResource(R.string.cd_telegram),
                             tint = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.size(18.dp)
                         )
@@ -473,7 +473,7 @@ fun PlaylistItem(
                         Spacer(modifier = Modifier.width(4.dp))
                         Icon(
                             imageVector = Icons.Rounded.Topic,
-                            contentDescription = "Topic",
+                            contentDescription = stringResource(R.string.cd_topic),
                             tint = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.size(16.dp)
                         )
@@ -482,7 +482,7 @@ fun PlaylistItem(
                         Spacer(modifier = Modifier.width(8.dp))
                         Icon(
                             imageVector = Icons.Rounded.Album,
-                            contentDescription = "QQ Music",
+                            contentDescription = stringResource(R.string.cd_qq_music),
                             tint = Color(0xFF2E7D32), // 修改为绿色
                             modifier = Modifier.size(18.dp)
                         )
@@ -491,7 +491,7 @@ fun PlaylistItem(
                         Spacer(modifier = Modifier.width(8.dp))
                         Icon(
                             painter = painterResource(R.drawable.ic_navidrome),
-                            contentDescription = "Navidrome",
+                            contentDescription = stringResource(R.string.cd_navidrome),
                             tint = Color.Unspecified,
                             modifier = Modifier.size(18.dp)
                         )
@@ -525,7 +525,7 @@ fun PlaylistItem(
                     } else {
                         Icon(
                             imageVector = Icons.Rounded.CheckCircle,
-                            contentDescription = "Selected",
+                            contentDescription = stringResource(R.string.cd_selected),
                             tint = MaterialTheme.colorScheme.onPrimary,
                             modifier = Modifier.size(16.dp)
                         )

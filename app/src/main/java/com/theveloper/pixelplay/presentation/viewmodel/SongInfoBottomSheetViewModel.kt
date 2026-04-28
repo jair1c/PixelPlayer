@@ -23,6 +23,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import com.theveloper.pixelplay.R
 
 @HiltViewModel
 class SongInfoBottomSheetViewModel @Inject constructor(
@@ -91,13 +92,13 @@ class SongInfoBottomSheetViewModel @Inject constructor(
         val provider = getCloudProviderLabel(song.contentUriString)
         return if (provider != null) {
             SongLocationInfo(
-                label = "Provider",
+                label = application.getString(R.string.label_provider),
                 value = provider,
                 isCloud = true,
             )
         } else {
             SongLocationInfo(
-                label = "Path",
+                label = application.getString(R.string.label_path),
                 value = song.path,
                 isCloud = false,
             )

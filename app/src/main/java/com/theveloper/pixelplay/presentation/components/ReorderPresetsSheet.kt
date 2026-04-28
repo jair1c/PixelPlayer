@@ -76,6 +76,7 @@ import kotlinx.coroutines.launch
 import racra.compose.smooth_corner_rect_library.AbsoluteSmoothCornerShape
 import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -92,8 +93,8 @@ fun ReorderPresetsSheet(
     if (showResetDialog) {
         AlertDialog(
             onDismissRequest = { showResetDialog = false },
-            title = { Text("Reset Presets") },
-            text = { Text("This will restore the default preset order and visibility. Continue?") },
+            title = { Text(stringResource(R.string.reset_presets)) },
+            text = { Text(stringResource(R.string.reset_presets_confirm)) },
             confirmButton = {
                 TextButton(
                     onClick = {
@@ -102,11 +103,11 @@ fun ReorderPresetsSheet(
                         onDismiss()
                     }
                 ) {
-                    Text("Reset")
+                    Text(stringResource(R.string.reset))
                 }
             },
             dismissButton = {
-                TextButton(onClick = { showResetDialog = false }) { Text("Cancel") }
+                TextButton(onClick = { showResetDialog = false }) { Text(stringResource(R.string.cancel)) }
             }
         )
     }
@@ -178,7 +179,7 @@ fun ReorderPresetsSheet(
                             ),
                             title = {
                                 Text(
-                                    text = "Manage Presets",
+                                    text = stringResource(R.string.manage_presets),
                                     fontFamily = GoogleSansRounded,
                                     style = MaterialTheme.typography.titleMedium.copy(
                                         fontSize = 22.sp,
@@ -198,7 +199,7 @@ fun ReorderPresetsSheet(
                                 ) {
                                     Icon(
                                         imageVector = Icons.Rounded.Close,
-                                        contentDescription = "Close"
+                                        contentDescription = stringResource(R.string.close)
                                     )
                                 }
                             },
@@ -213,7 +214,7 @@ fun ReorderPresetsSheet(
                                 ) {
                                     Icon(
                                         painter = painterResource(R.drawable.outline_restart_alt_24),
-                                        contentDescription = "Reset to default"
+                                        contentDescription = stringResource(R.string.reset_to_default)
                                     )
                                 }
                             }
@@ -236,11 +237,11 @@ fun ReorderPresetsSheet(
                         ) {
                             Icon(
                                 imageVector = Icons.Rounded.Check,
-                                contentDescription = "Done",
+                                contentDescription = stringResource(R.string.done),
                                 tint = MaterialTheme.colorScheme.onPrimaryContainer
                             )
                             Spacer(modifier = Modifier.width(10.dp))
-                            Text(text = "Done")
+                            Text(text = stringResource(R.string.done))
                         }
                     },
                     containerColor = MaterialTheme.colorScheme.surfaceContainerLow
@@ -254,7 +255,7 @@ fun ReorderPresetsSheet(
                         ) {
                             // Description
                             Text(
-                                text = "Drag to reorder • Tap eye to show/hide",
+                                text = stringResource(R.string.drag_to_reorder_hint),
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 modifier = Modifier.padding(horizontal = 18.dp)
@@ -332,7 +333,7 @@ fun ReorderPresetsSheet(
                                                 ) {
                                                     Icon(
                                                         imageVector = Icons.Rounded.DragIndicator,
-                                                        contentDescription = "Reorder",
+                                                        contentDescription = stringResource(R.string.cd_reorder),
                                                         modifier = if (item.isPinned) Modifier.draggableHandle() else Modifier,
                                                         tint = if (item.isPinned)
                                                             MaterialTheme.colorScheme.onSurfaceVariant
@@ -360,7 +361,7 @@ fun ReorderPresetsSheet(
                                                             Icons.Rounded.Visibility
                                                         else
                                                             Icons.Rounded.VisibilityOff,
-                                                        contentDescription = if (item.isPinned) "Visible" else "Hidden",
+                                                        contentDescription = if (item.isPinned) stringResource(R.string.visible_label) else stringResource(R.string.hidden_label),
                                                         tint = if (item.isPinned)
                                                             MaterialTheme.colorScheme.primary
                                                         else

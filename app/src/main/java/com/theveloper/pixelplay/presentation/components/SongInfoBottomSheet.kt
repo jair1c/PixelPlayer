@@ -326,7 +326,7 @@ fun SongInfoBottomSheet(
                         ) {
                             SmartImage(
                                 model = song.albumArtUriString,
-                                contentDescription = "Album Art",
+                                contentDescription = stringResource(R.string.cd_album_art),
                                 shape = albumArtShape,
                                 modifier = Modifier.size(80.dp),
                                 contentScale = ContentScale.Crop
@@ -356,7 +356,7 @@ fun SongInfoBottomSheet(
                                 Icon(
                                     modifier = Modifier.padding(horizontal = 8.dp),
                                     imageVector = Icons.Rounded.Edit,
-                                    contentDescription = "Edit song metadata"
+                                    contentDescription = stringResource(R.string.cd_edit_song_metadata)
                                 )
                             }
                         }
@@ -404,12 +404,12 @@ fun SongInfoBottomSheet(
                                                     elevation = FloatingActionButtonDefaults.elevation(0.dp),
                                                     shape = playButtonShape,
                                                     icon = {
-                                                        Icon(Icons.Rounded.PlayArrow, contentDescription = "Play song")
+                                                        Icon(Icons.Rounded.PlayArrow, contentDescription = stringResource(R.string.play_label))
                                                     },
                                                     text = {
                                                         Text(
                                                             modifier = Modifier.padding(end = 10.dp),
-                                                            text = "Play"
+                                                            text = stringResource(R.string.play_label)
                                                         )
                                                     }
                                                 )
@@ -428,7 +428,7 @@ fun SongInfoBottomSheet(
                                                     Icon(
                                                         modifier = Modifier.size(FloatingActionButtonDefaults.LargeIconSize),
                                                         imageVector = if (isFavorite) Icons.Rounded.Favorite else Icons.Rounded.FavoriteBorder,
-                                                        contentDescription = if (isFavorite) "Remove from favorites" else "Add to favorites"
+                                                        contentDescription = if (isFavorite) stringResource(R.string.remove_from_favorites) else stringResource(R.string.add_remove_favorites)
                                                     )
                                                 }
 
@@ -453,7 +453,7 @@ fun SongInfoBottomSheet(
                                                     Icon(
                                                         modifier = Modifier.size(FloatingActionButtonDefaults.LargeIconSize),
                                                         imageVector = Icons.Rounded.Share,
-                                                        contentDescription = "Share song file"
+                                                        contentDescription = stringResource(R.string.cd_share_song_file)
                                                     )
                                                 }
                                             }
@@ -480,7 +480,7 @@ fun SongInfoBottomSheet(
                                                 ) {
                                                     Icon(
                                                         Icons.AutoMirrored.Rounded.QueueMusic,
-                                                        contentDescription = "Add to Queue"
+                                                        contentDescription = stringResource(R.string.cd_add_to_queue)
                                                     )
                                                     Spacer(Modifier.width(14.dp))
                                                     Text(stringResource(R.string.add_to_queue))
@@ -499,7 +499,7 @@ fun SongInfoBottomSheet(
                                                 ) {
                                                     Icon(
                                                         Icons.AutoMirrored.Filled.QueueMusic,
-                                                        contentDescription = "Play Next"
+                                                        contentDescription = stringResource(R.string.cd_play_next)
                                                     )
                                                     Spacer(Modifier.width(8.dp))
                                                     Text(stringResource(R.string.next))
@@ -528,7 +528,7 @@ fun SongInfoBottomSheet(
                                                 ) {
                                                     Icon(
                                                         Icons.AutoMirrored.Rounded.PlaylistAdd,
-                                                        contentDescription = "Add to Playlist"
+                                                        contentDescription = stringResource(R.string.cd_add_to_playlist)
                                                     )
                                                     Spacer(Modifier.width(8.dp))
                                                     Text(stringResource(R.string.playlist))
@@ -556,7 +556,7 @@ fun SongInfoBottomSheet(
                                                 ) {
                                                     Icon(
                                                         Icons.Default.DeleteForever,
-                                                        contentDescription = "Delete"
+                                                        contentDescription = stringResource(R.string.cd_delete)
                                                     )
                                                     Spacer(Modifier.width(8.dp))
                                                     Text(stringResource(R.string.delete))
@@ -616,7 +616,7 @@ fun SongInfoBottomSheet(
                                                         Icon(
                                                             painter = painterResource(R.drawable.rounded_watch_arrow_down_24),
                                                             contentDescription = if (isPixelPlayWatchAvailable) {
-                                                                "Send song to watch"
+                                                                stringResource(R.string.send_song_to_watch)
                                                             } else {
                                                                 "Watch unavailable"
                                                             }
@@ -624,7 +624,7 @@ fun SongInfoBottomSheet(
                                                         Spacer(Modifier.width(8.dp))
                                                         Text(
                                                             if (isPixelPlayWatchAvailable) {
-                                                                "Send to Watch"
+                                                                stringResource(R.string.send_to_watch)
                                                             } else {
                                                                 "Watch unavailable"
                                                             }
@@ -654,7 +654,7 @@ fun SongInfoBottomSheet(
                                                 verticalArrangement = Arrangement.spacedBy(4.dp)
                                             ) {
                                                 SongInfoSegmentedListItem(
-                                                    headline = "Duration",
+                                                    headline = stringResource(R.string.field_duration),
                                                     supporting = formatDuration(song.duration),
                                                     icon = Icons.Rounded.Schedule,
                                                     iconDescription = "Duration icon",
@@ -673,7 +673,7 @@ fun SongInfoBottomSheet(
                                                 }
 
                                                 SongInfoSegmentedListItem(
-                                                    headline = "Album",
+                                                    headline = stringResource(R.string.field_album),
                                                     supporting = song.album,
                                                     icon = Icons.Rounded.Album,
                                                     iconDescription = "Album icon",
@@ -682,7 +682,7 @@ fun SongInfoBottomSheet(
                                                 )
 
                                                 SongInfoSegmentedListItem(
-                                                    headline = "Artist",
+                                                    headline = stringResource(R.string.field_artist),
                                                     supporting = song.displayArtist,
                                                     icon = Icons.Rounded.Person,
                                                     iconDescription = "Artist icon",
@@ -736,7 +736,7 @@ fun SongInfoBottomSheet(
                 ) {
                     TabAnimation(
                         index = 0,
-                        title = "Options",
+                        title = stringResource(R.string.options_label),
                         selectedIndex = pagerState.currentPage,
                         onClick = {
                             scope.launch {
@@ -748,7 +748,7 @@ fun SongInfoBottomSheet(
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(
                                 Icons.Rounded.Menu,
-                                contentDescription = "Options",
+                                contentDescription = stringResource(R.string.options_label),
                                 modifier = Modifier.padding(horizontal = 4.dp)
                             )
                             Spacer(Modifier.width(4.dp))
@@ -762,7 +762,7 @@ fun SongInfoBottomSheet(
 
                     TabAnimation(
                         index = 1,
-                        title = "Details",
+                        title = stringResource(R.string.details_label),
                         selectedIndex = pagerState.currentPage,
                         onClick = {
                             scope.launch {
@@ -774,7 +774,7 @@ fun SongInfoBottomSheet(
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(
                                 Icons.Rounded.Info,
-                                contentDescription = "Details",
+                                contentDescription = stringResource(R.string.details_label),
                                 modifier = Modifier.padding(horizontal = 4.dp)
                             )
                             Spacer(Modifier.width(4.dp))

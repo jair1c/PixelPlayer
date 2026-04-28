@@ -207,7 +207,7 @@ fun ArtistSettingsScreen(
                         // Configure Character Delimiters
                         SettingsItem(
                             title = stringResource(R.string.character_delimiters),
-                            subtitle = "Current: ${uiState.artistDelimiters.joinToString(", ")}",
+                            subtitle = stringResource(R.string.current_delimiters_prefix) + uiState.artistDelimiters.joinToString(", "),
                             leadingIcon = {
                                 Icon(
                                     imageVector = Icons.Outlined.Settings,
@@ -218,7 +218,7 @@ fun ArtistSettingsScreen(
                             trailingIcon = {
                                 Icon(
                                     imageVector = Icons.Rounded.ChevronRight,
-                                    contentDescription = "Configure",
+                                    contentDescription = stringResource(R.string.cd_configure),
                                     tint = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                             },
@@ -242,7 +242,7 @@ fun ArtistSettingsScreen(
                             trailingIcon = {
                                 Icon(
                                     imageVector = Icons.Rounded.ChevronRight,
-                                    contentDescription = "Configure",
+                                    contentDescription = stringResource(R.string.cd_configure),
                                     tint = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                             },

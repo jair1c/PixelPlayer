@@ -44,6 +44,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import racra.compose.smooth_corner_rect_library.AbsoluteSmoothCornerShape
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.compose.ui.res.stringResource
+import com.theveloper.pixelplay.R
 
 @AndroidEntryPoint
 class GDriveLoginActivity : ComponentActivity() {
@@ -120,7 +122,7 @@ fun GDriveLoginScreen(
                             onClose()
                         }
                     }) {
-                        Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = stringResource(R.string.cd_back))
                     }
                 }
             )
@@ -516,7 +518,7 @@ private fun FolderCard(
 
             Icon(
                 Icons.Rounded.ChevronRight,
-                contentDescription = "Open folder",
+                contentDescription = stringResource(R.string.cd_open_folder),
                 tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
                 modifier = Modifier.size(20.dp)
             )

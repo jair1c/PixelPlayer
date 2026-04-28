@@ -45,6 +45,7 @@ import com.theveloper.pixelplay.presentation.components.subcomps.SineWaveLine
 import com.theveloper.pixelplay.ui.theme.ExpTitleTypography
 import com.theveloper.pixelplay.ui.theme.GoogleSansRounded
 import racra.compose.smooth_corner_rect_library.AbsoluteSmoothCornerShape
+import androidx.compose.ui.res.stringResource
 
 data class ChangelogSection(
     val title: String,
@@ -65,7 +66,7 @@ val changelog = listOf(
         date = "2026-03-05",
         sections = listOf(
             ChangelogSection(
-                title = "What's New",
+                title = stringResource(R.string.changelog_whats_new),
                 items = listOf(
                     "Android Auto support is now available for in-car playback.",
                     "Wear OS support is live, including better watch-to-phone playback controls.",
@@ -76,7 +77,7 @@ val changelog = listOf(
                 )
             ),
             ChangelogSection(
-                title = "Improvements",
+                title = stringResource(R.string.changelog_improvements),
                 items = listOf(
                     "Big performance pass across startup, library, queue, and player interactions.",
                     "Player, Cast, Lyrics, Artist, and Genre surfaces were redesigned for smoother use.",
@@ -86,7 +87,7 @@ val changelog = listOf(
                 )
             ),
             ChangelogSection(
-                title = "Fixes",
+                title = stringResource(R.string.changelog_fixes),
                 items = listOf(
                     "Queue and shuffle behavior is now more stable and predictable.",
                     "Several background playback and casting edge cases were fixed.",
@@ -102,7 +103,7 @@ val changelog = listOf(
         date = "2026-01-14",
         sections = listOf(
             ChangelogSection(
-                title = "Highlights",
+                title = stringResource(R.string.changelog_highlights),
                 items = listOf(
                     "Material 3 Expressive UI Update",
                     "10-band Equalizer & Effects",
@@ -114,7 +115,7 @@ val changelog = listOf(
                 )
             ),
             ChangelogSection(
-                title = "Improvements",
+                title = stringResource(R.string.changelog_improvements),
                 items = listOf(
                     "Settings Architecture Refactor",
                     "Queue & Player Animations",
@@ -123,7 +124,7 @@ val changelog = listOf(
                 )
             ),
             ChangelogSection(
-                title = "Fixes",
+                title = stringResource(R.string.changelog_fixes),
                 items = listOf(
                     "Casting Stability Improvements",
                     "Player Sheet Stability",
@@ -137,7 +138,7 @@ val changelog = listOf(
         date = "2025-12-15",
         sections = listOf(
             ChangelogSection(
-                title = "Highlights",
+                title = stringResource(R.string.changelog_highlights),
                 items = listOf(
                     "Major navigation redesign",
                     "New file explorer for choosing source directories",
@@ -162,7 +163,7 @@ val changelog = listOf(
         date = "2025-10-28",
         sections = listOf(
             ChangelogSection(
-                title = "What's new",
+                title = stringResource(R.string.changelog_whats_new),
                 items = listOf(
                     "Introduced a richer listening stats hub with deeper insights into your sessions.",
                     "Launched a floating quick player to instantly open and preview local files.",
@@ -170,7 +171,7 @@ val changelog = listOf(
                 )
             ),
             ChangelogSection(
-                title = "Improvements",
+                title = stringResource(R.string.changelog_improvements),
                 items = listOf(
                     "Refined the overall Material 3 UI for a cleaner and more cohesive experience.",
                     "Metadata editing now supports cover art change.",
@@ -183,7 +184,7 @@ val changelog = listOf(
                 )
             ),
             ChangelogSection(
-                title = "Fixes",
+                title = stringResource(R.string.changelog_fixes),
                 items = listOf(
                     "Resolved metadata quirks so song details stay accurate everywhere.",
                     "Restored notification shortcuts so they reliably jump back into playback."
@@ -196,7 +197,7 @@ val changelog = listOf(
         date = "2024-09-15",
         sections = listOf(
             ChangelogSection(
-                title = "Added",
+                title = stringResource(R.string.changelog_added),
                 items = listOf(
                     "Chromecast support for casting audio from your device.",
                     "In-app changelog to keep you updated on the latest features.",
@@ -212,7 +213,7 @@ val changelog = listOf(
                 )
             ),
             ChangelogSection(
-                title = "Changed",
+                title = stringResource(R.string.changelog_changed),
                 items = listOf(
                     "Complete redesign of the user interface.",
                     "Complete redesign of the player.",
@@ -222,7 +223,7 @@ val changelog = listOf(
                 )
             ),
             ChangelogSection(
-                title = "Fixed",
+                title = stringResource(R.string.changelog_fixed),
                 items = listOf(
                     "Fixed various bugs in the tag editor.",
                     "Fixed a bug where the playback notification was not clearing.",
@@ -252,7 +253,7 @@ fun ChangelogBottomSheet(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Changelog",
+                text = stringResource(R.string.changelog_title),
                 fontFamily = GoogleSansRounded,
                 style = ExpTitleTypography.displaySmall,
                 color = MaterialTheme.colorScheme.onSurface
@@ -309,7 +310,7 @@ fun ChangelogBottomSheet(
                     contentDescription = null
                 )
             },
-            text = { Text(text = "View on GitHub") },
+            text = { Text(stringResource(R.string.view_on_github)) },
             modifier = Modifier
                 .align(Alignment.BottomEnd)
                 .padding(horizontal = 24.dp, vertical = 24.dp)

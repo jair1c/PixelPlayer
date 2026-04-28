@@ -253,7 +253,7 @@ fun TelegramDashboardScreen(
         }
 
         CollapsibleCommonTopBar(
-            title = "Telegram Channels",
+            title = stringResource(R.string.telegram_channels_title),
             collapseFraction = collapseFraction,
             headerHeight = currentTopBarHeightDp,
             onBackClick = onBack,
@@ -523,7 +523,7 @@ private fun ExpressiveChannelItem(
                 ) {
                     Icon(
                         imageVector = Icons.Rounded.MoreVert,
-                        contentDescription = "Channel options"
+                        contentDescription = stringResource(R.string.cd_channel_options)
                     )
                 }
             }
@@ -544,7 +544,7 @@ private fun ExpressiveChannelItem(
                     )
                     Spacer(modifier = Modifier.height(6.dp))
                     Text(
-                        text = "Topics",
+                        text = stringResource(R.string.tab_topics),
                         style = MaterialTheme.typography.labelMedium,
                         fontFamily = GoogleSansRounded,
                         fontWeight = FontWeight.SemiBold,
@@ -707,8 +707,8 @@ private fun ChannelActionsBottomSheet(
             )
             Spacer(modifier = Modifier.height(14.dp))
             ChannelActionCard(
-                title = "Remove channel",
-                subtitle = "Stop syncing and remove cached songs",
+                title = stringResource(R.string.remove_channel_title),
+                subtitle = stringResource(R.string.stop_sync_remove_cache_sub),
                 icon = Icons.Rounded.Delete,
                 onClick = onDelete,
                 containerColor = MaterialTheme.colorScheme.errorContainer,
@@ -873,7 +873,7 @@ private fun ExpressiveEmptyState(
         Spacer(modifier = Modifier.height(28.dp))
 
         Text(
-            text = "No Channels Synced",
+            text = stringResource(R.string.no_channels_synced),
             style = MaterialTheme.typography.headlineSmall,
             fontFamily = GoogleSansRounded,
             fontWeight = FontWeight.Bold,
@@ -883,7 +883,7 @@ private fun ExpressiveEmptyState(
         Spacer(modifier = Modifier.height(10.dp))
 
         Text(
-            text = "Add public Telegram channels to sync\nyour music library",
+            text = stringResource(R.string.add_telegram_channels_hint),
             style = MaterialTheme.typography.bodyLarge,
             fontFamily = GoogleSansRounded,
             textAlign = TextAlign.Center,

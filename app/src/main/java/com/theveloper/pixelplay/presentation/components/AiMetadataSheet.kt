@@ -30,10 +30,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.theveloper.pixelplay.R
 import com.theveloper.pixelplay.data.ai.SongMetadata
 import com.theveloper.pixelplay.ui.theme.ExpTitleTypography
 import com.theveloper.pixelplay.ui.theme.GoogleSansRounded
 import racra.compose.smooth_corner_rect_library.AbsoluteSmoothCornerShape
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -144,7 +146,7 @@ fun AiMetadataSheet(
                 }
                 Column {
                     Text(
-                        text = if (isSuccess) "Perfectly Tagged!" else "AI Metadata",
+                        text = if (isSuccess) stringResource(R.string.perfectly_tagged) else stringResource(R.string.ai_metadata),
                         style = ExpTitleTypography.headlineSmall.copy(fontWeight = FontWeight.ExtraBold),
                         color = colors.onSurface
                     )
@@ -176,9 +178,9 @@ fun AiMetadataSheet(
 
             // Editable Fields
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                MetadataField("Title", title) { title = it }
-                MetadataField("Artist", artist) { artist = it }
-                MetadataField("Album", album) { album = it }
+                MetadataField(stringResource(R.string.field_title), title) { title = it }
+                MetadataField(stringResource(R.string.field_artist), artist) { artist = it }
+                MetadataField(stringResource(R.string.field_album), album) { album = it }
                 MetadataField("Genre", genre) { genre = it }
             }
 
@@ -203,7 +205,7 @@ fun AiMetadataSheet(
                         shape = smoothCornerShape,
                         colors = ButtonDefaults.buttonColors(containerColor = colors.error)
                     ) {
-                        Text("Try Again")
+                        Text(stringResource(R.string.try_again))
                     }
                 }
             }
@@ -220,7 +222,7 @@ fun AiMetadataSheet(
                 ) {
                     Icon(Icons.Rounded.Close, null)
                     Spacer(Modifier.width(8.dp))
-                    Text("Cancel")
+                    Text(stringResource(R.string.cancel))
                 }
                 Button(
                     onClick = {
@@ -232,7 +234,7 @@ fun AiMetadataSheet(
                 ) {
                     Icon(Icons.Rounded.Check, null)
                     Spacer(Modifier.width(8.dp))
-                    Text("Apply Changes")
+                    Text(stringResource(R.string.apply_changes))
                 }
             }
         }

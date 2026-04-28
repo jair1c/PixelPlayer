@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.media3.common.util.UnstableApi
+import com.theveloper.pixelplay.R
 import com.theveloper.pixelplay.data.model.LibraryTabId
 import com.theveloper.pixelplay.data.model.Song
 import com.theveloper.pixelplay.data.model.StorageFilter
@@ -52,6 +53,7 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.LoadState
 import com.theveloper.pixelplay.presentation.components.ExpressiveScrollBar
 import com.theveloper.pixelplay.presentation.components.songFastScrollLabel
+import androidx.compose.ui.res.stringResource
 
 
 @androidx.annotation.OptIn(UnstableApi::class)
@@ -225,7 +227,7 @@ fun LibrarySongsTab(
                 contentAlignment = Alignment.Center
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text("Error loading songs", style = MaterialTheme.typography.titleMedium)
+                    Text(stringResource(R.string.error_loading_songs), style = MaterialTheme.typography.titleMedium)
                     Text(
                         error.localizedMessage ?: "Unknown error",
                         style = MaterialTheme.typography.bodySmall,
@@ -233,7 +235,7 @@ fun LibrarySongsTab(
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Button(onClick = { songs.retry() }) {
-                        Text("Retry")
+                        Text(stringResource(R.string.retry))
                     }
                 }
             }

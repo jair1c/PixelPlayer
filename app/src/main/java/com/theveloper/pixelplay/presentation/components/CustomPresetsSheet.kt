@@ -37,6 +37,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.theveloper.pixelplay.data.equalizer.EqualizerPreset
 import com.theveloper.pixelplay.ui.theme.GoogleSansRounded
+import androidx.compose.ui.res.stringResource
+import com.theveloper.pixelplay.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -164,14 +166,14 @@ private fun CustomPresetItem(
             IconButton(onClick = onRenameClick) {
                 Icon(
                     imageVector = Icons.Outlined.Edit,
-                    contentDescription = "Rename",
+                    contentDescription = stringResource(R.string.cd_rename),
                     tint = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
             IconButton(onClick = onDeleteClick) {
                 Icon(
                     imageVector = Icons.Outlined.Delete,
-                    contentDescription = "Delete",
+                    contentDescription = stringResource(R.string.cd_delete),
                     tint = MaterialTheme.colorScheme.error
                 )
             }

@@ -58,6 +58,8 @@ import com.theveloper.pixelplay.presentation.viewmodel.PlayerViewModel
 import com.theveloper.pixelplay.presentation.viewmodel.PlaylistViewModel
 import kotlinx.coroutines.flow.first
 import com.theveloper.pixelplay.presentation.components.ScreenWrapper
+import androidx.compose.ui.res.stringResource
+import com.theveloper.pixelplay.R
 
 @OptIn(UnstableApi::class)
 @SuppressLint("UnrememberedGetBackStackEntry")
@@ -383,7 +385,7 @@ fun AppNavigation(
                         )
                     }
                 } else {
-                    Text("Error: Genre ID missing", modifier = Modifier)
+                    Text(stringResource(R.string.error_genre_id_missing), modifier = Modifier)
                 }
             }
             composable(

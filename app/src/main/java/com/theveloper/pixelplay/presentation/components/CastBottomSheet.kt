@@ -293,7 +293,7 @@ fun CastBottomSheet(
         ActiveDeviceUi(
             id = remoteRoute.id,
             title = remoteRoute.name,
-            subtitle = "Casting session",
+            subtitle = stringResource(R.string.casting_session),
             isRemote = true,
             icon = when (remoteRoute.deviceType) {
                 MediaRouter.RouteInfo.DEVICE_TYPE_TV -> Icons.Rounded.Tv
@@ -304,20 +304,20 @@ fun CastBottomSheet(
             isConnecting = isCastConnecting,
             volume = routeVolume.toFloat().coerceAtLeast(0f),
             volumeRange = 0f..remoteRoute.volumeMax.toFloat().coerceAtLeast(1f),
-            connectionLabel = if (isCastConnecting) "Connecting" else "Connected"
+            connectionLabel = if (isCastConnecting) stringResource(R.string.connecting_label) else stringResource(R.string.connected_label)
         )
     } else {
         val isBluetoothAudio = isBluetoothEnabled && !activeBluetoothName.isNullOrEmpty()
         ActiveDeviceUi(
             id = "phone",
-            title = if (isBluetoothAudio) activeBluetoothName!! else "This phone",
-            subtitle = if (isBluetoothAudio) "Bluetooth audio" else "Local playback",
+            title = if (isBluetoothAudio) activeBluetoothName!! else stringResource(R.string.this_phone),
+            subtitle = if (isBluetoothAudio) stringResource(R.string.bluetooth_audio) else stringResource(R.string.local_playback),
             isRemote = false,
             icon = if (isBluetoothAudio) Icons.Rounded.Bluetooth else Icons.Rounded.Headphones,
             isConnecting = false,
             volume = trackVolume,
             volumeRange = 0f..1f,
-            connectionLabel = if (isPlaying) "Playing" else "Paused"
+            connectionLabel = if (isPlaying) stringResource(R.string.playing_label) else stringResource(R.string.paused_label)
         )
     }
 
@@ -490,12 +490,12 @@ private fun CastPermissionStep(
             ) {
                 PermissionHighlight(
                     icon = Icons.Rounded.Bluetooth,
-                    title = "Nearby devices",
+                    title = stringResource(R.string.nearby_devices),
                     description = "Needed to read and control your connected Bluetooth audio gear."
                 )
                 PermissionHighlight(
                     icon = Icons.Rounded.Wifi,
-                    title = "Location for Wi‑Fi",
+                    title = stringResource(R.string.location_for_wifi),
                     description = "Android requires Location to share the Wi‑Fi network (SSID) you're on so we can find compatible cast devices."
                 )
             }
@@ -506,7 +506,7 @@ private fun CastPermissionStep(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(50)
         ) {
-            Text(text = "Allow access")
+            Text(text = stringResource(R.string.allow_access))
         }
 
         if (missingPermissions.isNotEmpty()) {
@@ -615,7 +615,7 @@ private fun CastSheetContent(
             ) {
                 Text(
                     modifier = Modifier.padding(start = 6.dp, end = 8.dp),
-                    text = "Connect device",
+                    text = stringResource(R.string.connect_device),
                     style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.SemiBold)
                 )
             }
@@ -696,7 +696,7 @@ private fun CastSheetContent(
         ) {
             TabAnimation(
                 index = 0,
-                title = "Controls",
+                title = stringResource(R.string.controls),
                 selectedIndex = pagerState.currentPage,
                 onClick = {
                     scope.launch {
@@ -708,7 +708,7 @@ private fun CastSheetContent(
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
                         Icons.Rounded.Speaker,
-                        contentDescription = "Controls",
+                        contentDescription = stringResource(R.string.cd_controls),
                         modifier = Modifier.padding(horizontal = 4.dp)
                     )
                     Spacer(Modifier.width(4.dp))
@@ -722,7 +722,7 @@ private fun CastSheetContent(
 
             TabAnimation(
                 index = 1,
-                title = "Devices",
+                title = stringResource(R.string.devices),
                 selectedIndex = pagerState.currentPage,
                 onClick = {
                     scope.launch {
@@ -734,7 +734,7 @@ private fun CastSheetContent(
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
                         Icons.Filled.Devices,
-                        contentDescription = "Devices",
+                        contentDescription = stringResource(R.string.cd_devices),
                         modifier = Modifier.padding(horizontal = 4.dp)
                     )
                     Spacer(Modifier.width(4.dp))
@@ -797,7 +797,7 @@ private fun CastControlsTabContent(
                     )
                 }
                 IconButton(onClick = onRefresh) {
-                    Icon(Icons.Filled.Refresh, contentDescription = "Refresh connections")
+                    Icon(Icons.Filled.Refresh, contentDescription = stringResource(R.string.cd_refresh_connections))
                 }
             }
             QuickSettingsRow(
@@ -1183,7 +1183,7 @@ private fun CollapsibleCastTopBar(
 //                )
 //        ) {
 //            Text(
-//                text = "Connect device",
+//                text = stringResource(R.string.connect_device),
 //                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
 //                modifier = Modifier
 //                    .align(Alignment.Center)
@@ -1212,7 +1212,7 @@ private fun CollapsibleCastTopBar(
             ) {
                 Text(
                     modifier = Modifier.padding(start = 4.dp),
-                    text = "Connect device",
+                    text = stringResource(R.string.connect_device),
                     style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.SemiBold)
                 )
             }
@@ -1277,7 +1277,7 @@ private fun DeviceSectionHeader(
             ),
             modifier = Modifier.clip(RoundedCornerShape(16.dp))
         ) {
-            Icon(Icons.Filled.Refresh, contentDescription = "Refresh devices")
+            Icon(Icons.Filled.Refresh, contentDescription = stringResource(R.string.cd_refresh_devices))
         }
     }
 }
@@ -1405,7 +1405,7 @@ private fun ActiveDeviceHero(
                             Icon(
                                 modifier = Modifier.size(22.dp),
                                 painter = painterResource(R.drawable.rounded_mimo_disconnect_24),
-                                contentDescription = "disconnect_icon",
+                                contentDescription = stringResource(R.string.disconnect),
                             )
                             Spacer(
                                 modifier = Modifier.width(6.dp)
@@ -1424,7 +1424,7 @@ private fun ActiveDeviceHero(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = if (device.isRemote) "Device volume" else "Phone volume",
+                        text = if (device.isRemote) stringResource(R.string.device_volume) else stringResource(R.string.phone_volume),
                         style = MaterialTheme.typography.titleSmall,
                         color = MaterialTheme.colorScheme.onTertiaryContainer
                     )
@@ -1643,11 +1643,11 @@ private fun CastDeviceRow(
 
                 val statusText = when {
                     device.isBluetooth &&
-                        device.connectionState == MediaRouter.RouteInfo.CONNECTION_STATE_CONNECTED -> "Connected"
+                        device.connectionState == MediaRouter.RouteInfo.CONNECTION_STATE_CONNECTED -> stringResource(R.string.connected_label)
                     device.isBluetooth -> "Available to connect"
-                    device.isSelected && device.connectionState == MediaRouter.RouteInfo.CONNECTION_STATE_CONNECTED -> "Connected"
+                    device.isSelected && device.connectionState == MediaRouter.RouteInfo.CONNECTION_STATE_CONNECTED -> stringResource(R.string.connected_label)
                     device.isSelected && device.connectionState == MediaRouter.RouteInfo.CONNECTION_STATE_CONNECTING -> "Connecting"
-                    else -> "Available"
+                    else -> stringResource(R.string.available_label)
                 }
 
                 val statusIcon = if (device.isBluetooth) R.drawable.rounded_bluetooth_24 else R.drawable.rounded_wifi_24
@@ -1697,14 +1697,14 @@ private fun BluetoothMetricIndicator(
         if (batteryPercent != null) {
             Icon(
                 imageVector = Icons.Rounded.BatteryFull,
-                contentDescription = "Battery level",
+                contentDescription = stringResource(R.string.cd_battery_level),
                 tint = contentColor,
                 modifier = Modifier.size(14.dp)
             )
         } else {
             Icon(
                 painter = painterResource(R.drawable.rounded_volume_up_24),
-                contentDescription = "Volume level",
+                contentDescription = stringResource(R.string.cd_volume_level),
                 tint = contentColor,
                 modifier = Modifier.size(14.dp)
             )
@@ -1769,10 +1769,10 @@ private fun QuickSettingsRow(
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         QuickSettingTile(
-            label = if (wifiConnected && !wifiSsid.isNullOrEmpty()) wifiSsid else "Wi-Fi",
+            label = if (wifiConnected && !wifiSsid.isNullOrEmpty()) wifiSsid else stringResource(R.string.source_wifi),
             subtitle = when {
                 !wifiOn -> "Off"
-                wifiConnected -> "Connected"
+                wifiConnected -> stringResource(R.string.connected_label)
                 else -> "On"
             },
             icon = if (wifiOn) Icons.Rounded.Wifi else Icons.Rounded.WifiOff,
@@ -1781,9 +1781,9 @@ private fun QuickSettingsRow(
             modifier = Modifier.weight(1f)
         )
         QuickSettingTile(
-            label = if (bluetoothEnabled && !bluetoothName.isNullOrEmpty()) bluetoothName else "Bluetooth",
+            label = if (bluetoothEnabled && !bluetoothName.isNullOrEmpty()) bluetoothName else stringResource(R.string.cd_bluetooth),
             subtitle = if (bluetoothEnabled) {
-                if (!bluetoothName.isNullOrEmpty()) "Connected" else "On"
+                if (!bluetoothName.isNullOrEmpty()) stringResource(R.string.connected_label) else stringResource(R.string.on_label)
             } else "Off",
             icon = if (bluetoothEnabled) Icons.Rounded.Bluetooth else Icons.Rounded.BluetoothDisabled,
             isActive = bluetoothEnabled,
@@ -2022,14 +2022,14 @@ private fun CastSheetScanningPreview() {
         devices = emptyList(),
         activeDevice = ActiveDeviceUi(
             id = "phone",
-            title = "This phone",
-            subtitle = "Local playback",
+            title = stringResource(R.string.this_phone),
+            subtitle = stringResource(R.string.local_playback_label),
             isRemote = false,
             icon = Icons.Rounded.Headphones,
             isConnecting = false,
             volume = 0.4f,
             volumeRange = 0f..1f,
-            connectionLabel = "Playing"
+            connectionLabel = stringResource(R.string.playing_label)
         ),
         isBluetoothEnabled = true,
         bluetoothName = "Headphones"
@@ -2082,13 +2082,13 @@ private fun CastSheetDevicesPreview() {
         activeDevice = ActiveDeviceUi(
             id = "2",
             title = "Pixel Buds Pro",
-            subtitle = "Connected via Bluetooth",
+            subtitle = stringResource(R.string.connected_via_bluetooth_label),
             isRemote = true,
             icon = Icons.Rounded.Bluetooth,
             isConnecting = false,
             volume = 12f,
             volumeRange = 0f..25f,
-            connectionLabel = "Connected"
+            connectionLabel = stringResource(R.string.connected_label)
         ),
         isBluetoothEnabled = true,
         bluetoothName = "Pixel Buds Pro"
@@ -2115,14 +2115,14 @@ private fun CastSheetWifiOffPreview() {
         devices = emptyList(),
         activeDevice = ActiveDeviceUi(
             id = "phone",
-            title = "This phone",
-            subtitle = "Local playback",
+            title = stringResource(R.string.this_phone),
+            subtitle = stringResource(R.string.local_playback_label),
             isRemote = false,
             icon = Icons.Rounded.Headphones,
             isConnecting = false,
             volume = 0.5f,
             volumeRange = 0f..1f,
-            connectionLabel = "Paused"
+            connectionLabel = stringResource(R.string.paused_label)
         ),
         isBluetoothEnabled = false
     )

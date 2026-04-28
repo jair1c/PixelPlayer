@@ -76,7 +76,7 @@ fun LyricsFloatingToolbar(
         ) {
             Icon(
                 imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
-                contentDescription = "Back",
+                contentDescription = stringResource(R.string.cd_back),
                 tint = onBackgroundColor
             )
         }
@@ -127,7 +127,7 @@ fun LyricsFloatingToolbar(
         ) {
             Icon(
                 imageVector = Icons.Filled.MoreVert,
-                contentDescription = "Lyrics options",
+                contentDescription = stringResource(R.string.cd_lyrics_options),
                 tint = onBackgroundColor
             )
         }

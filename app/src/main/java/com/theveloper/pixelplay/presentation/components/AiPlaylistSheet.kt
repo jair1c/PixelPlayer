@@ -63,9 +63,11 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.theveloper.pixelplay.R
 import com.theveloper.pixelplay.ui.theme.ExpTitleTypography
 import com.theveloper.pixelplay.ui.theme.GoogleSansRounded
 import racra.compose.smooth_corner_rect_library.AbsoluteSmoothCornerShape
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -226,7 +228,7 @@ fun AiPlaylistSheet(
                     Box(contentAlignment = Alignment.Center) {
                         Icon(
                             imageVector = Icons.Rounded.AutoAwesome,
-                            contentDescription = "AI",
+                            contentDescription = stringResource(R.string.cd_ai),
                             modifier = Modifier.size(32.dp),
                             tint = if (isGenerating) colors.onPrimaryContainer else colors.onTertiaryContainer
                         )
@@ -235,7 +237,7 @@ fun AiPlaylistSheet(
 
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
-                        text = if (isSuccess) "Perfectly Curated" else "Daily Mix",
+                        text = if (isSuccess) stringResource(R.string.ai_perfectly_curated) else stringResource(R.string.daily_mix),
                         style = ExpTitleTypography.displayMedium.copy(
                             fontSize = 32.sp,
                             fontWeight = FontWeight.Bold
@@ -253,7 +255,7 @@ fun AiPlaylistSheet(
 
             // Description text
             Text(
-                text = "Describe the vibe, mood, or activity and let AI curate the perfect playlist from your library.",
+                text = stringResource(R.string.ai_describe_vibe),
                 style = MaterialTheme.typography.bodyMedium,
                 color = colors.onSurfaceVariant,
                 modifier = Modifier.fillMaxWidth()
@@ -271,7 +273,7 @@ fun AiPlaylistSheet(
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     Text(
-                        text = "Playlist size",
+                        text = stringResource(R.string.ai_playlist_size),
                         style = MaterialTheme.typography.labelLarge,
                         fontFamily = GoogleSansRounded,
                         fontWeight = FontWeight.SemiBold,
@@ -284,7 +286,7 @@ fun AiPlaylistSheet(
                         OutlinedTextField(
                             value = minLength,
                             onValueChange = { minLength = it.filter { char -> char.isDigit() } },
-                            label = { Text("Min songs") },
+                            label = { Text(stringResource(R.string.min_songs_label)) },
                             modifier = Modifier.weight(1f),
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                             singleLine = true,
@@ -294,7 +296,7 @@ fun AiPlaylistSheet(
                         OutlinedTextField(
                             value = maxLength,
                             onValueChange = { maxLength = it.filter { char -> char.isDigit() } },
-                            label = { Text("Max songs") },
+                            label = { Text(stringResource(R.string.max_songs_label)) },
                             modifier = Modifier.weight(1f),
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                             singleLine = true,
@@ -353,7 +355,7 @@ fun AiPlaylistSheet(
                         ) {
                             Icon(Icons.Rounded.Restore, null, tint = colors.error, modifier = Modifier.size(18.dp))
                             Text(
-                                text = "Tap to Retry",
+                                text = stringResource(R.string.ai_tap_to_retry),
                                 color = colors.error,
                                 style = MaterialTheme.typography.labelLarge,
                                 fontWeight = FontWeight.Bold
@@ -443,7 +445,7 @@ fun AiPlaylistSheet(
                         )
                         Spacer(modifier = Modifier.width(12.dp))
                         Text(
-                            text = "Ready to Play",
+                            text = stringResource(R.string.ai_ready_to_play),
                             style = MaterialTheme.typography.titleMedium,
                             fontFamily = GoogleSansRounded,
                             fontWeight = FontWeight.SemiBold,
@@ -475,7 +477,7 @@ fun AiPlaylistSheet(
                         )
                         Spacer(modifier = Modifier.width(12.dp))
                         Text(
-                            text = "Generate Playlist",
+                            text = stringResource(R.string.ai_generate_playlist),
                             style = MaterialTheme.typography.titleMedium,
                             fontFamily = GoogleSansRounded,
                             fontWeight = FontWeight.SemiBold,

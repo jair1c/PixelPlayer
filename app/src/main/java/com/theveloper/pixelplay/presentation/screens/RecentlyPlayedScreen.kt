@@ -91,6 +91,7 @@ import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 import racra.compose.smooth_corner_rect_library.AbsoluteSmoothCornerShape
+import androidx.compose.ui.res.stringResource
 
 @androidx.annotation.OptIn(UnstableApi::class)
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
@@ -213,7 +214,7 @@ fun RecentlyPlayedScreen(
                             onShuffle = {
                                 playerViewModel.playSongsShuffled(
                                     songsToPlay = queueSongs,
-                                    queueName = "Recently Played",
+                                    queueName = "Reproducidas recientemente",
                                     startAtZero = true,
                                 )
                             },
@@ -248,7 +249,7 @@ fun RecentlyPlayedScreen(
                                     playerViewModel.playSongs(
                                         songsToPlay = queueSongs,
                                         startSong = item.song,
-                                        queueName = "Recently Played"
+                                        queueName = "Reproducidas recientemente"
                                     )
                                 },
                                 onMoreOptionsClick = { song ->
@@ -351,7 +352,7 @@ fun RecentlyPlayedScreen(
         ) {
             Icon(
                 imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
-                contentDescription = "Back"
+                contentDescription = stringResource(R.string.cd_back)
             )
         }
     }
@@ -430,7 +431,7 @@ private fun ExpressiveRecentlyPlayedHeader(
             Spacer(modifier = Modifier.height(10.dp))
 
             Text(
-                text = "Recently Played",
+                text = stringResource(R.string.recently_played),
                 style = titleStyle,
                 color = MaterialTheme.colorScheme.onSurface
             )
@@ -495,7 +496,7 @@ private fun RecentlyPlayedActions(
                 modifier = Modifier.size(ButtonDefaults.IconSize)
             )
             Spacer(Modifier.width(ButtonDefaults.IconSpacing))
-            Text("Play latest")
+            Text(stringResource(R.string.play_latest))
         }
 
         FilledTonalButton(
@@ -516,7 +517,7 @@ private fun RecentlyPlayedActions(
                 modifier = Modifier.size(ButtonDefaults.IconSize)
             )
             Spacer(Modifier.width(ButtonDefaults.IconSpacing))
-            Text("Shuffle")
+            Text(stringResource(R.string.shuffle))
         }
     }
 }

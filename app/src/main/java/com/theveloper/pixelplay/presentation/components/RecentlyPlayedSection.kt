@@ -44,6 +44,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.theveloper.pixelplay.data.model.Song
 import com.theveloper.pixelplay.presentation.model.RecentlyPlayedSongUiModel
+import androidx.compose.ui.res.stringResource
+import com.theveloper.pixelplay.R
 
 private val HomeRecentlyPlayedPillHeight = 58.dp
 private val HomeRecentlyPlayedPillSpacing = 8.dp
@@ -112,7 +114,7 @@ fun RecentlyPlayedSection(
         ) {
             Text(
                 modifier = Modifier.padding(start = 6.dp),
-                text = "Recently Played",
+                text = stringResource(R.string.recently_played),
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.SemiBold
             )

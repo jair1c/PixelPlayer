@@ -36,6 +36,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.theveloper.pixelplay.presentation.viewmodel.SortOption
 import racra.compose.smooth_corner_rect_library.AbsoluteSmoothCornerShape
+import androidx.compose.ui.res.stringResource
+import com.theveloper.pixelplay.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -182,7 +184,7 @@ fun SortOptionCard(
             if (isSelected) {
                 Icon(
                     imageVector = Icons.Rounded.Check,
-                    contentDescription = "Selected",
+                    contentDescription = stringResource(R.string.cd_selected),
                     tint = contentColor
                 )
             }

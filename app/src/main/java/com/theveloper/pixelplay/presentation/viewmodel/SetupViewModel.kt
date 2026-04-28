@@ -32,6 +32,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import java.io.File
+import com.theveloper.pixelplay.R
 
 data class SetupUiState(
     val mediaPermissionGranted: Boolean = false,
@@ -336,7 +337,7 @@ class SetupViewModel @Inject constructor(
                         operation = BackupOperationType.IMPORT,
                         step = 0,
                         totalSteps = 1,
-                        title = "Preparing restore",
+                        title = application.getString(R.string.preparing_restore_title),
                         detail = "Starting restore task."
                     )
                 )

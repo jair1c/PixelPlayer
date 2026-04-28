@@ -42,8 +42,10 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import coil.size.Size
+import com.theveloper.pixelplay.R
 import com.theveloper.pixelplay.data.model.Album
 import com.theveloper.pixelplay.ui.theme.GoogleSansRounded
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -90,7 +92,7 @@ fun AlbumMultiSelectionOptionSheet(
                         fontFamily = GoogleSansRounded
                     )
                     Text(
-                        text = "selected",
+                        text = stringResource(R.string.selected_label),
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         fontFamily = GoogleSansRounded
@@ -101,7 +103,7 @@ fun AlbumMultiSelectionOptionSheet(
             Spacer(modifier = Modifier.height(12.dp))
 
             Text(
-                text = "Play replaces the current queue. Play Next inserts right after the current song.",
+                text = stringResource(R.string.play_replace_queue_hint),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -128,10 +130,10 @@ fun AlbumMultiSelectionOptionSheet(
                 icon = {
                     Icon(
                         imageVector = Icons.Rounded.PlayArrow,
-                        contentDescription = "Play selected albums"
+                        contentDescription = stringResource(R.string.cd_play_selected_albums)
                     )
                 },
-                text = "Play"
+                text = stringResource(R.string.play_label)
             )
 
             Spacer(modifier = Modifier.height(10.dp))
@@ -158,10 +160,10 @@ fun AlbumMultiSelectionOptionSheet(
                     icon = {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.QueueMusic,
-                            contentDescription = "Play selected albums next"
+                            contentDescription = stringResource(R.string.cd_play_selected_albums_next)
                         )
                     },
-                    text = "Next"
+                    text = stringResource(R.string.next)
                 )
 
                 AlbumSelectionActionButton(
@@ -179,10 +181,10 @@ fun AlbumMultiSelectionOptionSheet(
                     icon = {
                         Icon(
                             imageVector = Icons.AutoMirrored.Rounded.QueueMusic,
-                            contentDescription = "Add selected albums to queue"
+                            contentDescription = stringResource(R.string.cd_add_selected_albums_queue)
                         )
                     },
-                    text = "Add to Queue"
+                    text = stringResource(R.string.add_to_queue)
                 )
             }
 

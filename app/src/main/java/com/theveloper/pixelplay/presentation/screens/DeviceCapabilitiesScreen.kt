@@ -538,7 +538,7 @@ fun CodecCard(
                         ) {
                             Icon(
                                 imageVector = Icons.Rounded.CheckCircle,
-                                contentDescription = "HW Accelerated",
+                                contentDescription = stringResource(R.string.cd_hw_accelerated),
                                 tint = MaterialTheme.colorScheme.onPrimaryContainer,
                                 modifier = Modifier.padding(4.dp).size(16.dp)
                             )

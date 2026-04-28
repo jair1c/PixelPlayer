@@ -43,6 +43,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.theveloper.pixelplay.ui.theme.GoogleSansRounded
 import racra.compose.smooth_corner_rect_library.AbsoluteSmoothCornerShape
+import androidx.compose.ui.res.stringResource
+import com.theveloper.pixelplay.R
 
 private val buttonHeight = 44.dp
 private val segmentedOuterCornerRadius = 26.dp
@@ -174,7 +176,7 @@ fun SelectionActionRow(
         ) {
             Icon(
                 imageVector = Icons.Rounded.MoreHoriz,
-                contentDescription = "More options",
+                contentDescription = stringResource(R.string.cd_options),
                 modifier = Modifier.size(20.dp)
             )
             Spacer(modifier = Modifier.width(6.dp))

@@ -2,7 +2,9 @@
 
 package com.theveloper.pixelplay.presentation.telegram.channel
 
+import com.theveloper.pixelplay.R
 import com.theveloper.pixelplay.presentation.components.ExpressiveOfflineState
+import androidx.compose.ui.res.stringResource
 
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
@@ -206,7 +208,7 @@ fun TelegramChannelSearchSheet(
                         } else {
                             Icon(
                                 Icons.AutoMirrored.Rounded.Send,
-                                contentDescription = "Search"
+                                contentDescription = stringResource(R.string.search)
                             )
                         }
                     }

@@ -30,6 +30,7 @@ import com.theveloper.pixelplay.presentation.netease.auth.NeteaseLoginActivity
 import com.theveloper.pixelplay.presentation.qqmusic.auth.QqMusicLoginActivity
 import com.theveloper.pixelplay.presentation.telegram.auth.TelegramLoginActivity
 import com.theveloper.pixelplay.ui.theme.GoogleSansRounded
+import androidx.compose.ui.res.stringResource
 
 /**
  * Bottom sheet that lets the user choose between streaming providers.
@@ -71,7 +72,7 @@ fun StreamingProviderSheet(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Cloud Streaming",
+                text = stringResource(R.string.cloud_streaming),
                 style = MaterialTheme.typography.headlineSmall,
                 fontFamily = GoogleSansRounded,
                 fontWeight = FontWeight.Bold,
@@ -81,7 +82,7 @@ fun StreamingProviderSheet(
             Spacer(Modifier.height(6.dp))
 
             Text(
-                text = "Stream music from your cloud accounts",
+                text = stringResource(R.string.cloud_streaming_sub),
                 style = MaterialTheme.typography.bodyMedium,
                 fontFamily = GoogleSansRounded,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -106,8 +107,8 @@ fun StreamingProviderSheet(
                     ProviderRow(
                         iconPainter = painterResource(R.drawable.telegram),
                         iconTint = Color(0xFF2AABEE),
-                        title = "Telegram",
-                        subtitle = "Stream from channels & chats",
+                        title = stringResource(R.string.provider_telegram),
+                        subtitle = stringResource(R.string.provider_telegram_sub),
                         shape = providerSegmentItemShape,
                         onClick = {
                             context.startActivity(Intent(context, TelegramLoginActivity::class.java))
@@ -118,8 +119,8 @@ fun StreamingProviderSheet(
                     ProviderRow(
                         iconPainter = painterResource(R.drawable.rounded_drive_export_24),
                         iconTint = Color(0xFF4285F4),
-                        title = "Google Drive",
-                        subtitle = "Coming soon",
+                        title = stringResource(R.string.provider_gdrive),
+                        subtitle = stringResource(R.string.provider_gdrive_sub),
                         shape = providerSegmentItemShape,
                         enabled = false,
                         onClick = { }
@@ -128,7 +129,7 @@ fun StreamingProviderSheet(
                     ProviderRow(
                         iconPainter = painterResource(R.drawable.ic_navidrome_md3),
                         iconTint = Color(0xFFE8A54B),
-                        title = "Subsonic",
+                        title = stringResource(R.string.provider_subsonic),
                         subtitle = if (isNavidromeLoggedIn) "Connected · Navidrome/Airsonic" else "Connect Navidrome & others",
                         shape = providerSegmentItemShape,
                         isConnected = isNavidromeLoggedIn,
@@ -145,8 +146,8 @@ fun StreamingProviderSheet(
                     ProviderRow(
                         iconPainter = painterResource(R.drawable.ic_jellyfin),
                         iconTint = Color(0xFF00A4DC),
-                        title = "Jellyfin",
-                        subtitle = if (isJellyfinLoggedIn) "Connected" else "Connect your Jellyfin server",
+                        title = stringResource(R.string.provider_jellyfin),
+                        subtitle = if (isJellyfinLoggedIn) stringResource(R.string.connected_label) else stringResource(R.string.connect_jellyfin),
                         shape = providerSegmentItemShape,
                         isConnected = isJellyfinLoggedIn,
                         onClick = {
@@ -162,8 +163,8 @@ fun StreamingProviderSheet(
                     ProviderRow(
                         iconPainter = painterResource(R.drawable.netease_cloud_music_logo_icon_206716__1_),
                         iconTint = Color(0xFFE85959),
-                        title = "Netease Cloud Music",
-                        subtitle = if (isNeteaseLoggedIn) "Connected" else "Sign in to stream",
+                        title = stringResource(R.string.provider_netease),
+                        subtitle = if (isNeteaseLoggedIn) stringResource(R.string.connected_label) else stringResource(R.string.sign_in_to_stream),
                         shape = providerSegmentItemShape,
                         isConnected = isNeteaseLoggedIn,
                         onClick = {
@@ -179,8 +180,8 @@ fun StreamingProviderSheet(
                     ProviderRow(
                         iconPainter = painterResource(R.drawable.qq_music),
                         iconTint = Color(0xFF31C27C),
-                        title = "QQ Music",
-                        subtitle = if (isQqMusicLoggedIn) "Connected" else "Sign in to stream",
+                        title = stringResource(R.string.provider_qqmusic),
+                        subtitle = if (isQqMusicLoggedIn) stringResource(R.string.connected_label) else stringResource(R.string.sign_in_to_stream),
                         shape = providerSegmentItemShape,
                         isConnected = isQqMusicLoggedIn,
                         onClick = {

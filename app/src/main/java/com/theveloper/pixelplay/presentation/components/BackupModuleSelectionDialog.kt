@@ -76,6 +76,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.ui.res.stringResource
 
 @OptIn(
     ExperimentalAnimationApi::class,
@@ -144,7 +145,7 @@ fun BackupModuleSelectionDialog(
                             CenterAlignedTopAppBar(
                                 title = {
                                     Text(
-                                        text = "Restore Modules",
+                                        text = stringResource(R.string.restore_modules_title),
                                         style = MaterialTheme.typography.titleMedium.copy(
                                             fontSize = 24.sp,
                                             textGeometricTransform = TextGeometricTransform(scaleX = 1.2f),
@@ -165,7 +166,7 @@ fun BackupModuleSelectionDialog(
                                     ) {
                                         Icon(
                                             imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
-                                            contentDescription = "Back"
+                                            contentDescription = stringResource(R.string.back)
                                         )
                                     }
                                 },
@@ -200,7 +201,7 @@ fun BackupModuleSelectionDialog(
                                         ) {
                                             Icon(
                                                 painter = painterResource(R.drawable.round_select_all_24),
-                                                contentDescription = "Select all"
+                                                contentDescription = stringResource(R.string.cd_select_all)
                                             )
                                         }
                                         FilledIconButton(
@@ -213,7 +214,7 @@ fun BackupModuleSelectionDialog(
                                         ) {
                                             Icon(
                                                 painter = painterResource(R.drawable.baseline_deselect_24),
-                                                contentDescription = "Clear selection"
+                                                contentDescription = stringResource(R.string.cd_clear_selection)
                                             )
                                         }
                                     }
@@ -231,7 +232,7 @@ fun BackupModuleSelectionDialog(
                                             LoadingIndicator(modifier = Modifier.height(20.dp))
                                             androidx.compose.foundation.layout.Spacer(modifier = Modifier.size(8.dp))
                                             Text(
-                                                text = "Restoring",
+                                                text = stringResource(R.string.restoring),
                                                 style = MaterialTheme.typography.labelLarge,
                                                 fontWeight = FontWeight.SemiBold
                                             )
@@ -245,7 +246,7 @@ fun BackupModuleSelectionDialog(
                                                     contentDescription = null
                                                 )
                                                 Text(
-                                                    text = "Restore Selected",
+                                                    text = stringResource(R.string.restore_selected),
                                                     style = MaterialTheme.typography.labelLarge,
                                                     fontWeight = FontWeight.SemiBold
                                                 )
@@ -275,7 +276,7 @@ fun BackupModuleSelectionDialog(
                                     verticalArrangement = Arrangement.spacedBy(6.dp)
                                 ) {
                                     Text(
-                                        text = "Backup Details",
+                                        text = stringResource(R.string.backup_details_title),
                                         style = MaterialTheme.typography.titleSmall,
                                         color = MaterialTheme.colorScheme.onSurface,
                                         fontWeight = FontWeight.SemiBold
@@ -287,7 +288,7 @@ fun BackupModuleSelectionDialog(
                                     ) {
                                         Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
                                             Text(
-                                                text = "Created",
+                                                text = stringResource(R.string.backup_created_label),
                                                 style = MaterialTheme.typography.labelSmall,
                                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                                             )
@@ -305,19 +306,19 @@ fun BackupModuleSelectionDialog(
                                     ) {
                                         Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
                                             Text(
-                                                text = "App Version",
+                                                text = stringResource(R.string.backup_app_version_label),
                                                 style = MaterialTheme.typography.labelSmall,
                                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                                             )
                                             Text(
-                                                text = plan.manifest.appVersion.ifEmpty { "Unknown" },
+                                                text = plan.manifest.appVersion.ifEmpty { stringResource(R.string.unknown_label) },
                                                 style = MaterialTheme.typography.bodySmall,
                                                 color = MaterialTheme.colorScheme.onSurface
                                             )
                                         }
                                         Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
                                             Text(
-                                                text = "Schema",
+                                                text = stringResource(R.string.backup_schema_label),
                                                 style = MaterialTheme.typography.labelSmall,
                                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                                             )
@@ -330,7 +331,7 @@ fun BackupModuleSelectionDialog(
                                         if (plan.manifest.deviceInfo.model.isNotBlank()) {
                                             Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
                                                 Text(
-                                                    text = "Device",
+                                                    text = stringResource(R.string.backup_device_label),
                                                     style = MaterialTheme.typography.labelSmall,
                                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                                 )
@@ -359,7 +360,7 @@ fun BackupModuleSelectionDialog(
                                         ) {
                                             LoadingIndicator(modifier = Modifier.height(24.dp))
                                             Text(
-                                                text = "Transfer in progress...",
+                                                text = stringResource(R.string.transfer_in_progress),
                                                 style = MaterialTheme.typography.bodySmall,
                                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                                             )

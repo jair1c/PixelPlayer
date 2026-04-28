@@ -2,6 +2,7 @@ package com.theveloper.pixelplay.presentation.screens
 
 import com.theveloper.pixelplay.presentation.navigation.navigateSafely
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.compose.ui.res.stringResource
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
@@ -386,7 +387,7 @@ fun GenreDetailScreen(
                 ) {
                     Icon(
                         imageVector = Icons.Rounded.MoreVert,
-                        contentDescription = "Options",
+                        contentDescription = stringResource(R.string.options_label),
                         modifier = Modifier.size(28.dp)
                     )
                 }
@@ -424,7 +425,7 @@ fun GenreDetailScreen(
                                 Icon(Icons.Rounded.AutoFixHigh, contentDescription = null)
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Text(
-                                    text = "Quick Fill Genre",
+                                    text = stringResource(R.string.quick_fill_genre_action),
                                     style = MaterialTheme.typography.titleMedium,
                                     fontWeight = FontWeight.Bold
                                 )
@@ -653,7 +654,7 @@ fun GenreCollapsibleTopBar(
                     contentColor = animatedContentColor
                 )
             ) {
-                Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = "Back", tint = animatedContentColor)
+                Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = stringResource(R.string.back), tint = animatedContentColor)
             }
 
             ExpressiveTopBarContent(
@@ -728,7 +729,7 @@ fun GenreArtistHeader(
                     } else {
                         Icon(
                             imageVector = Icons.Rounded.Person,
-                            contentDescription = "Generic Artist",
+                            contentDescription = stringResource(R.string.cd_generic_artist),
                             tint = MaterialTheme.colorScheme.onPrimaryContainer,
                             modifier = Modifier
                                 .padding(10.dp)
@@ -825,7 +826,7 @@ fun GenreAlbumHeader(
                     containerColor = MaterialTheme.colorScheme.primary
                 )
             ) {
-                Icon(Icons.Rounded.PlayArrow, contentDescription = "Play Album")
+                Icon(Icons.Rounded.PlayArrow, contentDescription = stringResource(R.string.cd_play_album))
             }
         }
     }

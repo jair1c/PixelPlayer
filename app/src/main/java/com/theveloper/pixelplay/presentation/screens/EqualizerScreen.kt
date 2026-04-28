@@ -396,7 +396,7 @@ fun EqualizerScreen(
                             EqualizerViewMode.GRAPH -> Icons.AutoMirrored.Rounded.ShowChart
                             EqualizerViewMode.HYBRID -> Icons.AutoMirrored.Rounded.ViewQuilt
                         },
-                        contentDescription = "Change View Mode"
+                        contentDescription = stringResource(R.string.cd_change_view_mode)
                     )
                 }
 
@@ -494,7 +494,7 @@ private fun PresetTabsRow(
                         Spacer(modifier = Modifier.width(4.dp))
                         Icon(
                             imageVector = Icons.Filled.Star,
-                            contentDescription = "Custom",
+                            contentDescription = stringResource(R.string.cd_custom),
                             modifier = Modifier.size(10.dp), // Slightly smaller
                             tint = if (selectedIndex == index) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.primary 
                             // Note: TabAnimation handles content color usually, but Icon tint might need explicit handling or use LocalContentColor.
@@ -517,7 +517,7 @@ private fun PresetTabsRow(
         ) {
              Icon(
                 Icons.Rounded.Edit,
-                contentDescription = "Edit presets",
+                contentDescription = stringResource(R.string.cd_edit_presets),
                 modifier = Modifier.size(18.dp)
             )
         }
@@ -582,7 +582,7 @@ private fun BandSlidersSection(
                             Spacer(modifier = Modifier.width(8.dp))
                             Icon(
                                 imageVector = Icons.Rounded.ExpandMore,
-                                contentDescription = "Presets",
+                                contentDescription = stringResource(R.string.cd_presets),
                                 tint = MaterialTheme.colorScheme.onSecondaryContainer
                             )
                         }
@@ -607,7 +607,7 @@ private fun BandSlidersSection(
                              )
                              Spacer(modifier = Modifier.width(6.dp))
                              Text(
-                                 text = "Save",
+                                 text = stringResource(R.string.save_preset),
                                  color = MaterialTheme.colorScheme.onTertiaryContainer,
                                  fontWeight = FontWeight.Bold
                              )
@@ -1306,7 +1306,7 @@ private fun UnsupportedEffectCard(
             ) {
                 Icon(
                     imageVector = Icons.Rounded.Close,
-                    contentDescription = "Dismiss",
+                    contentDescription = stringResource(R.string.dismiss),
                     tint = MaterialTheme.colorScheme.error
                 )
             }
@@ -1381,7 +1381,7 @@ private fun UnsupportedEffectRow(
             IconButton(onClick = onDismiss) {
                 Icon(
                     imageVector = Icons.Rounded.Close,
-                    contentDescription = "Dismiss",
+                    contentDescription = stringResource(R.string.dismiss),
                     tint = MaterialTheme.colorScheme.onErrorContainer
                 )
             }

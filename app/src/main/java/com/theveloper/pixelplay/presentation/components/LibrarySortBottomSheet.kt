@@ -55,6 +55,8 @@ import com.theveloper.pixelplay.data.model.SortDirection
 import com.theveloper.pixelplay.data.model.SortOption
 import com.theveloper.pixelplay.ui.theme.GoogleSansRounded
 import racra.compose.smooth_corner_rect_library.AbsoluteSmoothCornerShape
+import androidx.compose.ui.res.stringResource
+import com.theveloper.pixelplay.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -248,7 +250,7 @@ fun LibrarySortBottomSheet(
             if (sourceToggleContent != null) {
                 Spacer(modifier = Modifier.height(12.dp))
                 Text(
-                    text = "Source",
+                    text = stringResource(R.string.source_label),
                     style = MaterialTheme.typography.headlineSmall,
                     fontFamily = GoogleSansRounded,
                     fontWeight = FontWeight.Bold,
@@ -446,7 +448,7 @@ internal fun LibrarySheetToggleCard(
                     {
                         Icon(
                             imageVector = Icons.Rounded.Check,
-                            contentDescription = "Switch is on",
+                            contentDescription = stringResource(R.string.cd_switch_on),
                             tint = MaterialTheme.colorScheme.tertiaryContainer,
                             modifier = Modifier.size(SwitchDefaults.IconSize),
                         )

@@ -1,6 +1,7 @@
 package com.theveloper.pixelplay.presentation.screens
 
 import com.theveloper.pixelplay.presentation.navigation.navigateSafely
+import androidx.compose.ui.res.stringResource
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.Crossfade
@@ -532,7 +533,7 @@ fun SearchHistoryList(
             )
             if (historyItems.isNotEmpty()) {
                 TextButton(onClick = onClearAllHistory) {
-                    Text("Clear All")
+                    Text(stringResource(R.string.clear_all))
                 }
             }
         }
@@ -571,7 +572,7 @@ fun SearchHistoryListItem(
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.weight(1f)) {
             Icon(
                 imageVector = Icons.Rounded.History,
-                contentDescription = "History Icon",
+                contentDescription = stringResource(R.string.cd_history_icon),
                 modifier = Modifier.size(20.dp),
                 tint = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -586,7 +587,7 @@ fun SearchHistoryListItem(
         IconButton(onClick = { onHistoryDelete(item.query) }) {
             Icon(
                 imageVector = Icons.Rounded.DeleteForever,
-                contentDescription = "Delete history item",
+                contentDescription = stringResource(R.string.cd_delete_history_item),
                 tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
             )
         }
@@ -604,7 +605,7 @@ fun EmptySearchResults(searchQuery: String, colorScheme: ColorScheme) {
     ) {
         Icon(
             imageVector = Icons.Rounded.Search,
-            contentDescription = "No results",
+            contentDescription = stringResource(R.string.cd_no_results),
             modifier = Modifier
                 .size(80.dp)
                 .padding(bottom = 16.dp),
@@ -621,7 +622,7 @@ fun EmptySearchResults(searchQuery: String, colorScheme: ColorScheme) {
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
-            text = "Try a different search term or check your filters.",
+            text = stringResource(R.string.try_different_search),
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f),
             textAlign = TextAlign.Center
@@ -652,7 +653,7 @@ fun SearchResultsList(
                 .padding(16.dp),
             contentAlignment = Alignment.Center
         ) {
-            Text("No results found.", style = MaterialTheme.typography.bodyLarge)
+            Text(stringResource(R.string.no_results_found), style = MaterialTheme.typography.bodyLarge)
         }
         return
     }
@@ -933,7 +934,7 @@ fun SearchResultAlbumItem(
                     contentColor = MaterialTheme.colorScheme.onSecondary
                 )
             ) {
-                Icon(Icons.Rounded.PlayArrow, contentDescription = "Play Album", modifier = Modifier.size(24.dp))
+                Icon(Icons.Rounded.PlayArrow, contentDescription = stringResource(R.string.cd_play_album), modifier = Modifier.size(24.dp))
             }
         }
     }
@@ -985,7 +986,7 @@ fun SearchResultArtistItem(
             } else {
                 Icon(
                     painter = painterResource(id = R.drawable.rounded_artist_24),
-                    contentDescription = "Artist",
+                    contentDescription = stringResource(R.string.search_artist),
                     modifier = Modifier
                         .size(56.dp)
                         .background(MaterialTheme.colorScheme.tertiaryContainer, CircleShape)
@@ -1017,7 +1018,7 @@ fun SearchResultArtistItem(
                     contentColor = MaterialTheme.colorScheme.onTertiary
                 )
             ) {
-                Icon(Icons.Rounded.PlayArrow, contentDescription = "Play Artist", modifier = Modifier.size(24.dp))
+                Icon(Icons.Rounded.PlayArrow, contentDescription = stringResource(R.string.cd_play_artist), modifier = Modifier.size(24.dp))
             }
         }
     }
@@ -1087,7 +1088,7 @@ fun SearchResultPlaylistItem(
                     contentColor = MaterialTheme.colorScheme.onPrimary
                 )
             ) {
-                Icon(Icons.Rounded.PlayArrow, contentDescription = "Play Playlist", modifier = Modifier.size(24.dp))
+                Icon(Icons.Rounded.PlayArrow, contentDescription = stringResource(R.string.cd_play_playlist), modifier = Modifier.size(24.dp))
             }
         }
     }
@@ -1124,7 +1125,7 @@ fun SearchFilterChip(
              {
                  Icon(
                      painter = painterResource(R.drawable.rounded_check_circle_24),
-                     contentDescription = "Selected",
+                     contentDescription = stringResource(R.string.cd_selected),
                      tint = MaterialTheme.colorScheme.onPrimary,
                      modifier = Modifier.size(FilterChipDefaults.IconSize)
                  )

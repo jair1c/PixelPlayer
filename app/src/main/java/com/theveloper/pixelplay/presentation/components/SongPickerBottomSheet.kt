@@ -112,7 +112,7 @@ fun SongPickerContent(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        "Add Songs",
+                        stringResource(R.string.add_songs),
                         style = MaterialTheme.typography.displaySmall,
                         fontFamily = GoogleSansRounded
                     )

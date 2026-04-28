@@ -20,62 +20,62 @@ enum class SettingsCategory(
 ) {
     LIBRARY(
         id = "library",
-        title = "Music Management",
-        subtitle = "Manage folders, refresh library, parsing options",
+        title = "Gestión de música",
+        subtitle = "Gestionar carpetas, actualizar biblioteca, opciones de análisis",
         icon = Icons.Rounded.LibraryMusic
     ),
     APPEARANCE(
         id = "appearance",
-        title = "Appearance",
-        subtitle = "Themes, layout, and visual styles",
+        title = "Apariencia",
+        subtitle = "Temas, diseño y estilos visuales",
         icon = Icons.Rounded.Palette
     ),
     PLAYBACK(
         id = "playback",
-        title = "Playback",
-        subtitle = "Audio behavior, crossfade, and background play",
+        title = "Reproducción",
+        subtitle = "Comportamiento de audio, crossfade y reproducción en segundo plano",
         icon = Icons.Rounded.MusicNote // Using MusicNote again or maybe PlayCircle if available
     ),
     BEHAVIOR(
         id = "behavior",
-        title = "Behavior",
-        subtitle = "Gestures, haptics, and navigation behavior",
+        title = "Comportamiento",
+        subtitle = "Gestos, háptica y comportamiento de navegación",
         iconRes = R.drawable.rounded_touch_app_24
     ),
     AI_INTEGRATION(
         id = "ai",
-        title = "AI Integration (β)",
-        subtitle = "AI providers, API keys, and model settings",
+        title = "Integración con IA (β)",
+        subtitle = "Proveedores de IA, claves API y configuración de modelos",
         iconRes = R.drawable.gemini_ai
     ),
     BACKUP_RESTORE(
         id = "backup_restore",
-        title = "Backup & Restore",
-        subtitle = "Export and recover your personal app data",
+        title = "Copia de seguridad y restauración",
+        subtitle = "Exportar y recuperar tus datos personales",
         iconRes = R.drawable.rounded_upload_file_24
     ),
     DEVELOPER(
         id = "developer",
-        title = "Developer Options",
-        subtitle = "Experimental features and debugging",
+        title = "Opciones de desarrollador",
+        subtitle = "Funciones experimentales y depuración",
         icon = Icons.Rounded.DeveloperMode
     ),
     EQUALIZER(
         id = "equalizer",
-        title = "Equalizer",
-        subtitle = "Adjust audio frequencies and presets",
+        title = "Ecualizador",
+        subtitle = "Ajustar frecuencias de audio y presets",
         icon = Icons.Rounded.GraphicEq
     ),
     DEVICE_CAPABILITIES(
         id = "device_capabilities",
-        title = "Device Capabilities",
-        subtitle = "Audio specs, codecs, and decoder info",
+        title = "Capacidades del dispositivo",
+        subtitle = "Especificaciones de audio, códecs e info del decodificador",
         icon = Icons.Rounded.DeveloperBoard // Placeholder, maybe Memory or SettingsInputComponent
     ),
     ABOUT(
         id = "about",
-        title = "About",
-        subtitle = "App info, version, and credits",
+        title = "Acerca de",
+        subtitle = "Información de la app, versión y créditos",
         icon = Icons.Rounded.Info
     );
 

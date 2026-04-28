@@ -39,6 +39,7 @@ import com.theveloper.pixelplay.presentation.components.SmartImage
 import com.theveloper.pixelplay.ui.theme.GoogleSansRounded
 import racra.compose.smooth_corner_rect_library.AbsoluteSmoothCornerShape
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -80,7 +81,7 @@ fun JellyfinDashboardScreen(
                     ) {
                         Icon(
                             Icons.AutoMirrored.Rounded.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = stringResource(R.string.back)
                         )
                     }
                 },
@@ -237,7 +238,7 @@ private fun JellyfinDashboardContent(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "Playlists",
+                text = stringResource(R.string.tab_playlists),
                 style = MaterialTheme.typography.titleMedium,
                 fontFamily = GoogleSansRounded,
                 fontWeight = FontWeight.Bold
@@ -250,7 +251,7 @@ private fun JellyfinDashboardContent(
                         modifier = Modifier.size(18.dp)
                     )
                     Spacer(Modifier.width(4.dp))
-                    Text("Sync", fontFamily = GoogleSansRounded)
+                    Text(stringResource(R.string.sync), fontFamily = GoogleSansRounded)
                 }
             }
         }
@@ -274,14 +275,14 @@ private fun JellyfinDashboardContent(
                     )
                     Spacer(Modifier.height(16.dp))
                     Text(
-                        text = "No playlists synced yet",
+                        text = stringResource(R.string.no_playlists_synced),
                         style = MaterialTheme.typography.bodyLarge,
                         fontFamily = GoogleSansRounded,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                     Spacer(Modifier.height(8.dp))
                     Text(
-                        text = "Tap sync to fetch your Jellyfin playlists",
+                        text = stringResource(R.string.tap_sync_jellyfin),
                         style = MaterialTheme.typography.bodyMedium,
                         fontFamily = GoogleSansRounded,
                         color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
@@ -331,14 +332,14 @@ private fun JellyfinMenuCard(
             modifier = Modifier.padding(16.dp)
         ) {
             Text(
-                text = "Quick actions",
+                text = stringResource(R.string.quick_actions_label),
                 style = MaterialTheme.typography.titleMedium,
                 fontFamily = GoogleSansRounded,
                 fontWeight = FontWeight.Bold
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = "Manage your Jellyfin server connection.",
+                text = stringResource(R.string.manage_jellyfin_conn),
                 style = MaterialTheme.typography.bodySmall,
                 fontFamily = GoogleSansRounded,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -364,7 +365,7 @@ private fun JellyfinMenuCard(
                             color = MaterialTheme.colorScheme.onPrimaryContainer
                         )
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text("Syncing", fontFamily = GoogleSansRounded)
+                        Text(stringResource(R.string.syncing), fontFamily = GoogleSansRounded)
                     } else {
                         Icon(
                             Icons.Rounded.CloudSync,
@@ -372,7 +373,7 @@ private fun JellyfinMenuCard(
                             modifier = Modifier.size(18.dp)
                         )
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text("Sync library", fontFamily = GoogleSansRounded)
+                        Text(stringResource(R.string.sync_library), fontFamily = GoogleSansRounded)
                     }
                 }
 
@@ -390,7 +391,7 @@ private fun JellyfinMenuCard(
                         modifier = Modifier.size(18.dp)
                     )
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text("Disconnect", fontFamily = GoogleSansRounded)
+                    Text(stringResource(R.string.disconnect), fontFamily = GoogleSansRounded)
                 }
             }
         }
@@ -466,7 +467,7 @@ private fun JellyfinPlaylistCard(
             ) {
                 Icon(
                     Icons.Rounded.Sync,
-                    contentDescription = "Sync",
+                    contentDescription = stringResource(R.string.cd_sync),
                     modifier = Modifier.size(20.dp)
                 )
             }
@@ -482,7 +483,7 @@ private fun JellyfinPlaylistCard(
             ) {
                 Icon(
                     Icons.Rounded.Delete,
-                    contentDescription = "Delete",
+                    contentDescription = stringResource(R.string.cd_delete),
                     modifier = Modifier.size(20.dp)
                 )
             }

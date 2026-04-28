@@ -2,8 +2,10 @@
 
 package com.theveloper.pixelplay.presentation.screens
 
+import com.theveloper.pixelplay.R
 import com.theveloper.pixelplay.presentation.navigation.navigateSafely
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.compose.ui.res.stringResource
 
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -619,7 +621,7 @@ private fun CollapsibleAlbumSectionHeader(
                     contentColor = MaterialTheme.colorScheme.onTertiaryContainer
                 )
             ) {
-                Icon(Icons.Rounded.PlayArrow, contentDescription = "Play ${section.title}")
+                Icon(Icons.Rounded.PlayArrow, contentDescription = section.title)
             }
             Icon(
                 imageVector = Icons.Rounded.ExpandMore,
@@ -828,7 +830,7 @@ private fun SharedArtistTopBarProbe(
                     ) {
                         Icon(
                             imageVector = Icons.Rounded.Edit,
-                            contentDescription = "Edit artist image"
+                            contentDescription = stringResource(R.string.cd_edit_artist_image)
                         )
                     }
 
@@ -837,7 +839,7 @@ private fun SharedArtistTopBarProbe(
                         onDismissRequest = { showImageMenu = false }
                     ) {
                         DropdownMenuItem(
-                            text = { Text("Change photo") },
+                            text = { Text(stringResource(R.string.change_photo)) },
                             leadingIcon = {
                                 Icon(Icons.Rounded.AddAPhoto, contentDescription = null)
                             },
@@ -848,7 +850,7 @@ private fun SharedArtistTopBarProbe(
                         )
                         if (hasCustomImage) {
                             DropdownMenuItem(
-                                text = { Text("Reset to default") },
+                                text = { Text(stringResource(R.string.reset_to_default)) },
                                 leadingIcon = {
                                     Icon(Icons.Rounded.Delete, contentDescription = null)
                                 },
@@ -876,7 +878,7 @@ private fun SharedArtistTopBarProbe(
                     alpha = expandedContentAlpha
                 }
         ) {
-            Icon(Icons.Rounded.Shuffle, contentDescription = "Shuffle play artist")
+            Icon(Icons.Rounded.Shuffle, contentDescription = stringResource(R.string.cd_shuffle_play_artist))
         }
     }
 }
@@ -994,7 +996,7 @@ private fun CustomCollapsingTopBar(
                     onClick = onBackPressed,
                     colors = IconButtonDefaults.filledIconButtonColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow)
                 ) {
-                    Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Volver")
+                    Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.back))
                 }
 
                 // Image edit button (visible only when header is mostly expanded)
@@ -1011,14 +1013,14 @@ private fun CustomCollapsingTopBar(
                             containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
                             contentColor = MaterialTheme.colorScheme.onSurface
                         ) {
-                            Icon(Icons.Rounded.Edit, contentDescription = "Edit artist image")
+                            Icon(Icons.Rounded.Edit, contentDescription = stringResource(R.string.cd_edit_artist_image))
                         }
                         DropdownMenu(
                             expanded = showImageMenu,
                             onDismissRequest = { showImageMenu = false }
                         ) {
                             DropdownMenuItem(
-                                text = { Text("Change photo") },
+                                text = { Text(stringResource(R.string.change_photo)) },
                                 leadingIcon = { Icon(Icons.Rounded.AddAPhoto, contentDescription = null) },
                                 onClick = {
                                     showImageMenu = false
@@ -1027,7 +1029,7 @@ private fun CustomCollapsingTopBar(
                             )
                             if (hasCustomImage) {
                                 DropdownMenuItem(
-                                    text = { Text("Reset to default") },
+                                    text = { Text(stringResource(R.string.reset_to_default)) },
                                     leadingIcon = { Icon(Icons.Rounded.Delete, contentDescription = null) },
                                     onClick = {
                                         showImageMenu = false
@@ -1092,7 +1094,7 @@ private fun CustomCollapsingTopBar(
                             alpha = fabScale
                         }
                 ) {
-                    Icon(Icons.Rounded.Shuffle, contentDescription = "Shuffle play album")
+                    Icon(Icons.Rounded.Shuffle, contentDescription = stringResource(R.string.cd_shuffle_play_album))
                 }
             }
         }

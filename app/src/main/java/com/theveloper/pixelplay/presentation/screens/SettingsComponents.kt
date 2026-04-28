@@ -70,6 +70,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.core.view.HapticFeedbackConstantsCompat
 import com.theveloper.pixelplay.presentation.utils.LocalAppHapticsConfig
 import com.theveloper.pixelplay.presentation.utils.performAppCompatHapticFeedback
+import androidx.compose.ui.res.stringResource
 
 @Composable
 fun SettingsSection(title: String, icon: @Composable () -> Unit, content: @Composable () -> Unit) {
@@ -339,7 +340,7 @@ fun ThemeSelectorItem(
                                 if (isSelected) {
                                     Icon(
                                         imageVector = Icons.Rounded.Check,
-                                        contentDescription = "Selected",
+                                        contentDescription = stringResource(R.string.cd_selected),
                                         tint = contentColor
                                     )
                                 }
@@ -442,7 +443,7 @@ fun RefreshLibraryItem(
                         verticalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
                     Text(
-                            text = "Refresh Library",
+                            text = stringResource(R.string.refresh_library),
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onSurface
                     )
@@ -468,7 +469,7 @@ fun RefreshLibraryItem(
                         modifier = Modifier.size(18.dp)
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                Text("Full Rescan")
+                Text(stringResource(R.string.full_rescan))
             }
              
             Spacer(modifier = Modifier.height(8.dp))
@@ -489,7 +490,7 @@ fun RefreshLibraryItem(
                         modifier = Modifier.size(18.dp)
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                Text("Rebuild Database")
+                Text(stringResource(R.string.rebuild_database))
             }
 
             if (isSyncing) {
@@ -562,7 +563,7 @@ fun RefreshLyricsItem(
                         verticalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
                     Text(
-                            text = "Refresh Lyrics",
+                            text = stringResource(R.string.refresh_lyrics),
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onSurface
                     )
@@ -583,7 +584,7 @@ fun RefreshLyricsItem(
                 ) {
                     Icon(
                             imageVector = Icons.Outlined.Sync,
-                            contentDescription = "Refresh lyrics",
+                            contentDescription = stringResource(R.string.cd_refresh_lyrics),
                             tint = MaterialTheme.colorScheme.onPrimaryContainer
                     )
                 }
@@ -715,7 +716,7 @@ fun AiApiKeyItem(
                 value = localApiKey,
                 onValueChange = { localApiKey = it },
                 modifier = Modifier.fillMaxWidth(),
-                placeholder = { Text("Enter API Key") },
+                placeholder = { Text(stringResource(R.string.enter_api_key)) },
                 singleLine = true,
                 visualTransformation = androidx.compose.ui.text.input.PasswordVisualTransformation()
             )
@@ -732,7 +733,7 @@ fun AiApiKeyItem(
                     },
                     enabled = hasChanges
                 ) {
-                    Text("Save")
+                    Text(stringResource(R.string.save))
                 }
                 if (showSaved) {
                     Text(
@@ -793,7 +794,7 @@ fun AiSystemPromptItem(
             )
             Spacer(modifier = Modifier.height(12.dp))
             Text(
-                text = "Preset Prompts",
+                text = stringResource(R.string.preset_prompts),
                 style = MaterialTheme.typography.labelLarge,
                 color = MaterialTheme.colorScheme.onSurface
             )
@@ -818,7 +819,7 @@ fun AiSystemPromptItem(
                 value = localPrompt,
                 onValueChange = { localPrompt = it },
                 modifier = Modifier.fillMaxWidth().heightIn(min = 100.dp, max = 200.dp),
-                placeholder = { Text("Enter system prompt...") },
+                placeholder = { Text(stringResource(R.string.enter_system_prompt)) },
                 minLines = 3,
                 maxLines = 6
             )
@@ -835,13 +836,13 @@ fun AiSystemPromptItem(
                     },
                     enabled = hasChanges
                 ) {
-                    Text("Save")
+                    Text(stringResource(R.string.save))
                 }
                 if (!isDefault) {
                     OutlinedButton(onClick = {
                         onReset()
                     }) {
-                        Text("Reset")
+                        Text(stringResource(R.string.reset))
                     }
                 }
                 if (showSaved) {

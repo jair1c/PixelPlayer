@@ -68,6 +68,7 @@ import com.theveloper.pixelplay.presentation.viewmodel.SettingsViewModel
 import racra.compose.smooth_corner_rect_library.AbsoluteSmoothCornerShape
 import com.theveloper.pixelplay.data.preferences.NavBarStyle
 import com.theveloper.pixelplay.presentation.components.resolveNavBarSurfaceHeight
+import androidx.compose.ui.res.stringResource
 
 const val DEFAULT_NAV_BAR_CORNER_RADIUS = 28f
 
@@ -129,7 +130,7 @@ fun NavBarCornerRadiusContent(
                                 containerColor = MaterialTheme.colorScheme.surfaceContainerLow
                             )
                     ) {
-                        Icon(painterResource(R.drawable.rounded_arrow_back_24), contentDescription = "Back", tint = MaterialTheme.colorScheme.onSurface)
+                        Icon(painterResource(R.drawable.rounded_arrow_back_24), contentDescription = stringResource(R.string.back), tint = MaterialTheme.colorScheme.onSurface)
                     }
                 },
                 actions = {
@@ -150,7 +151,7 @@ fun NavBarCornerRadiusContent(
                             modifier = Modifier.size(18.dp)
                         )
                         Spacer(modifier = Modifier.size(8.dp))
-                        Text("Done")
+                        Text(stringResource(R.string.done))
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -177,7 +178,7 @@ fun NavBarCornerRadiusContent(
                 Spacer(modifier = Modifier.height(24.dp))
                 
                 Text(
-                    text = "Adjust Corner Radius",
+                    text = stringResource(R.string.adjust_corner_radius),
                     style = MaterialTheme.typography.displaySmall.copy(
                         fontWeight = FontWeight.Bold
                     ),
@@ -188,7 +189,7 @@ fun NavBarCornerRadiusContent(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Text(
-                    text = "Match the navbar shape's corners with your device's physical corners for a seamless look.",
+                    text = stringResource(R.string.navbar_corner_radius_hint),
                     style = MaterialTheme.typography.bodyLarge,
                     textAlign = TextAlign.Center,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -224,7 +225,7 @@ fun NavBarCornerRadiusContent(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = "Corner Radius",
+                                text = stringResource(R.string.corner_radius_label),
                                 style = MaterialTheme.typography.titleMedium,
                                 color = MaterialTheme.colorScheme.onSurface
                             )
@@ -244,11 +245,11 @@ fun NavBarCornerRadiusContent(
                                 ) {
                                     Icon(
                                         Icons.Rounded.Refresh,
-                                        contentDescription = "Reset",
+                                        contentDescription = stringResource(R.string.reset),
                                         modifier = Modifier.size(14.dp)
                                     )
                                     Spacer(modifier = Modifier.size(6.dp))
-                                    Text("Reset", style = MaterialTheme.typography.labelMedium)
+                                    Text(stringResource(R.string.reset), style = MaterialTheme.typography.labelMedium)
                                 }
                             }
                         }

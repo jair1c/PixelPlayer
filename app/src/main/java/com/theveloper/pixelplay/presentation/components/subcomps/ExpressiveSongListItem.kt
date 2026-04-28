@@ -33,6 +33,8 @@ import com.theveloper.pixelplay.presentation.components.SmartImage
 import com.theveloper.pixelplay.presentation.components.SmartImageListTargetSize
 import com.theveloper.pixelplay.utils.formatDuration
 import racra.compose.smooth_corner_rect_library.AbsoluteSmoothCornerShape
+import androidx.compose.ui.res.stringResource
+import com.theveloper.pixelplay.R
 
 @Composable
 fun ExpressiveSongListItem(
@@ -55,7 +57,7 @@ fun ExpressiveSongListItem(
             // Album Art
             SmartImage(
                 model = song.albumArtUriString,
-                contentDescription = "Album art for ${song.title}",
+                contentDescription = stringResource(R.string.cd_album_art),
                 targetSize = SmartImageListTargetSize,
                 modifier = Modifier
                     .size(56.dp)
@@ -93,7 +95,7 @@ fun ExpressiveSongListItem(
             if (isPlaying) {
                 Icon(
                     imageVector = Icons.Rounded.GraphicEq,
-                    contentDescription = "Playing",
+                    contentDescription = stringResource(R.string.cd_playing),
                     tint = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.size(24.dp)
                 )

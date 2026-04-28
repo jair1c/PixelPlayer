@@ -82,7 +82,7 @@ fun NavidromeDashboardScreen(
                     ) {
                         Icon(
                             Icons.AutoMirrored.Rounded.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = stringResource(R.string.cd_back)
                         )
                     }
                 },
@@ -546,7 +546,7 @@ private fun PlaylistCard(
             ) {
                 Icon(
                     Icons.Rounded.Sync,
-                    contentDescription = "Sync",
+                    contentDescription = stringResource(R.string.cd_sync),
                     modifier = Modifier.size(20.dp)
                 )
             }
@@ -562,7 +562,7 @@ private fun PlaylistCard(
             ) {
                 Icon(
                     Icons.Rounded.Delete,
-                    contentDescription = "Remove",
+                    contentDescription = stringResource(R.string.cd_delete),
                     modifier = Modifier.size(20.dp)
                 )
             }

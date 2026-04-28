@@ -809,7 +809,7 @@ private fun ContributorAvatar(
             cachedBitmap != null -> {
                 Image(
                     bitmap = cachedBitmap!!,
-                    contentDescription = "Avatar of $name",
+                    contentDescription = stringResource(R.string.cd_user_avatar),
                     modifier = Modifier.fillMaxSize(),
                     contentScale = ContentScale.Crop,
                 )
@@ -820,7 +820,7 @@ private fun ContributorAvatar(
                         .data(avatarUrl)
                         .crossfade(true)
                         .build(),
-                    contentDescription = "Avatar of $name",
+                    contentDescription = stringResource(R.string.cd_user_avatar),
                     modifier = Modifier.fillMaxSize(),
                     shape = CircleShape,
                     contentScale = ContentScale.Crop,
@@ -847,7 +847,7 @@ private fun ContributorAvatar(
                 ) {
                     Icon(
                         painter = painterResource(iconRes),
-                        contentDescription = "Icon of $name",
+                        contentDescription = stringResource(R.string.cd_user_avatar),
                         tint = iconTint,
                         modifier = Modifier.size(28.dp),
                     )

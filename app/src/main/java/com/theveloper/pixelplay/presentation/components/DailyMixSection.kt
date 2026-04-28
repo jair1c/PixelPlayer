@@ -60,6 +60,7 @@ import com.theveloper.pixelplay.utils.shapes.RoundedStarShape
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import racra.compose.smooth_corner_rect_library.AbsoluteSmoothCornerShape
+import androidx.compose.ui.res.stringResource
 
 
 // 2) DailyMixSection y DailyMixCard quedan igual de ligeras...
@@ -114,7 +115,7 @@ fun DailyMixSection(
                 playerViewModel.showAndPlaySong(
                     song = song,
                     contextSongs = songs,
-                    queueName = "Daily Mix",
+                    queueName = "Mix Diario",
                     isVoluntaryPlay = false
                 )
                 showSongInfoSheet = false
@@ -271,7 +272,7 @@ fun DailyMixHeader(thumbnails: ImmutableList<Song>) {
                 )
                 Text(
                     modifier = Modifier.padding(start = 1.dp),
-                    text = "Based on History",
+                    text = stringResource(R.string.based_on_history),
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Normal,
                     color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.8f)
@@ -355,7 +356,7 @@ private fun DailyMixSongList(
                     playerViewModel.showAndPlaySong(
                         song = song,
                         contextSongs = playbackQueue,
-                        queueName = "Daily Mix",
+                        queueName = "Mix Diario",
                         isVoluntaryPlay = false
                     )
                 },
@@ -397,7 +398,7 @@ private fun ViewAllDailyMixButton(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "Check all of Daily Mix",
+                text = stringResource(R.string.check_all_daily_mix),
                 style = MaterialTheme.typography.bodyLarge,
                 fontWeight = FontWeight.Medium
             )

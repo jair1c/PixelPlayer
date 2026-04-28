@@ -54,6 +54,8 @@ import com.theveloper.pixelplay.data.model.Song
 import com.theveloper.pixelplay.presentation.components.AutoScrollingTextOnDemand
 import com.theveloper.pixelplay.presentation.components.ShimmerBox
 import com.theveloper.pixelplay.presentation.components.SmartImage
+import androidx.compose.ui.res.stringResource
+import com.theveloper.pixelplay.R
 
 @Immutable
 private data class EnhancedSongAnimationTarget(
@@ -325,7 +327,7 @@ fun EnhancedSongListItem(
                                 } else {
                                     Icon(
                                         imageVector = Icons.Rounded.CheckCircle,
-                                        contentDescription = "Selected",
+                                        contentDescription = stringResource(R.string.cd_selected),
                                         tint = selectionOverlayContentColor,
                                         modifier = Modifier.size(28.dp)
                                     )
@@ -400,7 +402,7 @@ fun EnhancedSongListItem(
                     ) {
                         Icon(
                             imageVector = Icons.Rounded.MoreVert,
-                            contentDescription = "More options for ${song.title}",
+                            contentDescription = stringResource(R.string.cd_options),
                             modifier = Modifier.size(24.dp)
                         )
                     }

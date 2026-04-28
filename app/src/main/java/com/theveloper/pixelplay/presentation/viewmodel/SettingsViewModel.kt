@@ -48,6 +48,7 @@ import com.theveloper.pixelplay.data.preferences.LaunchTab
 import com.theveloper.pixelplay.data.model.Song
 import com.theveloper.pixelplay.data.service.player.HiFiCapabilityChecker
 import java.io.File
+import com.theveloper.pixelplay.R
 
 data class SettingsUiState(
     val isLoadingDirectories: Boolean = false,
@@ -1197,7 +1198,7 @@ class SettingsViewModel @Inject constructor(
                 operation = BackupOperationType.EXPORT,
                 step = 0,
                 totalSteps = 1,
-                title = "Preparing backup",
+                title = application.getString(R.string.preparing_backup_title),
                 detail = "Starting backup task."
             )
             val result = backupManager.export(uri, sections) { progress ->
@@ -1247,7 +1248,7 @@ class SettingsViewModel @Inject constructor(
                 operation = BackupOperationType.IMPORT,
                 step = 0,
                 totalSteps = 1,
-                title = "Preparing restore",
+                title = application.getString(R.string.preparing_restore_title),
                 detail = "Starting restore task."
             )
             val result = backupManager.restore(uri, plan) { progress ->

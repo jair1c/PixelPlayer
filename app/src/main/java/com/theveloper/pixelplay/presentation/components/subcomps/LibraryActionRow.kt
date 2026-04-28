@@ -76,6 +76,7 @@ import com.theveloper.pixelplay.R
 import com.theveloper.pixelplay.data.model.MusicFolder
 import com.theveloper.pixelplay.ui.theme.GoogleSansRounded
 import java.io.File
+import androidx.compose.ui.res.stringResource
 
 val defaultShape = RoundedCornerShape(26.dp) // Fallback shape
 val genHeight = 42.dp
@@ -169,8 +170,8 @@ fun LibraryActionRow(
                         modifier = Modifier.height(genHeight)
                     ) {
                         val icon = if (isPlaylistTab) Icons.AutoMirrored.Rounded.PlaylistAdd else Icons.Rounded.Shuffle
-                        val text = if (isPlaylistTab) "New" else "Shuffle"
-                        val contentDesc = if (isPlaylistTab) "Create New Playlist" else "Shuffle Play"
+                        val text = if (isPlaylistTab) stringResource(R.string.new_playlist_short) else stringResource(R.string.shuffle_action)
+                        val contentDesc = if (isPlaylistTab) stringResource(R.string.create_new_playlist_short) else stringResource(R.string.shuffle_play_cd)
 
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
@@ -241,11 +242,11 @@ fun LibraryActionRow(
                                 ) {
                                     Icon(
                                         painter = painterResource(R.drawable.rounded_upload_file_24),
-                                        contentDescription = "Import M3U",
+                                        contentDescription = stringResource(R.string.cd_import_m3u),
                                         modifier = Modifier.size(20.dp)
                                     )
                                     Text(
-                                        text = "Import",
+                                        text = stringResource(R.string.import_file),
                                         overflow = TextOverflow.Ellipsis,
                                         style = MaterialTheme.typography.labelLarge,
                                         fontWeight = FontWeight.Medium
@@ -317,7 +318,7 @@ fun LibraryActionRow(
                     ) {
                         Icon(
                             imageVector = Icons.Rounded.MyLocation,
-                            contentDescription = "Locate Current Song"
+                            contentDescription = stringResource(R.string.cd_locate_current_song)
                         )
                     }
                 }
@@ -336,7 +337,7 @@ fun LibraryActionRow(
                          com.theveloper.pixelplay.data.model.StorageFilter.OFFLINE -> Icons.Rounded.PhoneAndroid
                      }
                      val tooltipText = when(currentStorageFilter) {
-                         com.theveloper.pixelplay.data.model.StorageFilter.ALL -> "All Songs"
+                         com.theveloper.pixelplay.data.model.StorageFilter.ALL -> stringResource(R.string.all_songs)
                          com.theveloper.pixelplay.data.model.StorageFilter.ONLINE -> "Online"
                          com.theveloper.pixelplay.data.model.StorageFilter.OFFLINE -> "Offline"
                      }
@@ -385,7 +386,7 @@ fun LibraryActionRow(
                 ) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Rounded.Sort,
-                        contentDescription = "Sort Options",
+                        contentDescription = stringResource(R.string.cd_sort_options) ,
                     )
                 }
             }
@@ -442,7 +443,7 @@ fun Breadcrumbs(
             modifier = Modifier.size(36.dp),
             enabled = currentFolder != null
         ) {
-            Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = "Back")
+            Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = stringResource(R.string.back))
         }
         Spacer(Modifier.width(8.dp))
 

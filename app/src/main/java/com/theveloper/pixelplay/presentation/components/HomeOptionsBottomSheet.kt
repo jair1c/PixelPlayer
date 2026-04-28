@@ -13,6 +13,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.theveloper.pixelplay.R
+import androidx.compose.ui.res.stringResource
 
 @Composable
 fun HomeOptionsBottomSheet(
@@ -21,11 +22,11 @@ fun HomeOptionsBottomSheet(
 ) {
     Column(modifier.padding(bottom = 32.dp)) { // Padding for gesture bar
         ListItem(
-            headlineContent = { Text("DJ Mashup") },
+            headlineContent = { Text(stringResource(R.string.dj_mashup)) },
             leadingContent = {
                 Icon(
                     painter = painterResource(id = R.drawable.rounded_instant_mix_24),
-                    contentDescription = "DJ Mashup"
+                    contentDescription = stringResource(R.string.cd_dj_mashup)
                 )
             },
             modifier = Modifier

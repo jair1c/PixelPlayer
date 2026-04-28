@@ -367,7 +367,7 @@ fun StatsScreen(
                             ) {
                                 Icon(
                                     imageVector = Icons.Rounded.Refresh,
-                                    contentDescription = "Refresh listening stats"
+                                    contentDescription = stringResource(R.string.cd_refresh_listening_stats)
                                 )
                             }
                         }
@@ -904,12 +904,12 @@ private enum class CategoryDimension(
         highlightTitle = "Top genre"
     ),
     Artist(
-        displayName = "Artist",
+        displayName = stringResource(R.string.stats_artist),
         cardTitle = "Listening by artist",
         highlightTitle = "Top artist"
     ),
     Album(
-        displayName = "Album",
+        displayName = stringResource(R.string.stats_album),
         cardTitle = "Listening by album",
         highlightTitle = "Top album"
     ),

@@ -80,6 +80,7 @@ import com.theveloper.pixelplay.ui.theme.PixelPlayTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import org.json.JSONObject
+import androidx.compose.ui.res.stringResource
 
 @AndroidEntryPoint
 class QqMusicLoginActivity : ComponentActivity() {
@@ -248,7 +249,7 @@ private fun QqMusicLoginScreen(
                     ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = stringResource(R.string.cd_back)
                         )
                     }
                 },
@@ -276,7 +277,7 @@ private fun QqMusicLoginScreen(
                     ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
-                            contentDescription = "Web back"
+                            contentDescription = stringResource(R.string.cd_web_back)
                         )
                     }
 
@@ -293,7 +294,7 @@ private fun QqMusicLoginScreen(
                     ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Rounded.ArrowForward,
-                            contentDescription = "Web forward"
+                            contentDescription = stringResource(R.string.cd_web_forward)
                         )
                     }
 
@@ -310,7 +311,7 @@ private fun QqMusicLoginScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Rounded.Refresh,
-                            contentDescription = "Refresh"
+                            contentDescription = stringResource(R.string.cd_refresh)
                         )
                     }
 
@@ -329,7 +330,7 @@ private fun QqMusicLoginScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Rounded.Home,
-                            contentDescription = "Open home"
+                            contentDescription = stringResource(R.string.cd_open_home)
                         )
                     }
                 },

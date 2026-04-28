@@ -278,10 +278,10 @@ private fun WatchTransferProgressDialog(
     }
     val statusText = when (transfer.status) {
         WearTransferProgress.STATUS_TRANSFERRING -> "Transferring"
-        WearTransferProgress.STATUS_COMPLETED -> "Completed"
+        WearTransferProgress.STATUS_COMPLETED -> context.getString(R.string.completed_label)
         WearTransferProgress.STATUS_FAILED -> "Failed"
         WearTransferProgress.STATUS_CANCELLED -> "Cancelled"
-        else -> "Preparing"
+        else -> context.getString(R.string.preparing_label)
     }
 
     Dialog(
@@ -304,7 +304,7 @@ private fun WatchTransferProgressDialog(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Sending to Watch",
+                    text = stringResource(R.string.sending_to_watch),
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onSurface,
                     fontWeight = FontWeight.SemiBold
@@ -369,7 +369,7 @@ private fun WatchTransferProgressDialog(
                         contentColor = MaterialTheme.colorScheme.onError
                     )
                 ) {
-                    Text(text = "Cancel transfer")
+                    Text(stringResource(R.string.cancel_transfer))
                 }
             }
         }
@@ -803,7 +803,7 @@ fun LibraryScreen(
                         } else {
                             Text(
                                 modifier = Modifier.padding(start = 8.dp),
-                                text = "Library",
+                                text = stringResource(R.string.tab_library),
                                 fontFamily = GoogleSansRounded,
                                 fontWeight = FontWeight.ExtraBold,
                                 color = MaterialTheme.colorScheme.primary,
@@ -837,7 +837,7 @@ fun LibraryScreen(
                                 ) {
                                     Icon(
                                         painter = painterResource(R.drawable.rounded_watch_arrow_down_24),
-                                        contentDescription = "Watch transfer",
+                                        contentDescription = stringResource(R.string.cd_watch_transfer),
                                         modifier = Modifier.size(20.dp)
                                     )
                                     Text(
@@ -920,7 +920,7 @@ fun LibraryScreen(
                         ) {
                             Icon(
                                 Icons.Default.Edit,
-                                contentDescription = "Reorder tabs",
+                                contentDescription = stringResource(R.string.reorder_tabs),
                                 tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.9f)
                             )
                         }
@@ -1293,7 +1293,7 @@ fun LibraryScreen(
                                                 inactiveContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
                                                 activeCornerRadius = 32.dp,
                                                 onClick = { playerViewModel.setAlbumsListView(false) },
-                                                text = "Grid",
+                                                text = stringResource(R.string.tab_grid),
                                                 imageVector = Icons.Rounded.ViewModule
                                             )
 
@@ -1307,7 +1307,7 @@ fun LibraryScreen(
                                                 inactiveContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
                                                 activeCornerRadius = 32.dp,
                                                 onClick = { playerViewModel.setAlbumsListView(true) },
-                                                text = "List",
+                                                text = stringResource(R.string.tab_list),
                                                 imageVector = Icons.AutoMirrored.Rounded.ViewList
                                             )
                                         }
@@ -1329,7 +1329,7 @@ fun LibraryScreen(
                                                 inactiveContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
                                                 activeCornerRadius = 32.dp,
                                                 onClick = { playerViewModel.setFoldersSource(FolderSource.INTERNAL) },
-                                                text = "Internal"
+                                                text = stringResource(R.string.tab_internal)
                                             )
                                             ToggleSegmentButton(
                                                 modifier = Modifier
@@ -1346,12 +1346,12 @@ fun LibraryScreen(
                                                         playerViewModel.setFoldersSource(FolderSource.SD_CARD)
                                                     }
                                                 },
-                                                text = "SD Card"
+                                                text = stringResource(R.string.tab_sd_card)
                                             )
                                         }
                                         if (!playerUiState.isSdCardAvailable) {
                                             Text(
-                                                text = "SD card is not available right now.",
+                                                text = stringResource(R.string.sd_card_unavailable),
                                                 style = MaterialTheme.typography.bodySmall,
                                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                                                 modifier = Modifier.padding(top = 8.dp, start = 2.dp)
@@ -1362,7 +1362,7 @@ fun LibraryScreen(
                                 extraContent = {
                                     if (isPlaylistsTab && playlistUiState.showTelegramCloudPlaylists) {
                                         Text(
-                                            text = "Topics Display",
+                                            text = stringResource(R.string.tab_topics_display),
                                             style = MaterialTheme.typography.headlineSmall,
                                             fontFamily = com.theveloper.pixelplay.ui.theme.GoogleSansRounded,
                                             fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
@@ -1395,7 +1395,7 @@ fun LibraryScreen(
                                     }
                                     Spacer(modifier = Modifier.height(12.dp))
                                     Text(
-                                        text = "Cloud",
+                                        text = stringResource(R.string.tab_cloud),
                                         style = MaterialTheme.typography.headlineSmall,
                                         fontFamily = com.theveloper.pixelplay.ui.theme.GoogleSansRounded,
                                         fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
@@ -1970,15 +1970,15 @@ fun LibraryScreen(
                 pendingMergePlaylistIds = emptyList()
                 mergePlaylistName = ""
             },
-            title = { Text("Merge Playlists") },
+            title = { Text(stringResource(R.string.merge_playlists)) },
             text = {
                 Column {
-                    Text("Enter a name for the merged playlist:")
+                    Text(stringResource(R.string.enter_merged_name))
                     Spacer(modifier = Modifier.height(12.dp))
                     OutlinedTextField(
                         value = mergePlaylistName,
                         onValueChange = { mergePlaylistName = it },
-                        placeholder = { Text("Merged Playlist") },
+                        placeholder = { Text(stringResource(R.string.merged_playlist_hint)) },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth()
                     )
@@ -2005,7 +2005,7 @@ fun LibraryScreen(
                         }
                     }
                 ) {
-                    Text("Merge")
+                    Text(stringResource(R.string.merge))
                 }
             },
             dismissButton = {
@@ -2014,7 +2014,7 @@ fun LibraryScreen(
                     pendingMergePlaylistIds = emptyList()
                     mergePlaylistName = ""
                 }) {
-                    Text("Cancel")
+                    Text(stringResource(R.string.cancel))
                 }
             }
         )
@@ -2476,7 +2476,7 @@ private fun LibraryTabSwitcherSheet(
                                 contentDescription = null
                             )
                             Spacer(modifier = Modifier.width(10.dp))
-                            Text("Reorder tabs")
+                            Text(stringResource(R.string.reorder_tabs))
                         }
                     }
                 }
@@ -2909,7 +2909,7 @@ fun FolderListItem(folder: MusicFolder, onClick: () -> Unit) {
         Row(modifier = Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_folder),
-                contentDescription = "Folder",
+                contentDescription = stringResource(R.string.cd_folder),
                 modifier = Modifier
                     .size(48.dp)
                     .background(MaterialTheme.colorScheme.primaryContainer, CircleShape)

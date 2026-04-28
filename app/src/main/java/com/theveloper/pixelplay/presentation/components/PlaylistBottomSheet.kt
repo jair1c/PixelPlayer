@@ -116,7 +116,7 @@ fun PlaylistBottomSheet(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        if (songs.size > 1) "Add ${songs.size} Songs to..." else "Select Playlists",
+                        if (songs.size > 1) stringResource(R.string.add_songs_count, songs.size) else stringResource(R.string.select_playlists),
                         style = MaterialTheme.typography.displaySmall,
                         fontFamily = GoogleSansRounded
                     )
@@ -242,7 +242,7 @@ fun PlaylistBottomSheet(
                     playerViewModel.multiSelectionStateHolder.clearSelection()
                 },
                 icon = { Icon(Icons.Rounded.Save, "Save") },
-                text = { Text(if (songs.size > 1) "Add" else "Save") },
+                text = { Text(if (songs.size > 1) stringResource(R.string.add) else stringResource(R.string.save)) },
             )
         }
     }

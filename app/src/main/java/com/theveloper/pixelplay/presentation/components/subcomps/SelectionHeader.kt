@@ -48,9 +48,11 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import coil.size.Size
+import com.theveloper.pixelplay.R
 import com.theveloper.pixelplay.data.model.Song
 import com.theveloper.pixelplay.presentation.components.SmartImage
 import com.theveloper.pixelplay.ui.theme.GoogleSansRounded
+import androidx.compose.ui.res.stringResource
 
 /**
  * Header component displayed during multi-selection mode.
@@ -140,7 +142,7 @@ fun SelectionHeader(
             ) {
                 Icon(
                     imageVector = Icons.Rounded.Share,
-                    contentDescription = "Share selected",
+                    contentDescription = stringResource(R.string.cd_share_selected),
                     modifier = Modifier.size(22.dp)
                 )
             }
@@ -156,7 +158,7 @@ fun SelectionHeader(
             ) {
                 Icon(
                     imageVector = Icons.Rounded.Favorite,
-                    contentDescription = "Like selected",
+                    contentDescription = stringResource(R.string.cd_like_selected),
                     modifier = Modifier.size(22.dp)
                 )
             }
@@ -175,7 +177,7 @@ fun SelectionHeader(
                 )
                 Spacer(modifier = Modifier.width(6.dp))
                 Text(
-                    text = "Play",
+                    text = stringResource(R.string.play_label),
                     style = MaterialTheme.typography.labelLarge,
                     fontWeight = FontWeight.SemiBold,
                     fontFamily = GoogleSansRounded

@@ -38,6 +38,7 @@ import com.theveloper.pixelplay.R
 import com.theveloper.pixelplay.ui.theme.GoogleSansRounded
 import com.theveloper.pixelplay.ui.theme.PixelPlayStatusBarStyle
 import kotlinx.collections.immutable.toImmutableList
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -77,7 +78,7 @@ fun GenreGradientTopBar(
             ) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
-                    contentDescription = "Back",
+                    contentDescription = stringResource(R.string.back),
                     tint = startColor
                 )
             }
@@ -187,7 +188,7 @@ fun HomeGradientTopBar(
                 ) {
                     Icon(
                          imageVector = Icons.Rounded.Cloud,
-                         contentDescription = "Telegram"
+                         contentDescription = stringResource(R.string.nav_telegram)
                     )
                 }
                 //Spacer(Modifier.size(8.dp))
@@ -201,7 +202,7 @@ fun HomeGradientTopBar(
                     Icon(
                         //modifier = Modifier.size(18.dp),
                         painter = painterResource(R.drawable.round_newspaper_24),
-                        contentDescription = "Changelog"
+                        contentDescription = stringResource(R.string.changelog_title)
                     )
                 }
                 //Spacer(Modifier.size(8.dp))
@@ -214,7 +215,7 @@ fun HomeGradientTopBar(
                 ) {
                     Icon(
                         painter = painterResource(R.drawable.rounded_settings_24),
-                        contentDescription = "Settings"
+                        contentDescription = stringResource(R.string.nav_settings)
                     )
                 }
             }
